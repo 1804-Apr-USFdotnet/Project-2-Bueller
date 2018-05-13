@@ -8,5 +8,5 @@ namespace Project2_Bueller
 {
     public class Class1
     {
-    } 
+    }  
 }
