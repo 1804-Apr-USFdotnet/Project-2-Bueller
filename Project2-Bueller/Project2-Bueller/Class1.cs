@@ -8,5 +8,7 @@ namespace Project2_Bueller
 {
     public class Class1
     {
+
+        public int MyProperty { get; set; }
     } 
 }
