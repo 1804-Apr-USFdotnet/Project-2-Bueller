@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 namespace Project2_Bueller
 {
     public class Class1
-    {//something
+    {
+
+        public int MyProperty { get; set; }
     } 
 }
