@@ -17,11 +17,11 @@ namespace Bueller.DA
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Class> classSet { get; set; }
-        public DbSet<Classes> classesSet { get; set; }
+        public DbSet<PersonClass> classesSet { get; set; }
         public DbSet<Employees> Employees { get; set; }
         public DbSet<File> Files { get; set; }
-        public DbSet<Grades> Grades { get; set; }
-        public DbSet<Students> Students { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
 
         public override int SaveChanges()
@@ -31,6 +31,8 @@ namespace Bueller.DA
             AddedEntities.ForEach(E =>
             {
                 E.Property("Created").CurrentValue = DateTime.Now;
+                //set modified date as well. to sort by a common column
+                E.Property("Modified").CurrentValue = DateTime.Now;
             });
 
             var ModifiedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Modified).ToList();

@@ -66,6 +66,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -80,13 +81,13 @@
     <Compile Include="BuellerContext.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Class.cs" />
-    <Compile Include="Models\Classes.cs" />
+    <Compile Include="Models\PersonClass.cs" />
     <Compile Include="Models\Employees.cs" />
     <Compile Include="Models\File.cs" />
-    <Compile Include="Models\Grades.cs" />
+    <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\IDbContext.cs" />
     <Compile Include="Models\IEntity.cs" />
-    <Compile Include="Models\Students.cs" />
+    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
