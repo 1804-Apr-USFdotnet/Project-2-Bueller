@@ -23,9 +23,18 @@ namespace Bueller.DA.Models
         [Required(ErrorMessage = "Last name is required")]
         [StringLength(100, ErrorMessage = "Last name cannot be more than 100 characters")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Street is required")]
+        [StringLength(200, ErrorMessage = "Address cannot be more than 100 characters")]
         public string Street { get; set; }
+        [Required(ErrorMessage = "City is required")]
+        [StringLength(100, ErrorMessage = "City cannot be more than 100 characters")]
         public string City { get; set; }
+        [Required(ErrorMessage = "State is required")]
+        [StringLength(100, ErrorMessage = "State cannot be more than 100 characters")]
         public string State { get; set; }
+        [Required(ErrorMessage = "Country is required")]
+        [StringLength(100, ErrorMessage = "Country cannot be more than 100 characters")]
         public string Country { get; set; }
         [Required(ErrorMessage = "Zipcode is required")]
         [RegularExpression("[0-9]{5}", ErrorMessage = "Invalid input")]
@@ -35,19 +44,28 @@ namespace Bueller.DA.Models
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
-        //StudentId int pk
-        //firstname nvarchar 100
-        //middlename nvarchar 100 nullable
-        //lastname nvarchar 100 
-        //address1 nvc 200
-        //address2 nvc 200 nullable
-        //address3 nvc 200 nullable
-        //phone tel
-        //grade int
-        //credits int
-        //studenttype nvc 50
-        //PersonClassId int fk
-        //AccountNumberId int fk
+        [Required(ErrorMessage = "Grade is required")]
+        [StringLength(100, ErrorMessage = "Grade cannot be more than 100 characters")]
+        public string Grade { get; set; }
 
+        public int PersonClassId { get; set; }
+        public virtual PersonClass PersonClass { get; set; }
+
+        public int AccountId { get; set; }
+        public virtual Account Account { get; set; }
+
+        public virtual ICollection<Grade> Grades { get; set; }
+
+        public virtual ICollection<File> Files { get; set; }
+
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
+
+        [NotMapped]
+        public int Credits { get; set; }
+        [NotMapped]
+        public string StudentType { get; set; }
+        [NotMapped]
+        public double AverageGrade { get; set; }
     }
 }

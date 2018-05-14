@@ -82,7 +82,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\PersonClass.cs" />
-    <Compile Include="Models\Employees.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\IDbContext.cs" />
