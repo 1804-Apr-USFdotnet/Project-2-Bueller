@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bueller.DA.Models
 {
-    public class Grades : BaseEntity
+    public class PersonClass : BaseEntity
     {
     }
 }

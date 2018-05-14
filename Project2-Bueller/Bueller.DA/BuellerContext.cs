@@ -17,11 +17,11 @@ namespace Bueller.DA
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Class> classSet { get; set; }
-        public DbSet<Classes> classesSet { get; set; }
+        public DbSet<PersonClass> classesSet { get; set; }
         public DbSet<Employees> Employees { get; set; }
         public DbSet<File> Files { get; set; }
-        public DbSet<Grades> Grades { get; set; }
-        public DbSet<Students> Students { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
 
         public override int SaveChanges()
