@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bueller.DA.Models
 {
-    [Table("Employees", Schema = "Person")]
+    [Table("Employees", Schema = "Persons")]
     public class Employee : BaseEntity
     {
         [Key]
