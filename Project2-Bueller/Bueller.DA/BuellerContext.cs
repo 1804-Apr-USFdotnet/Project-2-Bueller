@@ -31,6 +31,8 @@ namespace Bueller.DA
             AddedEntities.ForEach(E =>
             {
                 E.Property("Created").CurrentValue = DateTime.Now;
+                //set modified date as well. to sort by a common column
+                E.Property("Modified").CurrentValue = DateTime.Now;
             });
 
             var ModifiedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Modified).ToList();
