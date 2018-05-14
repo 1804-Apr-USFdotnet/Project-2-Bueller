@@ -23,9 +23,18 @@ namespace Bueller.DA.Models
         [Required(ErrorMessage = "Last name is required")]
         [StringLength(100, ErrorMessage = "Last name cannot be more than 100 characters")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Street is required")]
+        [StringLength(200, ErrorMessage = "Address cannot be more than 100 characters")]
         public string Street { get; set; }
+        [Required(ErrorMessage = "City is required")]
+        [StringLength(100, ErrorMessage = "City cannot be more than 100 characters")]
         public string City { get; set; }
+        [Required(ErrorMessage = "State is required")]
+        [StringLength(100, ErrorMessage = "State cannot be more than 100 characters")]
         public string State { get; set; }
+        [Required(ErrorMessage = "Country is required")]
+        [StringLength(100, ErrorMessage = "Country cannot be more than 100 characters")]
         public string Country { get; set; }
         [Required(ErrorMessage = "Zipcode is required")]
         [RegularExpression("[0-9]{5}", ErrorMessage = "Invalid input")]
