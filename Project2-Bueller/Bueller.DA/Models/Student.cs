@@ -44,19 +44,28 @@ namespace Bueller.DA.Models
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
-        //StudentId int pk
-        //firstname nvarchar 100
-        //middlename nvarchar 100 nullable
-        //lastname nvarchar 100 
-        //address1 nvc 200
-        //address2 nvc 200 nullable
-        //address3 nvc 200 nullable
-        //phone tel
-        //grade int
-        //credits int
-        //studenttype nvc 50
-        //PersonClassId int fk
-        //AccountNumberId int fk
+        [Required(ErrorMessage = "Grade is required")]
+        [StringLength(100, ErrorMessage = "Grade cannot be more than 100 characters")]
+        public string Grade { get; set; }
 
+        public int PersonClassId { get; set; }
+        public virtual PersonClass PersonClass { get; set; }
+
+        public int AccountId { get; set; }
+        public virtual Account Account { get; set; }
+
+        public virtual ICollection<Grade> Grades { get; set; }
+
+        public virtual ICollection<File> Files { get; set; }
+
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
+
+        [NotMapped]
+        public int Credits { get; set; }
+        [NotMapped]
+        public string StudentType { get; set; }
+        [NotMapped]
+        public double AverageGrade { get; set; }
     }
 }
