@@ -43,7 +43,22 @@ namespace Bueller.DA.Models
         [DataType(DataType.Time)]
         public DateTime EndTime { get; set; }
 
-        //days similar table to person class
+        //different ways to do this.. try 5 columns for now
+        [Required]
+        [Range(0,1, ErrorMessage = "Enter 1 if class held on corresponsing day, 0 otherwise")]
+        public int Mon { get; set; }
+        [Required]
+        [Range(0, 1, ErrorMessage = "Enter 1 if class held on corresponsing day, 0 otherwise")]
+        public int Tues { get; set; }
+        [Required]
+        [Range(0, 1, ErrorMessage = "Enter 1 if class held on corresponsing day, 0 otherwise")]
+        public int Wed { get; set; }
+        [Required]
+        [Range(0, 1, ErrorMessage = "Enter 1 if class held on corresponsing day, 0 otherwise")]
+        public int Thurs { get; set; }
+        [Required]
+        [Range(0, 1, ErrorMessage = "Enter 1 if class held on corresponsing day, 0 otherwise")]
+        public int Fri { get; set; }
 
         //no class level for now
 
