@@ -92,5 +92,7 @@ namespace Bueller.DA.Models
 
         [ForeignKey("AccountNumberID")]
         public virtual Account Account { get; set; }
+
+        public virtual ICollection<Class> Classes { get; set; }
     }
 }
