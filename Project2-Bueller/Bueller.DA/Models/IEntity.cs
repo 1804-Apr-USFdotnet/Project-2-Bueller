@@ -9,6 +9,6 @@ namespace Bueller.DA.Models
     public abstract class BaseEntity
     {
         DateTime Created { get; set; }
-        DateTime? Modified { get; set; }
+        DateTime Modified { get; set; }
     }
 }
