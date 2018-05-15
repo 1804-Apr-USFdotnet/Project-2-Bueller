@@ -41,6 +41,8 @@ namespace Bueller.DA.Models
         [ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
 
+
+
         [Required]
         [ScaffoldColumn(false)]
         public int TeacherId { get; set; }

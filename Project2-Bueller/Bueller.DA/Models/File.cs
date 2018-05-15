@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bueller.DA.Models
 {
-    [Table("Files", Schema = "Submit")]
+    [Table("Files", Schema = "Assignments")]
     public class File : BaseEntity
     {
         [Key]
@@ -18,7 +18,6 @@ namespace Bueller.DA.Models
         public int FileID { get; set; }
 
         [Required]
-        [ForeignKey("Student")]
         [ScaffoldColumn(false)]
         public int StudentID { get; set; }
 
@@ -26,6 +25,8 @@ namespace Bueller.DA.Models
         [ForeignKey("Class")]
         [ScaffoldColumn(false)]
         public int ClassID { get; set; }
+
+        
 
         [Required]
         [DataType(DataType.Text)]
@@ -35,9 +36,8 @@ namespace Bueller.DA.Models
         [DataType(DataType.Upload)]     //not sure about this annotation
         public string FileLocation { get; set; }
 
-
-        public DateTime DueDate { get; set; }
         public virtual Student Student { get; set; }
+        [ForeignKey("TeacherID")]
         public virtual Employee Employee { get; set; }
 
         public DateTime Created { get; set; }
