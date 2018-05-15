@@ -80,6 +80,19 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Bueller.DAL\Bueller.DAL.csproj">
+      <Project>{eb4c8791-01fc-435a-8496-a8ac7ae941d4}</Project>
+      <Name>Bueller.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bueller.DA\Bueller.DA.csproj">
+      <Project>{b90fb958-2ac6-40f4-84f4-2e7d3e9c404c}</Project>
+      <Name>Bueller.DA</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mapping\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
