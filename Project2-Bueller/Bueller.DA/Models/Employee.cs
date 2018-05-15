@@ -17,7 +17,6 @@ namespace Bueller.DA.Models
         [ScaffoldColumn(false)]
         public int EmployeeID { get; set; }
 
-        [Required]
         [ForeignKey("PersonClass")]
         [ScaffoldColumn(false)]
         public int? PersonClassID { get; set; }

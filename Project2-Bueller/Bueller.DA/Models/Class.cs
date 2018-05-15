@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bueller.DA.Models
 {
@@ -45,6 +44,6 @@ namespace Bueller.DA.Models
         public virtual Subject Subject { get; set; }
 
         public DateTime Created { get; set; }
-        public DateTime Modified { get; set; }
+        public DateTime? Modified { get; set; }
     }
 }

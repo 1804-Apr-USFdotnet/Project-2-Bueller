@@ -59,7 +59,7 @@ namespace Bueller.DA.Models
         public virtual ICollection<File> Files { get; set; }
 
         public DateTime Created { get; set; }
-        public DateTime Modified { get; set; }
+        public DateTime? Modified { get; set; }
 
         [NotMapped]
         public int Credits { get; set; }

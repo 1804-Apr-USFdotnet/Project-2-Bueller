@@ -16,8 +16,8 @@ namespace Bueller.DA
         }
 
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<Class> classSet { get; set; }
-        public DbSet<PersonClass> classesSet { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<PersonClass> PersonClasses { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<Grade> Grades { get; set; }
