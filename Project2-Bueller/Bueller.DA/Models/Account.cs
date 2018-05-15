@@ -18,10 +18,19 @@ namespace Bueller.DA.Models
         public int AccountId { get; set; }
 
  
+        [DataType(DataType.Currency)]
         public double? BalanceOwed { get; set; }
+
+        [DataType(DataType.Currency)]
         public double? Aid { get; set; }
+
+        [DataType(DataType.Currency)]
         public double? TotalExpense { get; set; }
+
+        //weekly, bi-weekly, monthly
         public string PayPeriod { get; set; }
+
+        [DataType(DataType.Currency)]
         public double? Salary { get; set; }
 
         public DateTime Created { get; set; }
