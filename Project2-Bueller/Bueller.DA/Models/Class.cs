@@ -31,10 +31,17 @@ namespace Bueller.DA.Models
         [Required(ErrorMessage = "Credits is required")]
         [Range(1, 6, ErrorMessage = "Number of credits must be between 1 and 6")]
         public int Credits { get; set; }
+        [Required(ErrorMessage = "Description is required")]
+        [DataType(DataType.MultilineText)]
+        [StringLength(500, ErrorMessage = "Room number cannot be more than 100 characters")]
+        public string Description { get; set; }
 
-        [Required(ErrorMessage = "Time is required")]
+        [Required(ErrorMessage = "Start time is required")]
         [DataType(DataType.Time)]
-        public DateTime Time { get; set; }
+        public DateTime StartTime { get; set; }
+        [Required(ErrorMessage = "End time is required")]
+        [DataType(DataType.Time)]
+        public DateTime EndTime { get; set; }
 
         //days similar table to person class
 
@@ -51,6 +58,8 @@ namespace Bueller.DA.Models
         public int SubjectId { get; set; }
         [ForeignKey("SubjectId")]
         public virtual Subject Subject { get; set; }
+
+        public virtual ICollection<Student> Students { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
