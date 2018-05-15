@@ -8,5 +8,7 @@ namespace Bueller.DA.Models
 {
     public class Grade : BaseEntity
     {
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
     }
 }

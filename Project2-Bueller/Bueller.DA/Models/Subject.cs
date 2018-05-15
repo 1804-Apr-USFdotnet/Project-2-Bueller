@@ -28,5 +28,8 @@ namespace Bueller.DA.Models
         public string Department { get; set; }
 
         //credits is part of class model
+
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
     }
 }

@@ -37,5 +37,8 @@ namespace Bueller.DA.Models
 
         public virtual Student Student { get; set; }
         public virtual Employee Employee { get; set; }
+
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
     }
 }

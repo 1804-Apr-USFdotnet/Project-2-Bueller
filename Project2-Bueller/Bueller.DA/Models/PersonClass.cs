@@ -42,7 +42,7 @@ namespace Bueller.DA.Models
 
 
         public DateTime Created { get; set; }
-        public DateTime? Modified { get; set; }
+        public DateTime Modified { get; set; }
 
         public virtual Class Class { get; set; }
 

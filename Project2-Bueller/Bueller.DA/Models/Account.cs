@@ -17,5 +17,8 @@ namespace Bueller.DA.Models
         public double? TotalExpense { get; set; }
         public string PayPeriod { get; set; }
         public double? Salary { get; set; }
+
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
     }
 }
