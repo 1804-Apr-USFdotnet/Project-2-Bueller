@@ -60,9 +60,9 @@ namespace Bueller.DA.Models
         //public virtual PersonClass PersonClass { get; set; }
 
         [Required]
-        [ForeignKey("Account")]
         [ScaffoldColumn(false)]
         public int AccountId { get; set; }
+        [ForeignKey("AccountId")]
         public virtual Account Account { get; set; }
 
         public virtual ICollection<Grade> Grades { get; set; }

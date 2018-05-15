@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bueller.DA.Models
 {
-    [Table("Account", Schema = "Billing")]
+    [Table("Accounts", Schema = "Billing")]
     public class Account : BaseEntity
     {
 
