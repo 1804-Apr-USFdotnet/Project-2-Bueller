@@ -22,11 +22,8 @@ namespace Bueller.DA.Models
         public int StudentID { get; set; }
 
         [Required]
-        [ForeignKey("Class")]
         [ScaffoldColumn(false)]
         public int ClassID { get; set; }
-
-        
 
         [Required]
         [DataType(DataType.Text)]
@@ -36,9 +33,13 @@ namespace Bueller.DA.Models
         [DataType(DataType.Upload)]     //not sure about this annotation
         public string FileLocation { get; set; }
 
+
+        public DateTime DueDate { get; set; }
+
+        [ForeignKey("StudentID")]
         public virtual Student Student { get; set; }
-        [ForeignKey("TeacherID")]
-        public virtual Employee Employee { get; set; }
+        [ForeignKey("ClassID")]
+        public virtual Class Class { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }

@@ -49,6 +49,12 @@ namespace Bueller.DA.Models
         [ForeignKey("TeacherId")]
         public virtual Employee Teacher { get; set; }
 
+        [Required]
+        [ScaffoldColumn(false)]
+        public int FileId { get; set; }
+        [ForeignKey("FileId")]
+        public virtual File File { get; set; }
+
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
     }
