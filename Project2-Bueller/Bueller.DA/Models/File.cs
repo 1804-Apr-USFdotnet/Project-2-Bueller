@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bueller.DA.Models
 {
-    [Table("Files", Schema = "Submit")]
+    [Table("Files", Schema = "Assignments")]
     public class File : BaseEntity
     {
         [Key]
@@ -18,12 +18,10 @@ namespace Bueller.DA.Models
         public int FileID { get; set; }
 
         [Required]
-        [ForeignKey("Student")]
         [ScaffoldColumn(false)]
         public int StudentID { get; set; }
 
         [Required]
-        [ForeignKey("Class")]
         [ScaffoldColumn(false)]
         public int ClassID { get; set; }
 
@@ -37,8 +35,11 @@ namespace Bueller.DA.Models
 
 
         public DateTime DueDate { get; set; }
+
+        [ForeignKey("StudentID")]
         public virtual Student Student { get; set; }
-        public virtual Employee Employee { get; set; }
+        [ForeignKey("ClassID")]
+        public virtual Class Class { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
