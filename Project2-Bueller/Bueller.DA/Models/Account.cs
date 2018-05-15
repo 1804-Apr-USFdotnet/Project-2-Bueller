@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bueller.DA.Models
 {
-    [Table("Account", Schema = "Billing")]
+    [Table("Accounts", Schema = "Billing")]
     public class Account : BaseEntity
     {
 
@@ -17,5 +17,8 @@ namespace Bueller.DA.Models
         public double? TotalExpense { get; set; }
         public string PayPeriod { get; set; }
         public double? Salary { get; set; }
+
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
     }
 }

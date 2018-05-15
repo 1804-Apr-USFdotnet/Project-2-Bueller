@@ -8,32 +8,40 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bueller.DA.Models
 {
-    [Table("Student", Schema = "Persons")]
+    [Table("Students", Schema = "Persons")]
     public class Student : BaseEntity
     {
         [Key]
+        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int StudentId { get; set; }
         [Required(ErrorMessage = "First name is required")]
+        [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "First name cannot be more than 100 characters")]
         public string FirstName { get; set; }
+        [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Middle name cannot be more than 100 characters")]
         public string MiddleName { get; set; }
         [Required(ErrorMessage = "Last name is required")]
+        [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Last name cannot be more than 100 characters")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Street is required")]
+        [DataType(DataType.Text)]
         [StringLength(200, ErrorMessage = "Address cannot be more than 100 characters")]
         public string Street { get; set; }
         [Required(ErrorMessage = "City is required")]
+        [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "City cannot be more than 100 characters")]
         public string City { get; set; }
         [Required(ErrorMessage = "State is required")]
+        [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "State cannot be more than 100 characters")]
         public string State { get; set; }
         [Required(ErrorMessage = "Country is required")]
+        [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Country cannot be more than 100 characters")]
         public string Country { get; set; }
         [Required(ErrorMessage = "Zipcode is required")]
@@ -48,10 +56,13 @@ namespace Bueller.DA.Models
         [StringLength(100, ErrorMessage = "Grade cannot be more than 100 characters")]
         public string Grade { get; set; }
 
-        public int PersonClassId { get; set; }
-        public virtual PersonClass PersonClass { get; set; }
+        //public int? PersonClassId { get; set; }
+        //public virtual PersonClass PersonClass { get; set; }
 
+        [Required]
+        [ScaffoldColumn(false)]
         public int AccountId { get; set; }
+        [ForeignKey("AccountId")]
         public virtual Account Account { get; set; }
 
         public virtual ICollection<Grade> Grades { get; set; }
@@ -59,7 +70,7 @@ namespace Bueller.DA.Models
         public virtual ICollection<File> Files { get; set; }
 
         public DateTime Created { get; set; }
-        public DateTime? Modified { get; set; }
+        public DateTime Modified { get; set; }
 
         [NotMapped]
         public int Credits { get; set; }
