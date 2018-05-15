@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bueller.BLL
+namespace Bueller.Models
 {
     public class Class1
     {
