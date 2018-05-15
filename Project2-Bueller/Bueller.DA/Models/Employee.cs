@@ -17,10 +17,6 @@ namespace Bueller.DA.Models
         [ScaffoldColumn(false)]
         public int EmployeeID { get; set; }
 
-        [ForeignKey("PersonClass")]
-        [ScaffoldColumn(false)]
-        public int? PersonClassID { get; set; }
-
         public int? OfficeNumber { get; set; }
 
         [Required]
@@ -43,7 +39,6 @@ namespace Bueller.DA.Models
         public string Title { get; set; }
 
         [Required]
-        [ForeignKey("Account")]
         [ScaffoldColumn(false)]
         public int AccountNumberID { get; set; }
 
@@ -95,7 +90,9 @@ namespace Bueller.DA.Models
         public DateTime Modified { get; set; }
 
 
-        public virtual PersonClass PersonClass { get; set; }
+        [ForeignKey("AccountNumberID")]
         public virtual Account Account { get; set; }
+
+        public virtual ICollection<Class> Classes { get; set; }
     }
 }

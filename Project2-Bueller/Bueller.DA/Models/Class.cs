@@ -40,14 +40,16 @@ namespace Bueller.DA.Models
 
         //no class level for now
 
-        [ForeignKey("Employee")]
+        [Required]
+        [ScaffoldColumn(false)]
         public int TeacherId { get; set; }
+        [ForeignKey("TeacherId")]
         public virtual Employee Teacher { get; set; }
 
         [Required]
-        [ForeignKey("Subject")]
         [ScaffoldColumn(false)]
         public int SubjectId { get; set; }
+        [ForeignKey("SubjectId")]
         public virtual Subject Subject { get; set; }
 
         public DateTime Created { get; set; }
