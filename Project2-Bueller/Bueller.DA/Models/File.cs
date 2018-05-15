@@ -19,10 +19,12 @@ namespace Bueller.DA.Models
 
         [Required]
         [ForeignKey("Student")]
+        [ScaffoldColumn(false)]
         public int StudentID { get; set; }
 
         [Required]
         [ForeignKey("Employee")]
+        [ScaffoldColumn(false)]
         public int TeacherID { get; set; }
 
         [Required]
@@ -30,7 +32,7 @@ namespace Bueller.DA.Models
         public string FileName { get; set; }
 
         [Required]
-        [DataType(DataType.Upload)]
+        [DataType(DataType.Upload)]     //not sure about this annotation
         public string FileLocation { get; set; }
 
         public virtual Student Student { get; set; }

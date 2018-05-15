@@ -40,6 +40,7 @@ namespace Bueller.DA.Models
         public int TeacherId { get; set; }
         public virtual Employee Teacher { get; set; }
 
+        [ForeignKey("Subject")]
         public int SubjectId { get; set; }
         public virtual Subject Subject { get; set; }
 

@@ -15,6 +15,7 @@ namespace Bueller.DA.Models
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
+        //shouldnt ever need to scaffold this table
         public int PersonClassID { get; set; }
 
         [ForeignKey("Class")]

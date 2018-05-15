@@ -4,16 +4,29 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bueller.DA.Models
 {
+    [Table("Subjects", Schema ="Classes")]
     public class Subject : BaseEntity
     {
-
-        public int SubjectId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
-        public string  Name { get; set; }
-        public byte Credits { get; set; }
+        [ScaffoldColumn(false)]
+        public int SubjectId { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [StringLength(100, ErrorMessage = "Name cannot be longer than {1} characters")]
+        public string Name { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [StringLength(100, ErrorMessage = "Department cannot be longer than {1} characters")]
         public string Department { get; set; }
+
+        //credits is part of class model
     }
 }
