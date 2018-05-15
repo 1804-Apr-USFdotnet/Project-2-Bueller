@@ -38,9 +38,11 @@ namespace Bueller.DA.Models
 
         [Required(ErrorMessage = "Start time is required")]
         [DataType(DataType.Time)]
+        [Column(TypeName = "time")]
         public DateTime StartTime { get; set; }
         [Required(ErrorMessage = "End time is required")]
         [DataType(DataType.Time)]
+        [Column(TypeName = "time")]
         public DateTime EndTime { get; set; }
 
         //different ways to do this.. try 5 columns for now
