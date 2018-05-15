@@ -92,7 +92,7 @@ namespace Bueller.DA.Models
         public string EmployeeType { get; set; }
 
         public DateTime Created { get; set; }
-        public DateTime? Modified { get; set; }
+        public DateTime Modified { get; set; }
 
 
         public virtual PersonClass PersonClass { get; set; }

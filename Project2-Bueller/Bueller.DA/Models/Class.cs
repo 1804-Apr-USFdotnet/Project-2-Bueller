@@ -8,20 +8,24 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Bueller.DA.Models
 {
-    [Table("Class", Schema = "Classes")]
+    [Table("Classes", Schema = "Classes")]
     public class Class : BaseEntity
     {
         [Key]
+        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int ClassId { get; set; }
         [Required(ErrorMessage = "Name is required")]
+        [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Name cannot be more than 100 characters")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Room number is required")]
+        [DataType(DataType.Text)]
         [StringLength(20, ErrorMessage = "Room number cannot be more than 100 characters")]
         public string RoomNumber { get; set; }
         [Required(ErrorMessage = "Section is required")]
+        [DataType(DataType.Text)]
         [StringLength(10, ErrorMessage = "Section cannot be more than 100 characters")]
         public string Section { get; set; }
         [Required(ErrorMessage = "Credits is required")]
@@ -40,11 +44,13 @@ namespace Bueller.DA.Models
         public int TeacherId { get; set; }
         public virtual Employee Teacher { get; set; }
 
+        [Required]
         [ForeignKey("Subject")]
+        [ScaffoldColumn(false)]
         public int SubjectId { get; set; }
         public virtual Subject Subject { get; set; }
 
         public DateTime Created { get; set; }
-        public DateTime? Modified { get; set; }
+        public DateTime Modified { get; set; }
     }
 }
