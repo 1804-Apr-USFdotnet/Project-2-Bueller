@@ -76,14 +76,14 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repos\Crud.cs" />
+    <Compile Include="Repos\ICrud.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repos\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Bueller.DA\Bueller.DA.csproj">
       <Project>{b90fb958-2ac6-40f4-84f4-2e7d3e9c404c}</Project>
