@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bueller.DA;
 
 namespace Project2_Bueller
 {
@@ -10,7 +11,10 @@ namespace Project2_Bueller
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("this");
+            Console.WriteLine("Creating db");
+            BuellerContext db = new BuellerContext();
+            db.SaveChanges();
+            Console.WriteLine("db created");
         }
     }
 

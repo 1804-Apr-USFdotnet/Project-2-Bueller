@@ -84,5 +84,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bueller.DA\Bueller.DA.csproj">
+      <Project>{b90fb958-2ac6-40f4-84f4-2e7d3e9c404c}</Project>
+      <Name>Bueller.DA</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

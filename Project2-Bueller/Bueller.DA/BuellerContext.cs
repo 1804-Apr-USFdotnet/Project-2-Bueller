@@ -22,6 +22,7 @@ namespace Bueller.DA
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
 
         public override int SaveChanges()
         {
