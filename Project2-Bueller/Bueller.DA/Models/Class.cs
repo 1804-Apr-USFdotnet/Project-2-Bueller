@@ -78,6 +78,8 @@ namespace Bueller.DA.Models
 
         public virtual ICollection<Student> Students { get; set; }
 
+        public virtual ICollection<Assignment> Assignments { get; set; }
+
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
     }

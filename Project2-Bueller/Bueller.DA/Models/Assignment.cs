@@ -11,28 +11,32 @@ namespace Bueller.DA.Models
     [Table("Assignments", Schema = "Assignments")]
     public  class Assignment : BaseEntity
     {
-
         [Key]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int AssignmentId { get; set; }
 
-        [ForeignKey("ClassID")]
-        public virtual Class Class { get; set; }
-
-
         // this will also be title of homework assignment
         [Required]
         [DataType(DataType.Text)]
-        public string FileName { get; set; }
+        [StringLength(100, ErrorMessage = "Assignment name cannot be more than 100 characters")]
+        public string AssignmentName { get; set; }
 
-        [Required]
-        [DataType(DataType.Upload)]     //not sure about this annotation
-        public string FileLocation { get; set; }
-
+        [Required(ErrorMessage = "Due date is required")]
         public DateTime DueDate { get; set; }
 
+        //[Required]
+        //[DataType(DataType.Upload)]     //not sure about this annotation
+        //public HttpPostedFileBase AssignmentUpload { get; set; }
+
+        [Required]
+        [ScaffoldColumn(false)]
+        public int ClassId { get; set; }
+        [ForeignKey("ClassId")]
+        public virtual Class Class { get; set; }
+
+        public virtual ICollection<File> Files { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }

@@ -15,38 +15,27 @@ namespace Bueller.DA.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         [ScaffoldColumn(false)]
-        public int FileID { get; set; }
-
-        [Required]
-        [ScaffoldColumn(false)]
-        public int StudentID { get; set; }
-        
-
-        // Not really required if we work with assignment class
-        [Required]
-        [ScaffoldColumn(false)]
-        public int ClassID { get; set; }
+        public int FileId { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
+        [StringLength(100, ErrorMessage = "File name cannot be more than 100 characters")]
         public string FileName { get; set; }
 
+        //[DataType(DataType.Upload)]     //not sure about this annotation
+        //public string FileLocation { get; set; }
+
         [Required]
-        [DataType(DataType.Upload)]     //not sure about this annotation
-        public string FileLocation { get; set; }
-
-        // Not really required if we work with assignment class
-        public DateTime DueDate { get; set; }
-
-
-        [ForeignKey("AssignmentID")]
+        [ScaffoldColumn(false)]
+        public int AssignmentId { get; set; }
+        [ForeignKey("AssignmentId")]
         public virtual Assignment Assignment { get; set; }
 
-
-        [ForeignKey("StudentID")]
+        [Required]
+        [ScaffoldColumn(false)]
+        public int StudentId { get; set; }
+        [ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
-        [ForeignKey("ClassID")]
-        public virtual Class Class { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
