@@ -31,11 +31,11 @@ namespace Bueller.DA.Models
         [ForeignKey("AssignmentId")]
         public virtual Assignment Assignment { get; set; }
 
-        [Required]
-        [ScaffoldColumn(false)]
-        public int GradeId { get; set; }
-        [ForeignKey("GradeId")]
-        public virtual Grade Grade { get; set; }
+        //[Required]
+        //[ScaffoldColumn(false)]
+        //public int GradeId { get; set; }
+        //[ForeignKey("GradeId")]
+        //public virtual Grade Grade { get; set; }
 
         [Required]
         [ScaffoldColumn(false)]
