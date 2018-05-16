@@ -39,10 +39,6 @@ namespace Bueller.DA.Models
         public string Title { get; set; }
 
         [Required]
-        [ScaffoldColumn(false)]
-        public int AccountNumberID { get; set; }
-
-        [Required]
         [DataType(DataType.Text)]
         [StringLength(200, ErrorMessage = "City must be shorter than {1} characters")]
         public string City { get; set; }
@@ -69,7 +65,7 @@ namespace Bueller.DA.Models
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        [RegularExpression(".{1,200}[@].{1,200}[.].{1,5}",ErrorMessage = "Email is too long, max 200 character on each side of @")]
+        [RegularExpression(".{1,200}[@].{1,200}[.].{1,5}", ErrorMessage = "Email is too long, max 200 character on each side of @")]
         public string Email { get; set; }
 
         [Required]
@@ -89,7 +85,9 @@ namespace Bueller.DA.Models
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
 
-
+        [Required]
+        [ScaffoldColumn(false)]
+        public int AccountNumberID { get; set; }
         [ForeignKey("AccountNumberID")]
         public virtual Account Account { get; set; }
 
