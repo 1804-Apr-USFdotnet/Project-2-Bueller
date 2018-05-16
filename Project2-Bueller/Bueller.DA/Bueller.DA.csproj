@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="BuellerContext.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\File.cs" />

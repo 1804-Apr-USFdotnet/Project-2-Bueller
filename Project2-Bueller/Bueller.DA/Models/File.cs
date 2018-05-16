@@ -20,7 +20,9 @@ namespace Bueller.DA.Models
         [Required]
         [ScaffoldColumn(false)]
         public int StudentID { get; set; }
+        
 
+        // Not really required if we work with assignment class
         [Required]
         [ScaffoldColumn(false)]
         public int ClassID { get; set; }
@@ -33,8 +35,13 @@ namespace Bueller.DA.Models
         [DataType(DataType.Upload)]     //not sure about this annotation
         public string FileLocation { get; set; }
 
-        
+        // Not really required if we work with assignment class
         public DateTime DueDate { get; set; }
+
+
+        [ForeignKey("AssignmentID")]
+        public virtual Assignment Assignment { get; set; }
+
 
         [ForeignKey("StudentID")]
         public virtual Student Student { get; set; }
