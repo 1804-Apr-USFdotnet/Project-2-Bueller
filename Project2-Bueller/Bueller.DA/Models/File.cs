@@ -33,6 +33,12 @@ namespace Bueller.DA.Models
 
         [Required]
         [ScaffoldColumn(false)]
+        public int GradeId { get; set; }
+        [ForeignKey("GradeId")]
+        public virtual Grade Grade { get; set; }
+
+        [Required]
+        [ScaffoldColumn(false)]
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
