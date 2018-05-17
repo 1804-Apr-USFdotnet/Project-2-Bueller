@@ -65,7 +65,7 @@ namespace Bueller.DA.Models
         //[ForeignKey("StudentAccountId")]
         //public virtual StudentAccount StudentAccount { get; set; }
 
-        public virtual ICollection<Grade> Grades { get; set; }
+        //public virtual ICollection<Grade> Grades { get; set; }
 
         //public virtual ICollection<File> Files { get; set; }
 

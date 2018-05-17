@@ -37,11 +37,11 @@ namespace Bueller.DA.Models
         //[ForeignKey("GradeId")]
         //public virtual Grade Grade { get; set; }
 
-        //[Required]
-        //[ScaffoldColumn(false)]
-        //public int StudentId { get; set; }
-        //[ForeignKey("StudentId")]
-        //public virtual Student Student { get; set; }
+        [Required]
+        [ScaffoldColumn(false)]
+        public int StudentId { get; set; }
+        [ForeignKey("StudentId")]
+        public virtual Student Student { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }

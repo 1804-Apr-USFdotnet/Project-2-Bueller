@@ -64,9 +64,8 @@ namespace Bueller.DA.Models
 
         //no class level for now
 
-        [Required]
         [ScaffoldColumn(false)]
-        public int TeacherId { get; set; }
+        public int? TeacherId { get; set; }
         [ForeignKey("TeacherId")]
         public virtual Employee Teacher { get; set; }
 

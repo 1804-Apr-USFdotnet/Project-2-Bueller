@@ -35,11 +35,11 @@ namespace Bueller.DA.Models
         [StringLength(500, ErrorMessage = "Comment cannot be more than 500 characters")]
         public string Comment { get; set; }
 
-        [Required]
-        [ScaffoldColumn(false)]
-        public int StudentId { get; set; }
-        [ForeignKey("StudentId")]
-        public virtual Student Student { get; set; }
+        //[Required]
+        //[ScaffoldColumn(false)]
+        //public int StudentId { get; set; }
+        //[ForeignKey("StudentId")]
+        //public virtual Student Student { get; set; }
 
         //[Required]
         //[ScaffoldColumn(false)]
