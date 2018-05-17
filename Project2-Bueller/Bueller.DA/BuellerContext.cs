@@ -15,7 +15,8 @@ namespace Bueller.DA
 
         }
 
-        public DbSet<StudentAccount> Accounts { get; set; }
+        public DbSet<StudentAccount> StudentAccounts { get; set; }
+        public DbSet<EmployeeAccount> EmployeeAccounts { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<File> Files { get; set; }
@@ -44,13 +45,6 @@ namespace Bueller.DA
             });
             return base.SaveChanges();
         }
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //    modelBuilder.Entity<Employee>().HasRequired(t => t.Account).WithMany(
-        //        p => p.Accounts).HasForeignKey(t => t.AccountNumberID).WillCascadeOnDelete(true);
-        //    modelBuilder.Entity<Employee>().HasRequired(p => p.)
-        //}
 
         IDbSet<TEntity> IDbContext.Set<TEntity>()
         {
