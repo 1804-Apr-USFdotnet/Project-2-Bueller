@@ -17,20 +17,13 @@ namespace Bueller.DA.Models
         [ScaffoldColumn(false)]
         public int AccountId { get; set; }
 
-        [Required]
-        [ScaffoldColumn(false)]
-        public int StudentId { get; set; }
-        [ForeignKey("StudentId")]
-        public virtual Student Student { get; set; }
-
-
+ 
         [DataType(DataType.Currency)]
         public double? BalanceOwed { get; set; }
 
         [DataType(DataType.Currency)]
         public double? Aid { get; set; }
 
-        // This should  probably  be a computed column 
         [DataType(DataType.Currency)]
         public double? TotalExpense { get; set; }
 
