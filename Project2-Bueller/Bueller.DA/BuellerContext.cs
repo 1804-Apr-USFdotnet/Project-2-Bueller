@@ -44,13 +44,6 @@ namespace Bueller.DA
             });
             return base.SaveChanges();
         }
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //    modelBuilder.Entity<Employee>().HasRequired(t => t.Account).WithMany(
-        //        p => p.Accounts).HasForeignKey(t => t.AccountNumberID).WillCascadeOnDelete(true);
-        //    modelBuilder.Entity<Employee>().HasRequired(p => p.)
-        //}
 
         IDbSet<TEntity> IDbContext.Set<TEntity>()
         {
