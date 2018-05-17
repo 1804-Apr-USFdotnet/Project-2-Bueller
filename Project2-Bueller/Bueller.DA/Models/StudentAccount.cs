@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Bueller.DA.Models
 {
     [Table("Accounts", Schema = "Billing")]
-    public class Account : BaseEntity
+    public class StudentAccount : BaseEntity
     {
         [Key]
         [Required]

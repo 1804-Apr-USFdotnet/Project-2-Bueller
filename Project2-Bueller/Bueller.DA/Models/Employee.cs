@@ -89,7 +89,7 @@ namespace Bueller.DA.Models
         [ScaffoldColumn(false)]
         public int AccountNumberID { get; set; }
         [ForeignKey("AccountNumberID")]
-        public virtual Account Account { get; set; }
+        public virtual StudentAccount Account { get; set; }
 
         public virtual ICollection<Class> Classes { get; set; }
     }
