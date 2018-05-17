@@ -28,6 +28,7 @@ namespace Bueller.DA
         {
             var AddedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Added).ToList();
 
+
             AddedEntities.ForEach(E =>
             {
                 E.Property("Created").CurrentValue = DateTime.Now;
