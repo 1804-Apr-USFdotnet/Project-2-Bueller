@@ -85,11 +85,11 @@ namespace Bueller.DA.Models
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
 
-        [Required]
-        [ScaffoldColumn(false)]
-        public int EmployeeAccountId { get; set; }
-        [ForeignKey("EmployeeAccountId")]
-        public virtual EmployeeAccount EmployeeAccount { get; set; }
+        //[Required]
+        //[ScaffoldColumn(false)]
+        //public int EmployeeAccountId { get; set; }
+        //[ForeignKey("EmployeeAccountId")]
+        //public virtual EmployeeAccount EmployeeAccount { get; set; }
 
         public virtual ICollection<Class> Classes { get; set; }
     }

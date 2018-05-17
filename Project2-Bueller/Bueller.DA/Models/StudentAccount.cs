@@ -26,6 +26,12 @@ namespace Bueller.DA.Models
         [DataType(DataType.Currency)]
         public double TotalExpense { get; set; }
 
+        [Required]
+        [ScaffoldColumn(false)]
+        public int StudentId { get; set; }
+        [ForeignKey("StudentId")]
+        public virtual Student Student { get; set; }
+
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
     }
