@@ -67,7 +67,7 @@ namespace Bueller.DA.Models
 
         public virtual ICollection<Grade> Grades { get; set; }
 
-        public virtual ICollection<File> Files { get; set; }
+        //public virtual ICollection<File> Files { get; set; }
 
         public virtual ICollection<Class> Classes { get; set; }
 
