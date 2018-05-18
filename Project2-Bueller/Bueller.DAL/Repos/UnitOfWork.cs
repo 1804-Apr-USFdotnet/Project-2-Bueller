@@ -15,14 +15,14 @@ namespace Bueller.DAL.Repos
         private bool _disposed;
         private Dictionary<string, object> _repositories;
 
-        public UnitOfWork(BuellerContext context)
-        {
-            this._context = context;
-        }
-
         public UnitOfWork()
         {
             _context = new BuellerContext();
+        }
+
+        public UnitOfWork(BuellerContext context)
+        {
+            _context = context;
         }
 
         public void Dispose()
@@ -55,7 +55,8 @@ namespace Bueller.DAL.Repos
             if (!_repositories.ContainsKey(type))
             {
                 var repositoryType = typeof(Crud<>);
-                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _context);
+                var repositoryInstance = Activator.CreateInstance(typeof(Crud<T>), _context);
+                _repositories.Add(type,repositoryInstance);
             }
             return (Crud<T>)_repositories[type];
         }
