@@ -4,9 +4,10 @@ node('master'){
     }
     stage('build'){
         try{
+            dir('Project2-Bueller'){
                 bat 'nuget restore'
                 bat 'msbuild /p:MvcBuildViews=true'
-        
+            }
         }
         catch(exc){
             slackError('build')
