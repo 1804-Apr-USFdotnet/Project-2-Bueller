@@ -1,4 +1,4 @@
-node('master'){
+node('dev'){
     stage('import'){
         git 'https://github.com/1804-Apr-USFdotnet/Project-2-Bueller.git'
     }
