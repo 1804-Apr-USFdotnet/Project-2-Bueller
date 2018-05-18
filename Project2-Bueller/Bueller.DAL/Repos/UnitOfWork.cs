@@ -9,21 +9,22 @@ using Bueller.DA;
 
 namespace Bueller.DAL.Repos
 {
+    //does not work correctly right now, just use a crud repo
     //allows for dbcontext to not be referenced in web controllers
     public class UnitOfWork : IDisposable
     {
-        private readonly BuellerContext _context;
+        private readonly IDbContext _context;
         private bool _disposed;
         private Dictionary<string, object> _repositories;
-
-        public UnitOfWork(BuellerContext context)
-        {
-            this._context = context;
-        }
 
         public UnitOfWork()
         {
             _context = new BuellerContext();
+        }
+
+        public UnitOfWork(IDbContext context)
+        {
+            _context = context;
         }
 
         public void Dispose()
@@ -38,7 +39,7 @@ namespace Bueller.DAL.Repos
             {
                 if (disposing)
                 {
-                    ((IDbContext)_context).Dispose();
+                    _context.Dispose();
                 }
             }
             _disposed = true;
@@ -57,6 +58,7 @@ namespace Bueller.DAL.Repos
             {
                 var repositoryType = typeof(Crud<>);
                 var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _context);
+                _repositories.Add(type, repositoryInstance);
             }
             return (Crud<T>)_repositories[type];
         }
