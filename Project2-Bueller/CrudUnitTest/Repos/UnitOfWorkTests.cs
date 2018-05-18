@@ -14,16 +14,18 @@ namespace Bueller.DAL.Repos.Tests
     {
         private UnitOfWork unit = new UnitOfWork();
         private readonly Crud<Employee> EmpCrud;
+        private readonly EmployeeRepo employeeRepo;
 
         public UnitOfWorkTests()
         {
-            EmpCrud = unit.Crud<Employee>();
+            //EmpCrud = unit.Crud<Employee>();
+            employeeRepo = unit.EmployeeRepo();
         }
 
         [TestMethod()]
         public void UnitOfWorkTest()
         {
-            var em = EmpCrud.Table.Where(x => x.FirstName == "f").FirstOrDefault();
+            var em = employeeRepo.Table.Where(x => x.FirstName == "f").FirstOrDefault();
 
             Assert.AreEqual("f", em.FirstName);
         }

@@ -62,5 +62,23 @@ namespace Bueller.DAL.Repos
             }
             return (Crud<T>)_repositories[type];
         }
+
+        public EmployeeRepo EmployeeRepo()
+        {
+            if (_repositories == null)
+            {
+                _repositories = new Dictionary<string, object>();
+            }
+
+            var type = typeof(Employee).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(Crud<>);
+                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(Employee)), _context);
+                _repositories.Add(type, repositoryInstance);
+            }
+            return (EmployeeRepo)_repositories[type];
+        }
     }
 }

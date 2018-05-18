@@ -9,9 +9,10 @@ namespace Bueller.DAL.Repos
 {
     public class EmployeeRepo : Crud<Employee>
     {
+        private readonly IDbContext _context;
         public EmployeeRepo(IDbContext context) : base(context)
         {
-
+            _context = context;
         }
     }
 }

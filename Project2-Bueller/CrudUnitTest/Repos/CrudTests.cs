@@ -15,16 +15,18 @@ namespace Bueller.DAL.Repos.Tests
     public class CrudTests
     {
         public ICrud<Employee> crud;
+        public ICrud<Employee> empcrud;
         public IDbContext context;
         public CrudTests()
         {
             context = new BuellerContext();
             crud = new Crud<Employee>(context);
+            empcrud = new EmployeeRepo(context);
         }
         [TestMethod()]
         public void InsertTest()
         {
-            var em = crud.Table.Where(x => x.FirstName == "f").FirstOrDefault();
+            var em = empcrud.Table.Where(x => x.FirstName == "f").FirstOrDefault();
             Assert.AreEqual("f", em.FirstName);
         }
     }
