@@ -25,7 +25,7 @@ node('master'){
     }
     stage('analyze'){
         try{
-            dir('Project2-Bueller')
+            dir('Project2-Bueller'){
                 bat 'SonarScanner.MSBuild.exe begin /k:project2-bueller /d:sonar.organization="abyssopelagic-github"'
                 bat 'msbuild /t:rebuild'
                 bat 'SonarScanner.MSBuild.exe end'
