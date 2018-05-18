@@ -16,7 +16,6 @@ namespace Bueller.DAL.Repos.Tests
     {
         public ICrud<Employee> crud;
         public IDbContext context;
-        public BuellerContext db = new BuellerContext();
         public CrudTests()
         {
             context = new BuellerContext();
@@ -25,7 +24,8 @@ namespace Bueller.DAL.Repos.Tests
         [TestMethod()]
         public void InsertTest()
         {
-            Assert.Fail();
+            var em = crud.Table.Where(x => x.FirstName == "f").FirstOrDefault();
+            Assert.AreEqual("f", em.FirstName);
         }
     }
 }

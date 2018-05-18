@@ -78,6 +78,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuellerContext.cs" />
+    <Compile Include="Migrations\201805172031327_InitialCreate.cs" />
+    <Compile Include="Migrations\201805172031327_InitialCreate.Designer.cs">
+      <DependentUpon>201805172031327_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805181625404_initialUpdate.cs" />
+    <Compile Include="Migrations\201805181625404_initialUpdate.Designer.cs">
+      <DependentUpon>201805181625404_initialUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StudentAccount.cs" />
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Class.cs" />
@@ -91,7 +100,14 @@
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805172031327_InitialCreate.resx">
+      <DependentUpon>201805172031327_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805181625404_initialUpdate.resx">
+      <DependentUpon>201805181625404_initialUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
