@@ -83,10 +83,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\Crud.cs" />
     <Compile Include="Repos\ICrud.cs" />
+    <Compile Include="Repos\ITeacherAssignmentRepo.cs" />
+    <Compile Include="Repos\TeacherAssignmentRepo.cs" />
     <Compile Include="Repos\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

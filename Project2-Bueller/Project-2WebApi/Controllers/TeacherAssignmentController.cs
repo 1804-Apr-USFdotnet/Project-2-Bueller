@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Project_2WebApi.Controllers
+namespace  BuellerWebApi.Controllers
 {
     public class TeacherAssignmentController : ApiController
     {

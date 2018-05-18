@@ -13,11 +13,14 @@ namespace Bueller.DAL.Repos
     {
         private readonly IDbContext _context;
         private IDbSet<T> _entities;
+    
 
         public Crud(IDbContext context)
         {
             this._context = context;
         }
+
+  
 
         public T GetById(object id)
         {
