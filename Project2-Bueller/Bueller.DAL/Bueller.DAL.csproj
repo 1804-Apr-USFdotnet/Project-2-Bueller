@@ -89,6 +89,7 @@
     <Compile Include="Repos\EmployeeRepo.cs" />
     <Compile Include="Repos\ICrud.cs" />
     <Compile Include="Repos\ITeacherAssignmentRepo.cs" />
+    <Compile Include="Repos\StudentRepo.cs" />
     <Compile Include="Repos\TeacherAssignmentRepo.cs" />
     <Compile Include="Repos\UnitOfWork.cs" />
   </ItemGroup>
