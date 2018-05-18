@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bueller.BLL", "Bueller.BLL\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project-2WebApi", "Project-2WebApi\Project-2WebApi.csproj", "{68BD21A1-C39E-4CFE-B887-9C2B700317FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudUnitTest", "CrudUnitTest\CrudUnitTest.csproj", "{27934804-6DF9-4E54-8AD3-C35BAA3DEAF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{68BD21A1-C39E-4CFE-B887-9C2B700317FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68BD21A1-C39E-4CFE-B887-9C2B700317FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68BD21A1-C39E-4CFE-B887-9C2B700317FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27934804-6DF9-4E54-8AD3-C35BAA3DEAF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27934804-6DF9-4E54-8AD3-C35BAA3DEAF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27934804-6DF9-4E54-8AD3-C35BAA3DEAF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27934804-6DF9-4E54-8AD3-C35BAA3DEAF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
