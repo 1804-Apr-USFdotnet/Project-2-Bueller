@@ -1,1 +1,61 @@
+node('master'){
+    stage('import'){
+        git 'https://github.com/1804-Apr-USFdotnet/Project-2-Bueller.git'
+    }
+    stage('build'){
+        try{
+                bat 'nuget restore'
+                bat 'msbuild /p:MvcBuildViews=true'
+        }
+        catch(exc){
+            slackError('build')
+            throw exc
+        }
+    }
+    stage('test'){
+        try{
+           
+        }
+        catch(exc){
+            slackError('test')
+            throw exc
+        }
+    }
+    stage('analyze'){
+        try{
+                bat 'SonarScanner.MSBuild.exe begin /k:project2-bueller /d:sonar.organization="abyssopelagic-github"'
+                bat 'msbuild /t:rebuild'
+                bat 'SonarScanner.MSBuild.exe end'
+        }
+        catch(exc){
+            slackError('analyze')
+            throw exc
+        }
+    }
+    stage('package'){
+        try{
+        dir('BuellerWebApi'){
+            bat 'msbuild /t:package'
+        }
+        }
+        catch(exc){
+            slackError('package')
+            throw exc
+        }
+    }
+   /* stage('deploy'){
+        try{
+            dir("BuellerWebApi\\obj\\Debug\\Package"){
+                bat "\"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\" -source:package='C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2\\BuellerWebApi\\obj\\Debug\\Package\\RReviews.Web.zip' -dest:auto,computerName=\"https://ec2-13-59-126-130.us-east-2.compute.amazonaws.com:8172/msdeploy.axd\",userName=\"Administrator\",password=\"Playhocke7\",authtype=\"basic\",includeAcls=\"False\" -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:\"C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2\\BuellerWebApi\\obj\\Debug\\Package\\BuellerWebApi.SetParameters.xml\" -AllowUntrusted=True"
+        }
+        }
+        catch(exc){
+            slackError('deploy')
+            throw exc
+        }
+    }*/
+}
 
+def slackError(stageName) {
+    slackSend color: 'danger', message: "${stageName} stage failed. [<${JOB_URL}|${env.JOB_NAME}> <${env.BUILD_URL}console|${env.BUILD_DISPLAY_NAME}>] [${currentBuild.durationString[0..-14]}]"
+}

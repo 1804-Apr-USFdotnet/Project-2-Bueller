@@ -279,10 +279,6 @@
       <Project>{eb4c8791-01fc-435a-8496-a8ac7ae941d4}</Project>
       <Name>Bueller.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bueller.DA\Bueller.DA.csproj">
-      <Project>{B90FB958-2AC6-40F4-84F4-2E7D3E9C404C}</Project>
-      <Name>Bueller.DA</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
