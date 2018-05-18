@@ -4,8 +4,10 @@ node('master'){
     }
     stage('build'){
         try{
+            dir("Project2-Bueller"){
                 bat 'nuget restore'
                 bat 'msbuild /p:MvcBuildViews=true'
+            }
         }
         catch(exc){
             slackError('build')
@@ -23,9 +25,11 @@ node('master'){
     }
     stage('analyze'){
         try{
+            dir('Project2-Bueller')
                 bat 'SonarScanner.MSBuild.exe begin /k:project2-bueller /d:sonar.organization="abyssopelagic-github"'
                 bat 'msbuild /t:rebuild'
                 bat 'SonarScanner.MSBuild.exe end'
+        }
         }
         catch(exc){
             slackError('analyze')
@@ -34,7 +38,7 @@ node('master'){
     }
     stage('package'){
         try{
-        dir('BuellerWebApi'){
+        dir('Project2-Bueller/BuellerWebApi'){
             bat 'msbuild /t:package'
         }
         }
@@ -53,7 +57,7 @@ node('master'){
             slackError('deploy')
             throw exc
         }
-    }*/
+    }
 }
 
 def slackError(stageName) {
