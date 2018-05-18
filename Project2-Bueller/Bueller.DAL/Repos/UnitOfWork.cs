@@ -74,8 +74,8 @@ namespace Bueller.DAL.Repos
 
             if (!_repositories.ContainsKey(type))
             {
-                var repositoryType = typeof(Crud<>);
-                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(Employee)), _context);
+                var repositoryType = typeof(EmployeeRepo);
+                var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
                 _repositories.Add(type, repositoryInstance);
             }
             return (EmployeeRepo)_repositories[type];

@@ -13,12 +13,10 @@ namespace Bueller.DAL.Repos.Tests
     public class UnitOfWorkTests
     {
         private UnitOfWork unit = new UnitOfWork();
-        private readonly Crud<Employee> EmpCrud;
         private readonly EmployeeRepo employeeRepo;
 
         public UnitOfWorkTests()
         {
-            //EmpCrud = unit.Crud<Employee>();
             employeeRepo = unit.EmployeeRepo();
         }
 
