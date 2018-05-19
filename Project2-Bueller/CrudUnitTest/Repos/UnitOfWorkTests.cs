@@ -15,10 +15,7 @@ namespace Bueller.DAL.Repos.Tests
         private UnitOfWork unit = new UnitOfWork();
         private readonly EmployeeRepo employeeRepo;
 
-        public UnitOfWorkTests()
-        {
-            employeeRepo = unit.EmployeeRepo();
-        }
+        public UnitOfWorkTests() => employeeRepo = unit.EmployeeRepo();
 
         [TestMethod()]
         public void UnitOfWorkTest()

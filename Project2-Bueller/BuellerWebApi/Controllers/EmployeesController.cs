@@ -24,24 +24,27 @@ namespace BuellerWebApi.Controllers
         }
 
         // GET: api/Employees/5
-        public string Get(int id)
+        public Employee Get(int id)
         {
-            return "value";
+            return repo.GetById(id);
         }
 
         // POST: api/Employees
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Employee value)
         {
+            repo.Insert(value);
         }
 
         // PUT: api/Employees/5
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE: api/Employees/5
         public void Delete(int id)
         {
+            repo.Delete(repo.GetById(id));
         }
     }
 }

@@ -14,14 +14,14 @@ namespace Bueller.DAL.Repos
     {
         private readonly IDbContext _context;
         private IDbSet<T> _entities;
-    
+
 
         public Crud(IDbContext context)
         {
             this._context = context;
         }
 
-  
+
 
         public T GetById(object id)
         {
@@ -45,7 +45,7 @@ namespace Bueller.DAL.Repos
 
                 foreach (var validationErrors in dbEx.EntityValidationErrors)
                 {
-                    foreach (var validationError  in validationErrors.ValidationErrors)
+                    foreach (var validationError in validationErrors.ValidationErrors)
                     {
                         msg += string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage) + Environment.NewLine;
                     }
@@ -64,15 +64,6 @@ namespace Bueller.DAL.Repos
                 {
                     throw new ArgumentNullException("entity");
                 }
-
-                //var oldEntity = Entities.Attach(entity);
-                //if (oldEntity == null)
-                //{
-                //    throw new ArgumentNullException("entity");
-                //}
-                //_context.Entry(entity).State = EntityState.Modified;
-                //_context.Entry(oldEntity).CurrentValues.SetValues(entity);
-
                 this._context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
@@ -127,7 +118,7 @@ namespace Bueller.DAL.Repos
             }
         }
 
-        private IDbSet<T> Entities
+        protected IDbSet<T> Entities
         {
             get
             {
