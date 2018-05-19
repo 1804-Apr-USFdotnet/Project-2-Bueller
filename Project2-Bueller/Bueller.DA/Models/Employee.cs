@@ -12,7 +12,6 @@ namespace Bueller.DA.Models
     public class Employee : BaseEntity
     {
         [Key]
-        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int EmployeeID { get; set; }

@@ -13,7 +13,6 @@ namespace Bueller.DA.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
         [ScaffoldColumn(false)]
         public int SubjectId { get; set; }
 

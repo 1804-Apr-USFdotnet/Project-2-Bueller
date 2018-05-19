@@ -12,7 +12,6 @@ namespace Bueller.DA.Models
     public class Class : BaseEntity
     {
         [Key]
-        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int ClassId { get; set; }

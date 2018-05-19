@@ -12,7 +12,6 @@ namespace Bueller.DA.Models
     public class StudentAccount : BaseEntity
     {
         [Key]
-        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int StudentAccountId { get; set; }
