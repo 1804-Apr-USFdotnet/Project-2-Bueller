@@ -10,14 +10,10 @@ namespace Bueller.DAL.Repos
 {
     public class StudentRepo : Crud<Student>
     {
-        private IDbContext db;
-        //ICrud<Student> crud;
-        private BuellerContext bueller;
-
+        private readonly IDbContext _context;
         public StudentRepo(IDbContext context) : base(context)
         {
-            db = context;
-
+            _context = context;
         }
     }
 }
