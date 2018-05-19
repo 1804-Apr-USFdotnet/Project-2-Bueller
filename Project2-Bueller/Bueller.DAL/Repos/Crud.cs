@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Bueller.DA.Models;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using Bueller.DA;
 
 namespace Bueller.DAL.Repos
 {
@@ -63,6 +64,15 @@ namespace Bueller.DAL.Repos
                 {
                     throw new ArgumentNullException("entity");
                 }
+
+                //var oldEntity = Entities.Attach(entity);
+                //if (oldEntity == null)
+                //{
+                //    throw new ArgumentNullException("entity");
+                //}
+                //_context.Entry(entity).State = EntityState.Modified;
+                //_context.Entry(oldEntity).CurrentValues.SetValues(entity);
+
                 this._context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
