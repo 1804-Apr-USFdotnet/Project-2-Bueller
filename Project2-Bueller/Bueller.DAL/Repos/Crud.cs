@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Bueller.DA.Models;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using Bueller.DA;
 
 namespace Bueller.DAL.Repos
 {
@@ -15,13 +14,10 @@ namespace Bueller.DAL.Repos
         private readonly IDbContext _context;
         private IDbSet<T> _entities;
 
-
         public Crud(IDbContext context)
         {
             this._context = context;
         }
-
-
 
         public T GetById(object id)
         {
