@@ -21,9 +21,10 @@ namespace Bueller.DA.Models
         public virtual Employee Employee { get; set; }
 
         public double? PaymentAmount { get; set; }
-        
 
+        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
 
     }

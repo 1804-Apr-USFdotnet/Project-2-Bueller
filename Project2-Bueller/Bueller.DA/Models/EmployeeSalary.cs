@@ -23,8 +23,9 @@ namespace Bueller.DA.Models
         [ForeignKey("EmployeeId")]
         public virtual Employee Employee { get; set; }
 
-
+        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
     }
 }

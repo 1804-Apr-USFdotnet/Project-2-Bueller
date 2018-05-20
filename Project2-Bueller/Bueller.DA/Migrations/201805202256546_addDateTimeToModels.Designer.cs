@@ -7,13 +7,13 @@ namespace Bueller.DA.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class initialUpdate : IMigrationMetadata
+    public sealed partial class addDateTimeToModels : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initialUpdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addDateTimeToModels));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805181625404_initialUpdate"; }
+            get { return "201805202256546_addDateTimeToModels"; }
         }
         
         string IMigrationMetadata.Source

@@ -11,17 +11,20 @@ using System.Web.Http;
 
 namespace BuellerWebApi.Controllers
 {
-    [RoutePrefix("api/Employees")]
+    [RoutePrefix("api/Employee")]
     public class EmployeesController : ApiController
     {
-        UnitOfWork unit = new UnitOfWork();
-        EmployeeRepo repo;
+        private readonly UnitOfWork unit = new UnitOfWork();
+        private readonly EmployeeRepo repo;
+        private readonly EmployeeAccountRepo accountRepo;
 
         EmployeesController()
         {
             repo = unit.EmployeeRepo();
+            accountRepo = unit.EmployeeAccountRepo();
         }
-        // GET: api/Employees
+
+        #region Employees
         [HttpGet]
         [Route("GetAll")]
         public IEnumerable<Employee> GetEmployees()
@@ -134,6 +137,80 @@ namespace BuellerWebApi.Controllers
 
             return Ok(employees);
         }
+        #endregion
+        #region Employee Accounts
+        [HttpGet]
+        [Route("Account/GetAll")]
+        public IEnumerable<EmployeeAccount> GetEmployeeAccounts()
+        {
+            return accountRepo.Table.ToList();
+        }
+
+        [HttpPost]
+        [Route("Account/Add", Name = "AddEmplyeeAccount")]
+        public IHttpActionResult AddEmployeeAccount(int employeeID, EmployeeAccount employeeAccount)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            accountRepo.Insert(employeeAccount);
+
+            return CreatedAtRoute("AddEmployeeAccount", new { id = employeeAccount.EmployeeAccountId }, employeeAccount);
+        }
+
+        [HttpPost]
+        [Route("Account/Delete/{id}")]
+        public IHttpActionResult DeleteEmployeeAccount(int id)
+        {
+            EmployeeAccount employeeAccount = accountRepo.GetById(id);
+            if (employeeAccount == null)
+            {
+                return NotFound();
+            }
+
+            accountRepo.Delete(employeeAccount);
+
+            return Ok(employeeAccount);
+        }
+
+        [HttpGet]
+        [Route("Account/GetById/{id}")]
+        public IHttpActionResult GetEmployeeAccountById(int id)
+        {
+            EmployeeAccount employeeAccount = accountRepo.GetById(id);
+            if (employeeAccount == null)
+            {
+                return NotFound();
+            }
+            return Ok(employeeAccount);
+        }
+
+        [HttpGet]
+        [Route("Account/GetByEmployeeId/{id}")]
+        public IHttpActionResult GetAccountByEmployeeId(int id)
+        {
+            EmployeeAccount employeeAccount = accountRepo.GetAccountByEmployeeId(id);
+            if (employeeAccount == null)
+            {
+                return NotFound();
+            }
+            return Ok(employeeAccount);
+        }
+
+        [HttpGet]
+        [Route("Account/GetByPayPeriod/{period}")]
+        public IHttpActionResult GetAccountsByPayPeriod(string period)
+        {
+            IEnumerable<EmployeeAccount> employeeAccounts = accountRepo.GetAccountsByPayPeriod(period);
+            if (employeeAccounts.Count() == 0)
+            {
+                return NotFound();
+            }
+            return Ok(employeeAccounts);
+        }
+        #endregion
 
         private bool EmployeeExists(int id)
         {

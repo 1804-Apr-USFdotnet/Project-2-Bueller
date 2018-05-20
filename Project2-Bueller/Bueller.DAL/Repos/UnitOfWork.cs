@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using Bueller.DA;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Bueller.DAL.Repos
 {
@@ -82,22 +81,40 @@ namespace Bueller.DAL.Repos
             return (EmployeeRepo)_repositories[type];
         }
 
-        public UserAccountRepo UserAccountRepo()
+        public EmployeeAccountRepo EmployeeAccountRepo()
         {
             if (_repositories == null)
             {
                 _repositories = new Dictionary<string, object>();
             }
 
-            var type = typeof(IdentityUser).Name;
+            var type = typeof(EmployeeAccount).Name;
 
             if (!_repositories.ContainsKey(type))
             {
-                var repositoryType = typeof(UserAccountRepo);
+                var resositoryType = typeof(EmployeeAccountRepo);
+                var repositoryInstance = Activator.CreateInstance(resositoryType, _context);
+                _repositories.Add(type, repositoryInstance);
+            }
+            return (EmployeeAccountRepo)_repositories[type];
+        }
+
+        public StudentAccountRepo StudentAccountRepo()
+        {
+            if (_repositories == null)
+            {
+                _repositories = new Dictionary<string, object>();
+            }
+            var type = typeof(StudentAccount).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(StudentAccountRepo);
                 var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
                 _repositories.Add(type, repositoryInstance);
             }
-            return (UserAccountRepo)_repositories[type];
+
+            return (StudentAccountRepo)_repositories[type];
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Bueller.DA.Models
         public string AssignmentName { get; set; }
 
         [Required(ErrorMessage = "Due date is required")]
+        [Column(TypeName = "datetime2")]
         public DateTime DueDate { get; set; }
 
         //[Required]
@@ -37,7 +38,9 @@ namespace Bueller.DA.Models
 
         public virtual ICollection<File> Files { get; set; }
 
+        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
     }
 }

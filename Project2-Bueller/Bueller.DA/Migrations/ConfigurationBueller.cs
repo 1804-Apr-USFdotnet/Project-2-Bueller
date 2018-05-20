@@ -1,16 +1,16 @@
-﻿namespace Bueller.DA.Migrations
+namespace Bueller.DA.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Bueller.DA.BuellerContext>
+    internal sealed class ConfigurationBueller : DbMigrationsConfiguration<Bueller.DA.BuellerContext>
     {
-        public Configuration()
+        public ConfigurationBueller()
         {
             AutomaticMigrationsEnabled = false;
-            MigrationsDirectory = @"Migrations";
+            ContextKey = "Bueller.DA.BuellerContext";
         }
 
         protected override void Seed(Bueller.DA.BuellerContext context)

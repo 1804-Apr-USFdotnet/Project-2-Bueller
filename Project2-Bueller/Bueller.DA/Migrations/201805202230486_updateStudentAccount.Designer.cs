@@ -7,13 +7,13 @@ namespace Bueller.DA.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class updateStudentAccount : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateStudentAccount));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805172031327_InitialCreate"; }
+            get { return "201805202230486_updateStudentAccount"; }
         }
         
         string IMigrationMetadata.Source

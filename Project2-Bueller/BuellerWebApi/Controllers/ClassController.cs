@@ -39,12 +39,13 @@ namespace BuellerWebApi.Controllers
             return NotFound();
         }
 
+        [HttpGet]
         [Route("~/api/Class/StudentClasses/{id}")]
         public IHttpActionResult StudentClasses(int id)
         {
             //studentRepo.AddToClass();
-            //var classes = studentRepo.Table.Where(x => x.StudentId == id).SelectMany(x => x.Classes);
-            var classes = classRepo.Table.Where(x => x.Students.Any(a => a.StudentId == id));
+            //var classes = studentRepo.Table.Where(x => x.StudentId == id).SelectMany(x => x.Classes).ToList();
+            var classes = classRepo.Table.Where(x => x.Students.Any(a => a.StudentId == id)).ToList();
             //models need to be mapped to remove reference loops in serializing database models
             //List<string> test = new List<string>();
             //foreach (var classres in classes)
@@ -53,7 +54,7 @@ namespace BuellerWebApi.Controllers
             //}
             if (classes != null)
             {
-                return Ok(classes.Count());
+                return Ok(classes);
             }
             return NotFound();
         }
