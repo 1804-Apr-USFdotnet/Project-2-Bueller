@@ -24,6 +24,16 @@ namespace Bueller.DAL.Repos
             return this.Entities.Find(id);
         }
 
+        //used to add and test relationships between students and classes... 
+        //public void AddToClass()
+        //{
+        //    var student1 = _context.Set<Student>().FirstOrDefault(s => s.FirstName == "bobby");
+        //    var class1 = _context.Set<Class>().Find(3);
+        //    class1.Students.Add(student1);
+
+        //    _context.SaveChanges();
+        //}
+
         public void Insert(T entity)
         {
             try
