@@ -87,17 +87,9 @@
       <DependentUpon>201805192352540_Added Identity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations.Identity\Configuration.cs" />
-    <Compile Include="Migrations\201805172031327_InitialCreate.cs" />
-    <Compile Include="Migrations\201805172031327_InitialCreate.Designer.cs">
-      <DependentUpon>201805172031327_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805181625404_initialUpdate.cs" />
-    <Compile Include="Migrations\201805181625404_initialUpdate.Designer.cs">
-      <DependentUpon>201805181625404_initialUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805202100030_EmployeeTableCreatedModifiedColumnsToDatetime2.cs" />
-    <Compile Include="Migrations\201805202100030_EmployeeTableCreatedModifiedColumnsToDatetime2.Designer.cs">
-      <DependentUpon>201805202100030_EmployeeTableCreatedModifiedColumnsToDatetime2.cs</DependentUpon>
+    <Compile Include="Migrations\201805202230486_updateStudentAccount.cs" />
+    <Compile Include="Migrations\201805202230486_updateStudentAccount.Designer.cs">
+      <DependentUpon>201805202230486_updateStudentAccount.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeePayment.cs" />
@@ -119,14 +111,8 @@
     <EmbeddedResource Include="Migrations.Identity\201805192352540_Added Identity.resx">
       <DependentUpon>201805192352540_Added Identity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805172031327_InitialCreate.resx">
-      <DependentUpon>201805172031327_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805181625404_initialUpdate.resx">
-      <DependentUpon>201805181625404_initialUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805202100030_EmployeeTableCreatedModifiedColumnsToDatetime2.resx">
-      <DependentUpon>201805202100030_EmployeeTableCreatedModifiedColumnsToDatetime2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805202230486_updateStudentAccount.resx">
+      <DependentUpon>201805202230486_updateStudentAccount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

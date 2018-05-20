@@ -3,7 +3,7 @@ namespace Bueller.DA.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class updateStudentAccount : DbMigration
     {
         public override void Up()
         {
@@ -39,14 +39,14 @@ namespace Bueller.DA.Migrations
                         Wed = c.Int(nullable: false),
                         Thurs = c.Int(nullable: false),
                         Fri = c.Int(nullable: false),
-                        TeacherId = c.Int(nullable: false),
+                        TeacherId = c.Int(),
                         SubjectId = c.Int(nullable: false),
                         Created = c.DateTime(nullable: false),
                         Modified = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ClassId)
                 .ForeignKey("Classes.Subjects", t => t.SubjectId, cascadeDelete: true)
-                .ForeignKey("Persons.Employees", t => t.TeacherId, cascadeDelete: true)
+                .ForeignKey("Persons.Employees", t => t.TeacherId)
                 .Index(t => t.TeacherId)
                 .Index(t => t.SubjectId);
             
@@ -101,8 +101,8 @@ namespace Bueller.DA.Migrations
                         PersonalPhoneNumber = c.String(nullable: false),
                         OfficePhoneNumber = c.String(),
                         EmployeeType = c.String(nullable: false, maxLength: 100),
-                        Created = c.DateTime(nullable: false),
-                        Modified = c.DateTime(nullable: false),
+                        Created = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        Modified = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                     })
                 .PrimaryKey(t => t.EmployeeID);
             
@@ -160,7 +160,6 @@ namespace Bueller.DA.Migrations
                 c => new
                     {
                         StudentAccountId = c.Int(nullable: false, identity: true),
-                        BalanceOwed = c.Double(nullable: false),
                         Aid = c.Double(nullable: false),
                         TotalExpense = c.Double(nullable: false),
                         StudentId = c.Int(nullable: false),
