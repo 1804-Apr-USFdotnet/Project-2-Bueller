@@ -37,7 +37,9 @@ namespace Bueller.DA.Models
 
         public virtual ICollection<File> Files { get; set; }
 
+        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
     }
 }
