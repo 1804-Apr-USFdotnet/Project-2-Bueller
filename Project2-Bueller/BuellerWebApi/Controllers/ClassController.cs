@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Bueller.DA.Models;
 using Bueller.DAL.Repos;
+using Microsoft.AspNet.Identity;
 
 namespace BuellerWebApi.Controllers
 {
@@ -38,13 +39,21 @@ namespace BuellerWebApi.Controllers
             return NotFound();
         }
 
+        [Route("~/api/Class/StudentClasses/{id}")]
         public IHttpActionResult StudentClasses(int id)
         {
-            var classes = studentRepo.Table.Where(x => x.StudentId == id).SelectMany(x => x.Classes);
-            //var classes = classRepo.Table.Where(x => x.Students.Any(a => a.StudentId == id));
+            //studentRepo.AddToClass();
+            //var classes = studentRepo.Table.Where(x => x.StudentId == id).SelectMany(x => x.Classes);
+            var classes = classRepo.Table.Where(x => x.Students.Any(a => a.StudentId == id));
+            //models need to be mapped to remove reference loops in serializing database models
+            //List<string> test = new List<string>();
+            //foreach (var classres in classes)
+            //{
+            //    test.Add(classres.Name);
+            //}
             if (classes != null)
             {
-                return Ok(classes);
+                return Ok(classes.Count());
             }
             return NotFound();
         }
