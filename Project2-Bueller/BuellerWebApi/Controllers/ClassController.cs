@@ -39,6 +39,7 @@ namespace BuellerWebApi.Controllers
             return NotFound();
         }
 
+        [HttpGet]
         [Route("~/api/Class/StudentClasses/{id}")]
         public IHttpActionResult StudentClasses(int id)
         {

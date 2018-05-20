@@ -70,6 +70,8 @@ namespace Bueller.DAL.Repos
                 {
                     throw new ArgumentNullException("entity");
                 }
+                //_context.Entry(entity).State = EntityState.Modified;
+                //_context.Entry(entity).Property("Created").IsModified = false;
                 this._context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
