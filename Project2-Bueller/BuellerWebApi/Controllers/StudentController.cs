@@ -187,6 +187,18 @@ namespace BuellerWebApi.Controllers
             return Ok(studentAccounts);
         }
 
+        [HttpGet]
+        [Route("Account/GetByStudentId/{id}")]
+        public IHttpActionResult GetAccountBytStudentId(int id)
+        {
+            StudentAccount studentAccount = accountRepo.GetAccountByStudentId(id);
+            if (studentAccount == null)
+            {
+                NotFound();
+            }
+            return Ok(studentAccount);
+        }
+
         #endregion
     }
 }

@@ -26,9 +26,14 @@ namespace BuellerWebApi.Controllers
         #region Employees
         [HttpGet]
         [Route("GetAll")]
-        public IEnumerable<Employee> GetEmployees()
+        public IHttpActionResult GetEmployees()
         {
-            return repo.Table.ToList();
+            IEnumerable<Employee> employees = repo.Table.ToList();
+            if (employees.Count() == 0)
+            {
+                return NotFound();
+            }
+            return Ok(employees);
         }
 
         // GET: api/Employees/5

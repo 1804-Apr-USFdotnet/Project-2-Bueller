@@ -105,6 +105,7 @@ namespace Bueller.DAL.Repos
             {
                 _repositories = new Dictionary<string, object>();
             }
+
             var type = typeof(StudentAccount).Name;
 
             if (!_repositories.ContainsKey(type))
@@ -115,6 +116,25 @@ namespace Bueller.DAL.Repos
             }
 
             return (StudentAccountRepo)_repositories[type];
+        }
+
+        public AssignmentRepo AssignmentRepo()
+        {
+            if (_repositories == null)
+            {
+                _repositories = new Dictionary<string, object>();
+            }
+
+            var type = typeof(AssignmentRepo).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(AssignmentRepo);
+                var repositoryInstace = Activator.CreateInstance(repositoryType, _context);
+                _repositories.Add(type, repositoryInstace);
+            }
+
+            return (AssignmentRepo)_repositories[type];
         }
     }
 }
