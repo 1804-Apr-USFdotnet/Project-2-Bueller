@@ -98,5 +98,23 @@ namespace Bueller.DAL.Repos
             }
             return (EmployeeAccountRepo)_repositories[type];
         }
+
+        public StudentAccountRepo StudentAccountRepo()
+        {
+            if (_repositories == null)
+            {
+                _repositories = new Dictionary<string, object>();
+            }
+            var type = typeof(StudentAccount).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(StudentAccountRepo);
+                var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
+                _repositories.Add(type, repositoryInstance);
+            }
+
+            return (StudentAccountRepo)_repositories[type];
+        }
     }
 }

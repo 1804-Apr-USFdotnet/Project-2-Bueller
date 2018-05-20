@@ -10,11 +10,10 @@ using System.Web.Http;
 
 namespace BuellerWebApi.Controllers
 {
-    [RoutePrefix("api/Employees")]
+    [RoutePrefix("api/Employee")]
     public class EmployeesController : ApiController
     {
         private readonly UnitOfWork unit = new UnitOfWork();
-        private readonly UnitOfWork unitAccount = new UnitOfWork();
         private readonly EmployeeRepo repo;
         private readonly EmployeeAccountRepo accountRepo;
 
