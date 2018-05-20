@@ -95,7 +95,7 @@
     <Compile Include="Migrations\201805181625404_initialUpdate.Designer.cs">
       <DependentUpon>201805181625404_initialUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\ConfigurationBueller.cs" />
     <Compile Include="Models\EmployeePayment.cs" />
     <Compile Include="Models\EmployeeSalary.cs" />
     <Compile Include="Models\StudentAccount.cs" />

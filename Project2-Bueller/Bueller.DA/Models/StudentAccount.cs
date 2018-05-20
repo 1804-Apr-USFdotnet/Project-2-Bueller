@@ -15,9 +15,16 @@ namespace Bueller.DA.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int StudentAccountId { get; set; }
- 
+
+        [NotMapped]
         [DataType(DataType.Currency)]
-        public double BalanceOwed { get; set; }
+        public double BalanceOwed
+        {
+            get
+            {
+                return TotalExpense - Aid;
+            }
+        }
 
         [DataType(DataType.Currency)]
         public double Aid { get; set; }
@@ -31,6 +38,7 @@ namespace Bueller.DA.Models
         [ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
 
+        
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
     }

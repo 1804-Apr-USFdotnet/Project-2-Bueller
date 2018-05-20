@@ -5,9 +5,9 @@ namespace Bueller.DA.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Bueller.DA.BuellerContext>
+    internal sealed class ConfigurationBueller : DbMigrationsConfiguration<Bueller.DA.BuellerContext>
     {
-        public Configuration()
+        public ConfigurationBueller()
         {
             AutomaticMigrationsEnabled = false;
             ContextKey = "Bueller.DA.BuellerContext";
