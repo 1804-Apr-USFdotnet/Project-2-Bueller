@@ -13,18 +13,11 @@ namespace Bueller.DAL.Repos
 
        
         private   IDbContext db;
-        ICrud<Assignment> crud;
-        private BuellerContext bueller;
-
         public TeacherAssignmentRepo(IDbContext context) : base(context)
         {
             db = context;
 
         }
-
-
-
-        //IQueryable<Assignment> ICrud<Assignment>.Table => throw new NotImplementedException();
 
 
 
