@@ -1,4 +1,5 @@
 ﻿using Bueller.DA.Models;
+using Bueller.DAL.Models;
 using Bueller.DAL.Repos;
 using System;
 using System.Collections.Generic;
@@ -120,7 +121,7 @@ namespace BuellerWebApi.Controllers
         [Route("Type/{type}")]
         public IHttpActionResult GetEmployeesByType(string type)
         {
-            IEnumerable<Employee> employees = repo.GetEmployeesByType(type);
+            IEnumerable<EmployeeDto> employees = repo.GetEmployeesByType(type);
             if (employees.Count() == 0)
             {
                 return NotFound();
