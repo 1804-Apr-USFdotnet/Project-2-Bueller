@@ -1,4 +1,6 @@
-﻿using Bueller.DA.Models;
+﻿using AutoMapper;
+using Bueller.DA.Models;
+using Bueller.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +14,15 @@ namespace Bueller.DAL.Repos
         private readonly IDbContext _context;
         public EmployeeRepo(IDbContext context) : base(context)
         {
+
+          
             _context = context;
         }
 
-        public IEnumerable<Employee> GetEmployeesByType(string type)
-        {
-            return this.Entities.Where(x => x.EmployeeType == type).ToList();
+        public IEnumerable<EmployeeDto> GetEmployeesByType(string type)
+        { 
+            var employee =  this.Entities.Where(x => x.EmployeeType == type).ToList();
+            return Mapper.Map<IEnumerable<EmployeeDto>>(employee);
         }
 
         public IEnumerable<Employee> GetEmployeesByNameAscending()

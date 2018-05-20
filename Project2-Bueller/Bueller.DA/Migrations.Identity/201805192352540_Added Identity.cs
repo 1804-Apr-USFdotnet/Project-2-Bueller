@@ -36,16 +36,16 @@ namespace Bueller.DA.Migrations.Identity
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
+                        EmailConfirmed = c.Boolean(nullable: true),
                         PasswordHash = c.String(),
                         SecurityStamp = c.String(),
                         PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        PhoneNumberConfirmed = c.Boolean(nullable: true),
+                        TwoFactorEnabled = c.Boolean(nullable: true),
                         LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
+                        LockoutEnabled = c.Boolean(nullable: true),
+                        AccessFailedCount = c.Int(nullable: true),
+                        UserName = c.String(nullable: true, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
