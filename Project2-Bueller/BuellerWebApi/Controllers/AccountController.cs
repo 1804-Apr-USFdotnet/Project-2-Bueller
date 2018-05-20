@@ -30,7 +30,7 @@ namespace BuellerWebApi.Controllers
             }
 
             // actually register
-            var userStore = new UserStore<IdentityUser>(new BuellerContext());
+            var userStore = new UserStore<IdentityUser>(new IdentityContext());
             var userManager = new UserManager<IdentityUser>(userStore);
             var user = new IdentityUser(account.Email);
 
@@ -55,7 +55,7 @@ namespace BuellerWebApi.Controllers
             }
 
             // actually register
-            var userStore = new UserStore<IdentityUser>(new BuellerContext());
+            var userStore = new UserStore<IdentityUser>(new IdentityContext());
             var userManager = new UserManager<IdentityUser>(userStore);
             var user = new IdentityUser(account.Email);
 
@@ -83,7 +83,7 @@ namespace BuellerWebApi.Controllers
             }
 
             // actually login
-            var userStore = new UserStore<IdentityUser>(new BuellerContext());
+            var userStore = new UserStore<IdentityUser>(new IdentityContext());
             var userManager = new UserManager<IdentityUser>(userStore);
             var user = userManager.Users.FirstOrDefault(u => u.UserName == account.Email);
 

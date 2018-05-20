@@ -45,10 +45,25 @@ namespace BuellerWebApi.Controllers
 
         }
 
-        // DELETE: api/Employees/5
+        // DELETE: api/Employees/{Employee}
+        [HttpPost]
         public void Delete(Employee employee)
         {
             repo.Delete(employee);
+        }
+
+        [HttpGet]
+        [Route("~/api/Employees/Type")]
+        public IEnumerable<Employee> GetEmployeesByType(string type)
+        {
+            return repo.GetEmployeesByType(type);
+        }
+
+        [HttpGet]
+        [Route("~/api/Employees/Name")]
+        public IEnumerable<Employee> GetEmployeesByNameAscending()
+        {
+            return repo.GetEmployeesByNameAscending();
         }
     }
 }

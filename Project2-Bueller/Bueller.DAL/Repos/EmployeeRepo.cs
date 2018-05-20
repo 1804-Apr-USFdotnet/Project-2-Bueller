@@ -24,10 +24,5 @@ namespace Bueller.DAL.Repos
         {
             return this.Entities.OrderBy(x => x.FirstName);
         }
-
-        public IEnumerable<Employee> GetEmployeesByNameDescending()
-        {
-            return this.Entities.OrderByDescending(x => x.FirstName);
-        }
     }
 }
