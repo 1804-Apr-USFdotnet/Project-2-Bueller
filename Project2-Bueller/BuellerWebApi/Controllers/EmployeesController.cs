@@ -18,18 +18,21 @@ namespace BuellerWebApi.Controllers
             repo = unit.EmployeeRepo();
         }
         // GET: api/Employees
+        [HttpGet]
         public IEnumerable<Employee> Get()
         {
             return repo.Table.ToList();
         }
 
         // GET: api/Employees/5
+        [HttpGet]
         public Employee Get(int id)
         {
             return repo.GetById(id);
         }
 
         // POST: api/Employees
+        [HttpPost]
         public void Post([FromBody]Employee value)
         {
             repo.Insert(value);
@@ -42,9 +45,9 @@ namespace BuellerWebApi.Controllers
         }
 
         // DELETE: api/Employees/5
-        public void Delete(int id)
+        public void Delete(Employee employee)
         {
-            repo.Delete(repo.GetById(id));
+            repo.Delete(employee);
         }
     }
 }
