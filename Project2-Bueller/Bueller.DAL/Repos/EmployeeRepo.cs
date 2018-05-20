@@ -15,6 +15,19 @@ namespace Bueller.DAL.Repos
             _context = context;
         }
 
+        public IEnumerable<Employee> GetEmployeesByType(string type)
+        {
+            return this.Entities.Where(x => x.EmployeeType == type);
+        }
 
+        public IEnumerable<Employee> GetEmployeesByNameAscending()
+        {
+            return this.Entities.OrderBy(x => x.FirstName);
+        }
+
+        public IEnumerable<Employee> GetEmployeesByNameDescending()
+        {
+            return this.Entities.OrderByDescending(x => x.FirstName);
+        }
     }
 }

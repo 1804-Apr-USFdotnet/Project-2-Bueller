@@ -13,35 +13,42 @@ namespace BuellerWebApi.Controllers
     {
         UnitOfWork unit = new UnitOfWork();
         EmployeeRepo repo;
+
         EmployeesController()
         {
             repo = unit.EmployeeRepo();
         }
         // GET: api/Employees
+        [HttpGet]
         public IEnumerable<Employee> Get()
         {
             return repo.Table.ToList();
         }
 
         // GET: api/Employees/5
-        public string Get(int id)
+        [HttpGet]
+        public Employee Get(int id)
         {
-            return "value";
+            return repo.GetById(id);
         }
 
         // POST: api/Employees
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public void Post([FromBody]Employee value)
         {
+            repo.Insert(value);
         }
 
         // PUT: api/Employees/5
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE: api/Employees/5
-        public void Delete(int id)
+        public void Delete(Employee employee)
         {
+            repo.Delete(employee);
         }
     }
 }
