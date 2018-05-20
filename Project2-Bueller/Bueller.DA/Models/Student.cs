@@ -71,9 +71,7 @@ namespace Bueller.DA.Models
 
         public virtual ICollection<Class> Classes { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
-        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
 
         [NotMapped]

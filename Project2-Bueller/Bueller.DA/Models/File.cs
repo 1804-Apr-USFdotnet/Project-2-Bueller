@@ -42,9 +42,7 @@ namespace Bueller.DA.Models
         [ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
-        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
     }
 }

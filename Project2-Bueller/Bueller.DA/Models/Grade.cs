@@ -52,9 +52,7 @@ namespace Bueller.DA.Models
         [ForeignKey("FileId")]
         public virtual File File { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
-        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
     }
 }

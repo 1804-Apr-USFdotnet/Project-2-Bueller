@@ -28,9 +28,7 @@ namespace Bueller.DA.Models
 
         //credits is part of class model
 
-        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
-        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
     }
 }
