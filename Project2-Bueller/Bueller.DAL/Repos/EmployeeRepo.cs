@@ -17,12 +17,12 @@ namespace Bueller.DAL.Repos
 
         public IEnumerable<Employee> GetEmployeesByType(string type)
         {
-            return this.Entities.Where(x => x.EmployeeType == type);
+            return this.Entities.Where(x => x.EmployeeType == type).ToList();
         }
 
         public IEnumerable<Employee> GetEmployeesByNameAscending()
         {
-            return this.Entities.OrderBy(x => x.FirstName);
+            return this.Entities.OrderBy(x => x.FirstName).ToList();
         }
     }
 }

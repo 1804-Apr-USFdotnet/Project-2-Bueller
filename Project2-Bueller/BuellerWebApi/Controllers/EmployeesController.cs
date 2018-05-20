@@ -2,6 +2,7 @@
 using Bueller.DAL.Repos;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -9,6 +10,7 @@ using System.Web.Http;
 
 namespace BuellerWebApi.Controllers
 {
+    [RoutePrefix("api/Employees")]
     public class EmployeesController : ApiController
     {
         UnitOfWork unit = new UnitOfWork();
@@ -20,50 +22,121 @@ namespace BuellerWebApi.Controllers
         }
         // GET: api/Employees
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        [Route("GetAll")]
+        public IEnumerable<Employee> GetEmployees()
         {
             return repo.Table.ToList();
         }
 
         // GET: api/Employees/5
         [HttpGet]
-        public Employee Get(int id)
+        [Route("GetById/{id}")]
+        public IHttpActionResult GetEmployeeById(int id)
         {
-            return repo.GetById(id);
+            Employee employee = repo.GetById(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return Ok(employee);
         }
 
         // POST: api/Employees
         [HttpPost]
-        public void Post([FromBody]Employee value)
+        [Route("Add", Name = "AddEmployee")]
+        public IHttpActionResult AddEmployee(Employee employee)
         {
-            repo.Insert(value);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            repo.Insert(employee);
+
+            return CreatedAtRoute("AddEmployee", new { id = employee.EmployeeID }, employee);
         }
 
         // PUT: api/Employees/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        [Route("AddAt/{id}")]
+        public IHttpActionResult UpdateEmployee(int id, Employee employee)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            if (id != employee.EmployeeID)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                //doesnt update date modified, not sure how to fix
+                repo.Update(employee);
+            }
+
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmployeeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/Employees/{Employee}
+        // DELETE: api/Employees/{id}
         [HttpPost]
-        public void Delete(Employee employee)
+        [Route("Delete/{id}")]
+        public IHttpActionResult DeleteEmployee(int id)
         {
+            Employee employee = repo.GetById(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
             repo.Delete(employee);
+
+            return Ok(employee);
         }
 
         [HttpGet]
-        [Route("~/api/Employees/Type")]
-        public IEnumerable<Employee> GetEmployeesByType(string type)
+        [Route("Type/{type}")]
+        public IHttpActionResult GetEmployeesByType(string type)
         {
-            return repo.GetEmployeesByType(type);
+            IEnumerable<Employee> employees = repo.GetEmployeesByType(type);
+            if (employees.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(employees);
         }
 
         [HttpGet]
-        [Route("~/api/Employees/Name")]
-        public IEnumerable<Employee> GetEmployeesByNameAscending()
+        [Route("Name")]
+        public IHttpActionResult GetEmployeesByNameAscending()
         {
-            return repo.GetEmployeesByNameAscending();
+            IEnumerable<Employee> employees = repo.GetEmployeesByNameAscending();
+            if (employees.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(employees);
+        }
+
+        private bool EmployeeExists(int id)
+        {
+            return repo.Table.Count(e => e.EmployeeID == id) > 0;
         }
     }
 }
