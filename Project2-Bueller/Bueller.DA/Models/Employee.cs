@@ -81,7 +81,9 @@ namespace Bueller.DA.Models
         [StringLength(100, ErrorMessage = "Employee type must be shorter than {1} characters")]
         public string EmployeeType { get; set; }
 
+        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
 
         //[Required]

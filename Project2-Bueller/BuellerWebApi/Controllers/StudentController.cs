@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -55,10 +56,39 @@ namespace BuellerWebApi.Controllers
         }
 
         // PUT: api/Student/5
-        public void Put(int id, [FromBody]Student value)
+        public IHttpActionResult Put(int id, [FromBody]Student value)
         {
             //var student = repo.GetById(id);
             //repo.Update();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != value.StudentId)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                //doesnt update date modified, not sure how to fix
+                repo.Update(value);
+            }
+
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!(repo.Table.Count(e => e.StudentId == id) > 0))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE: api/Student/5
