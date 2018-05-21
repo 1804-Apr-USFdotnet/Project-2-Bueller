@@ -21,9 +21,6 @@ namespace Bueller.DAL.Models
         [StringLength(100, ErrorMessage = "File name cannot be more than 100 characters")]
         public string FileName { get; set; }
 
-        //[DataType(DataType.Upload)]     //not sure about this annotation
-        //public string FileLocation { get; set; }
-
         [Required]
         [ScaffoldColumn(false)]
         public int AssignmentId { get; set; }

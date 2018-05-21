@@ -18,10 +18,40 @@ namespace BuellerWebApi.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
+        //[HttpPost]
+        //[Route("Register")]
+        //[AllowAnonymous]
+        //public IHttpActionResult Register(Account account)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    // actually register
+        //    var userStore = new UserStore<IdentityUser>(new IdentityContext());
+        //    var userManager = new UserManager<IdentityUser>(userStore);
+        //    var user = new IdentityUser(account.Email);
+
+        //    if (userManager.Users.Any(u => u.UserName == account.Email))
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    userManager.Create(user, account.Password);
+        //    var authManager = Request.GetOwinContext().Authentication;
+        //    var claimsIdentity = userManager.CreateIdentity(user, "ApplicationCookie");
+
+        //    authManager.SignIn(new AuthenticationProperties { IsPersistent = true }, claimsIdentity);
+
+
+        //    return Ok();
+        //}
+
         [HttpPost]
-        [Route("Register")]
+        [Route("RegisterRole")]
         [AllowAnonymous]
-        public IHttpActionResult Register(Account account)
+        public IHttpActionResult RegisterWithRoles(Account account, string role)
         {
             if (!ModelState.IsValid)
             {
@@ -39,39 +69,10 @@ namespace BuellerWebApi.Controllers
             }
 
             userManager.Create(user, account.Password);
-            var authManager = Request.GetOwinContext().Authentication;
-            var claimsIdentity = userManager.CreateIdentity(user, "ApplicationCookie");
 
-            authManager.SignIn(new AuthenticationProperties { IsPersistent = true }, claimsIdentity);
+            // the only difference from Register 
+            userManager.AddClaim(user.Id, new Claim(ClaimTypes.Role, role));
 
-
-            return Ok();
-        }
-
-        [HttpPost]
-        [Route("RegisterAdmin")]
-        [AllowAnonymous]
-        public IHttpActionResult RegisterAdmin(Account account)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            // actually register
-            var userStore = new UserStore<IdentityUser>(new IdentityContext());
-            var userManager = new UserManager<IdentityUser>(userStore);
-            var user = new IdentityUser(account.Email);
-
-            if (userManager.Users.Any(u => u.UserName == account.Email))
-            {
-                return BadRequest();
-            }
-
-            userManager.Create(user, account.Password);
-
-            // the only difference from Register action
-            userManager.AddClaim(user.Id, new Claim(ClaimTypes.Role, "admin"));
             var authManager = Request.GetOwinContext().Authentication;
             var claimsIdentity = userManager.CreateIdentity(user, "ApplicationCookie");
 
@@ -105,7 +106,7 @@ namespace BuellerWebApi.Controllers
             {
                 return Unauthorized();
             }
-            
+
             var authManager = Request.GetOwinContext().Authentication;
             var claimsIdentity = userManager.CreateIdentity(user, WebApiConfig.AuthenticationType);
 
