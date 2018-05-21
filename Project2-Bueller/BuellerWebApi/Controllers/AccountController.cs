@@ -2,31 +2,29 @@
 using BuellerWebApi.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
-using Microsoft.Owin.Security;
 using System.Security.Claims;
-using Microsoft.Owin.Host.SystemWeb;
+using System.Web.Http;
 
 
 namespace BuellerWebApi.Controllers
 {
+    [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
-
-
         [HttpPost]
-        [Route("~/api/Account/Register")]
+        [Route("Register")]
         [AllowAnonymous]
         public IHttpActionResult Register(Account account)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
             // actually register
@@ -45,13 +43,13 @@ namespace BuellerWebApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Account/RegisterAdmin")]
+        [Route("RegisterAdmin")]
         [AllowAnonymous]
         public IHttpActionResult RegisterAdmin(Account account)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
             // actually register
@@ -73,13 +71,13 @@ namespace BuellerWebApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Account/Login")]
+        [Route("Login")]
         [AllowAnonymous]
         public IHttpActionResult LogIn(Account account)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
             // actually login
@@ -107,7 +105,7 @@ namespace BuellerWebApi.Controllers
         }
 
         [HttpGet]
-        [Route("~/api/Account/Logout")]
+        [Route("Logout")]
         public IHttpActionResult Logout()
         {
             Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
