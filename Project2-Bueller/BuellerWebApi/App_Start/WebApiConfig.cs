@@ -7,9 +7,14 @@ namespace BuellerWebApi
 {
     public static class WebApiConfig
     {
+        public static string AuthenticationType = "AuthTestCookie";
+        public static string CookieName = "AuthTestCookie";
+
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.EnableCors();
+
             config.Filters.Add(new AuthorizeAttribute());
 
 

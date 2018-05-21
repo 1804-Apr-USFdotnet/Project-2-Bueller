@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using Microsoft.Owin;
 
 
 namespace BuellerWebApi.Controllers
@@ -96,8 +97,9 @@ namespace BuellerWebApi.Controllers
                 return Unauthorized();
             }
 
+            Request.SetOwinContext(new OwinContext());
             var authManager = Request.GetOwinContext().Authentication;
-            var claimsIdentity = userManager.CreateIdentity(user, "ApplicationCookie");
+            var claimsIdentity = userManager.CreateIdentity(user, WebApiConfig.AuthenticationType);
 
             authManager.SignIn(new AuthenticationProperties { IsPersistent = true }, claimsIdentity);
 
@@ -108,7 +110,7 @@ namespace BuellerWebApi.Controllers
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
-            Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
+            Request.GetOwinContext().Authentication.SignOut(WebApiConfig.AuthenticationType);
             return Ok();
         }
     }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BuellerWebApi.Models
+namespace Bueller.MVC.Models
 {
     public class Account
     {
@@ -15,6 +15,7 @@ namespace BuellerWebApi.Models
         [Required]
         public string Email { get; set; }
         [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }
