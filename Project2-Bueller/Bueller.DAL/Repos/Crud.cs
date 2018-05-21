@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using Bueller.DAL.Models;
 using AutoMapper;
+using Bueller.DA;
 
 namespace Bueller.DAL.Repos
 {
