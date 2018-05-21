@@ -34,13 +34,13 @@ namespace BuellerWebApi.Controllers
             var userManager = new UserManager<IdentityUser>(userStore);
             var user = new IdentityUser(account.Email);
 
-            if (userManager.Users.Any(u => u.UserName == account.Email))
+            if (userManager.Users.Any(u => u.Email == account.Email))
             {
                 return BadRequest();
             }
 
             userManager.Create(user, account.Password);
-
+           
             return Ok();
         }
 

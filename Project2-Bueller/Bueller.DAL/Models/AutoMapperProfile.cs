@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bueller.DA.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Bueller.DAL.Models
         public AutoMapperProfile()
         {
             CreateMap<Employee, EmployeeDto>();
+            CreateMap<IdentityUser, UserAccountDto>();
        
         }
     }
