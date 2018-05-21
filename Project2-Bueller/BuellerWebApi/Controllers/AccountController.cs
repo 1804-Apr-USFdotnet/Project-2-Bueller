@@ -11,7 +11,6 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
-using Microsoft.Owin;
 
 
 namespace BuellerWebApi.Controllers
@@ -106,8 +105,7 @@ namespace BuellerWebApi.Controllers
             {
                 return Unauthorized();
             }
-
-            Request.SetOwinContext(new OwinContext());
+            
             var authManager = Request.GetOwinContext().Authentication;
             var claimsIdentity = userManager.CreateIdentity(user, WebApiConfig.AuthenticationType);
 
