@@ -86,6 +86,10 @@
     <Compile Include="Migrations.Identity\201805192352540_Added Identity.Designer.cs">
       <DependentUpon>201805192352540_Added Identity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations.Identity\201805212041366_UpdateAccountModel.cs" />
+    <Compile Include="Migrations.Identity\201805212041366_UpdateAccountModel.Designer.cs">
+      <DependentUpon>201805212041366_UpdateAccountModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations.Identity\Configuration.cs" />
     <Compile Include="Migrations\201805202230486_updateStudentAccount.cs" />
     <Compile Include="Migrations\201805202230486_updateStudentAccount.Designer.cs">
@@ -114,6 +118,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations.Identity\201805192352540_Added Identity.resx">
       <DependentUpon>201805192352540_Added Identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations.Identity\201805212041366_UpdateAccountModel.resx">
+      <DependentUpon>201805212041366_UpdateAccountModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805202230486_updateStudentAccount.resx">
       <DependentUpon>201805202230486_updateStudentAccount.cs</DependentUpon>

@@ -14,6 +14,7 @@ namespace Bueller.DAL.Models
         {
             CreateMap<Employee, EmployeeDto>().ReverseMap();
             CreateMap<EmployeeAccount, EmployeeAccountDto>().ReverseMap();
+            CreateMap<File, FileDto>().ReverseMap();
         }
     }
 }
