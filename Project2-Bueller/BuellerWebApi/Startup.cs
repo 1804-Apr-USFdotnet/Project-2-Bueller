@@ -15,7 +15,8 @@ namespace BuellerWebApi
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
-                AuthenticationType = "ApplicationCookie"
+                AuthenticationType = WebApiConfig.AuthenticationType,
+                CookieName = WebApiConfig.CookieName
             });
         }
     }

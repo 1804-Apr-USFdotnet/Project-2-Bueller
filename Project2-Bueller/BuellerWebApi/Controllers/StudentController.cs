@@ -4,6 +4,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using Bueller.DA.Models;
 using Bueller.DAL.Repos;
@@ -32,6 +33,26 @@ namespace BuellerWebApi.Controllers
         public HttpResponseMessage Get()
         {
             return Request.CreateResponse(HttpStatusCode.Accepted, repo.Table.ToList());
+        }
+
+
+        public IHttpActionResult GetLoginInfo()
+        {
+            // making use of global authorize filter in webapiconfig / filterconfig
+
+            // get the currently logged-in user
+            var user = Request.GetOwinContext().Authentication.User;
+
+            // get his username
+            string username = user.Identity.Name;
+
+            // get whether user has some role
+            bool isAdmin = user.IsInRole("admin");
+
+            // get all user's roles
+            List<string> roles = user.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value.ToString()).ToList();
+
+            return Ok($"Authenticated {username}, with roles: [{string.Join(", ", roles)}]!");
         }
 
         // GET: api/Student/5
