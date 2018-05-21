@@ -29,5 +29,10 @@ namespace Bueller.DAL.Repos
         {
             return this.Entities.Where(x => x.BalanceOwed > owed).ToList();
         }
+
+        public StudentAccount GetAccountByStudentId(int id)
+        {
+            return this.Entities.Where(x => x.StudentId == id).FirstOrDefault();
+        }
     }
 }

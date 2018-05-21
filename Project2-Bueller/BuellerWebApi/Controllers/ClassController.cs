@@ -46,12 +46,6 @@ namespace BuellerWebApi.Controllers
             //studentRepo.AddToClass();
             //var classes = studentRepo.Table.Where(x => x.StudentId == id).SelectMany(x => x.Classes).ToList();
             var classes = classRepo.Table.Where(x => x.Students.Any(a => a.StudentId == id)).ToList();
-            //models need to be mapped to remove reference loops in serializing database models
-            //List<string> test = new List<string>();
-            //foreach (var classres in classes)
-            //{
-            //    test.Add(classres.Name);
-            //}
             if (classes != null)
             {
                 return Ok(classes);

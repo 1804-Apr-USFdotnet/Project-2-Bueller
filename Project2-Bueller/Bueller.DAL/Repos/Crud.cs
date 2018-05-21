@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Bueller.DA.Models;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using Bueller.DAL.Models;
+using Bueller.DA;
 
 namespace Bueller.DAL.Repos
 {
@@ -70,8 +72,8 @@ namespace Bueller.DAL.Repos
                 {
                     throw new ArgumentNullException("entity");
                 }
-                //_context.Entry(entity).State = EntityState.Modified;
-                //_context.Entry(entity).Property("Created").IsModified = false;
+                ((BuellerContext)_context).Entry(entity).State = EntityState.Modified;
+                ((BuellerContext)_context).Entry(entity).Property("Created").IsModified = false;
                 this._context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
@@ -122,7 +124,7 @@ namespace Bueller.DAL.Repos
         {
             get
             {
-                return this.Entities;
+                return  this.Entities;
             }
         }
 
@@ -137,6 +139,5 @@ namespace Bueller.DAL.Repos
                 return _entities;
             }
         }
-
     }
 }

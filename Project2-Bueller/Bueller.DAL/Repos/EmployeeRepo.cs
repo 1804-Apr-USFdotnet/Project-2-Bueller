@@ -13,9 +13,7 @@ namespace Bueller.DAL.Repos
     {
         private readonly IDbContext _context;
         public EmployeeRepo(IDbContext context) : base(context)
-        {
-
-          
+        { 
             _context = context;
         }
 
@@ -25,9 +23,10 @@ namespace Bueller.DAL.Repos
             return Mapper.Map<IEnumerable<EmployeeDto>>(employee);
         }
 
-        public IEnumerable<Employee> GetEmployeesByNameAscending()
+        public IEnumerable<EmployeeDto> GetEmployeesByNameAscending()
         {
-            return this.Entities.OrderBy(x => x.FirstName).ToList();
+            var employees =  this.Entities.OrderBy(x => x.FirstName).ToList();
+            return Mapper.Map<IEnumerable<EmployeeDto>>(employees);
         }
     }
 }

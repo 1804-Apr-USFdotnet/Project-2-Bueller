@@ -1,4 +1,6 @@
-﻿using Bueller.DA.Models;
+﻿using AutoMapper;
+using Bueller.DA.Models;
+using Bueller.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +17,16 @@ namespace Bueller.DAL.Repos
             _context = context;
         }
 
-        public IEnumerable<EmployeeAccount> GetAccountsByPayPeriod(string payPeriod)
+        public IEnumerable<EmployeeAccountDto> GetAccountsByPayPeriod(string payPeriod)
         {
-            return this.Entities.Where(x => x.PayPeriod.Equals(payPeriod));
+            var temp = this.Entities.Where(x => x.PayPeriod.Equals(payPeriod));
+            return Mapper.Map<IEnumerable<EmployeeAccountDto>>(temp);
         }
 
-        public EmployeeAccount GetAccountByEmployeeId(int id)
+        public EmployeeAccountDto GetAccountByEmployeeId(int id)
         {
-            return this.Entities.Where(x => x.EmployeeId == id).FirstOrDefault();
+            var temp = this.Entities.Where(x => x.EmployeeId == id).FirstOrDefault();
+            return Mapper.Map<EmployeeAccountDto>(temp);
         }
     }
 }
