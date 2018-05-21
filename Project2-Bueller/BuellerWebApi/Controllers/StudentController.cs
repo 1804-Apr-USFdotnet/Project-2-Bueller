@@ -35,7 +35,7 @@ namespace BuellerWebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.Accepted, repo.Table.ToList());
         }
 
-
+        [Route("GetLoginInfo")]
         public IHttpActionResult GetLoginInfo()
         {
             // making use of global authorize filter in webapiconfig / filterconfig
