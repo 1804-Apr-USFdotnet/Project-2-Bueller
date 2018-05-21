@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Bueller.DA.Models;
 using Bueller.DA;
 using System.Data.Entity;
+using Bueller.DAL.Models;
 
 namespace Bueller.DAL.Repos.Tests
 {

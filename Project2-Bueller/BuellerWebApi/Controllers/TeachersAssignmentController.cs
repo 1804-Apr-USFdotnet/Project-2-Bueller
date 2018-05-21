@@ -18,32 +18,12 @@ namespace BuellerWebApi.Controllers
     public class TeachersAssignmentController : ApiController
     {
 
-        public static IDbContext buellerContext = new BuellerContext();
-        
-
-        TeacherAssignmentRepo teacherAssignmentRepo = new TeacherAssignmentRepo(buellerContext);
-
+      
 
         
         public IHttpActionResult GetAssignment()
         {
-            var DataAssignments = teacherAssignmentRepo.Table.ToList();
-            List<Models.Assignment> apiAssignments = new List<Models.Assignment>();
-           
-            
-            foreach (var DataAssignment in DataAssignments)
-            {
-
-                Models.Assignment apiAssignment = new Models.Assignment()
-                {
-                    AssignmentName = DataAssignment.AssignmentName
-
-                };
-                apiAssignments.Add(apiAssignment);
-
-            };
-
-            return Ok(apiAssignments);
+            return null;
         }
 
 

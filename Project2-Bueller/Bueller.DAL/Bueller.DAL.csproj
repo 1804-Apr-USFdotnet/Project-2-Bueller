@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\EmployeeAccountDto.cs" />
     <Compile Include="Models\EmployeeDto.cs" />
     <Compile Include="Models\AutoMapperProfile.cs" />
     <Compile Include="Models\UserAccountDto.cs" />

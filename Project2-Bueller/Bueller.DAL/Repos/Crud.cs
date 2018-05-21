@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Bueller.DA.Models;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using Bueller.DAL.Models;
+using AutoMapper;
 
 namespace Bueller.DAL.Repos
 {
@@ -122,7 +124,7 @@ namespace Bueller.DAL.Repos
         {
             get
             {
-                return this.Entities;
+                return  this.Entities;
             }
         }
 
@@ -137,6 +139,5 @@ namespace Bueller.DAL.Repos
                 return _entities;
             }
         }
-
     }
 }

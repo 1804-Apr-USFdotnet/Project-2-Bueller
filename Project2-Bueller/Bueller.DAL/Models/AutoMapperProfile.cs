@@ -12,8 +12,8 @@ namespace Bueller.DAL.Models
     {
         public AutoMapperProfile()
         {
-            CreateMap<Employee, EmployeeDto>();
-       
+            CreateMap<Employee, EmployeeDto>().ReverseMap();
+            CreateMap<EmployeeAccount, EmployeeAccountDto>().ReverseMap();
         }
     }
 }

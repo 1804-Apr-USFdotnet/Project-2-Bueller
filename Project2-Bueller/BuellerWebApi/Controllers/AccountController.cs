@@ -2,6 +2,7 @@
 using BuellerWebApi.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,11 @@ namespace BuellerWebApi.Controllers
             }
 
             userManager.Create(user, account.Password);
+            var authManager = Request.GetOwinContext().Authentication;
+            var claimsIdentity = userManager.CreateIdentity(user, "ApplicationCookie");
+
+            authManager.SignIn(new AuthenticationProperties { IsPersistent = true }, claimsIdentity);
+
 
             return Ok();
         }
@@ -66,6 +72,10 @@ namespace BuellerWebApi.Controllers
 
             // the only difference from Register action
             userManager.AddClaim(user.Id, new Claim(ClaimTypes.Role, "admin"));
+            var authManager = Request.GetOwinContext().Authentication;
+            var claimsIdentity = userManager.CreateIdentity(user, "ApplicationCookie");
+
+            authManager.SignIn(new AuthenticationProperties { IsPersistent = true }, claimsIdentity);
 
             return Ok();
         }
@@ -98,7 +108,6 @@ namespace BuellerWebApi.Controllers
 
             var authManager = Request.GetOwinContext().Authentication;
             var claimsIdentity = userManager.CreateIdentity(user, "ApplicationCookie");
-
             authManager.SignIn(new AuthenticationProperties { IsPersistent = true }, claimsIdentity);
 
             return Ok();
