@@ -17,6 +17,8 @@ namespace Bueller.MVC.Controllers
             return View();
         }
 
+        //limit role selection. both client and server side
+        //create new model account too depending on role
         [HttpPost]
         public async Task<ActionResult> Register(Account account, string role)
         {
