@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bueller.DAL.Repos
 {
-    class GradeRepo
+   public  class GradeRepo
     {
     }
 }
