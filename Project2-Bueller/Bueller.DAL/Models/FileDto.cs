@@ -11,8 +11,6 @@ namespace Bueller.DAL.Models
 {
     public class FileDto : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int FileId { get; set; }
 
