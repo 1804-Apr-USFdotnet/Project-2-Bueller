@@ -19,6 +19,7 @@ namespace Bueller.MVC.Controllers
 
         //limit role selection. both client and server side
         //create new model account too depending on role
+        //prevent register/additional login once logged in... important? and hide logout when not logged in?...
         [HttpPost]
         public async Task<ActionResult> Register(Account account, string role)
         {

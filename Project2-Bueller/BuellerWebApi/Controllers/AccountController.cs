@@ -58,6 +58,11 @@ namespace BuellerWebApi.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (!role.Equals("student") && !role.Equals("faculty") && !role.Equals("employee"))
+            {
+                return BadRequest(role);
+            }
+
             // actually register
             var userStore = new UserStore<IdentityUser>(new IdentityContext());
             var userManager = new UserManager<IdentityUser>(userStore);
