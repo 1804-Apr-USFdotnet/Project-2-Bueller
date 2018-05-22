@@ -17,7 +17,7 @@ namespace BuellerWebApi.Controllers
         private readonly UnitOfWork unit = new UnitOfWork();
         private readonly AssignmentRepo assignmentRepo;
 
-        AssignmentsController()
+        public AssignmentsController()
         {
             assignmentRepo = unit.AssignmentRepo();
         }
@@ -29,7 +29,7 @@ namespace BuellerWebApi.Controllers
             IEnumerable<Assignment> assignments = assignmentRepo.Table.ToList();
             if (assignments.Count() == 0)
             {
-                return Ok(assignments);
+                return Content(HttpStatusCode.NotFound,"List is empty");
             }
             return Ok(assignments);
         }
@@ -41,7 +41,7 @@ namespace BuellerWebApi.Controllers
             Assignment assignment = assignmentRepo.GetById(id);
             if (assignment == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             return Ok(assignment);
         }
@@ -81,7 +81,7 @@ namespace BuellerWebApi.Controllers
             {
                 if (!AssignmentExists(id))
                 {
-                    return NotFound();
+                    return Content(HttpStatusCode.NotFound, "Item does not exist");
                 }
                 else
                 {
@@ -92,14 +92,14 @@ namespace BuellerWebApi.Controllers
 
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
         {
             Assignment assignment = assignmentRepo.GetById(id);
             if (assignment == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             assignmentRepo.Delete(assignment);
 

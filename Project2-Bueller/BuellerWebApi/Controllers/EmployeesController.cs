@@ -30,49 +30,44 @@ namespace BuellerWebApi.Controllers
         [Route("GetAll")]
         public IHttpActionResult GetEmployees()
         {
-            IEnumerable<EmployeeDto> employees = Mapper.Map<IEnumerable<EmployeeDto>>(repo.Table.ToList());
+            var employees = repo.Table.ToList();
             if (employees.Count() == 0)
             {
                 return NotFound();
             }
             return Ok(employees);
         }
-
-        // GET: api/Employees/5
+        
         [HttpGet]
         [Route("GetById/{id}")]
         public IHttpActionResult GetEmployeeById(int id)
         {
-            EmployeeDto employee = Mapper.Map<EmployeeDto>(repo.GetById(id));
+            var employee = repo.GetById(id);
             if (employee == null)
             {
                 return NotFound();
             }
             return Ok(employee);
         }
-
-        // POST: api/Employees
+        
         [HttpPost]
         [Route("Add", Name = "AddEmployee")]
         public IHttpActionResult AddEmployee(EmployeeDto employee)
         {
-            Employee employee2 = Mapper.Map<Employee>(employee);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            repo.Insert(employee2);
+            repo.Insert(Mapper.Map<Employee>(employee));
 
             return CreatedAtRoute("AddEmployee", new { id = employee.EmployeeID }, employee);
         }
-
-        // PUT: api/Employees/5
+        
         [HttpPut]
         [Route("AddAt/{id}")]
         public IHttpActionResult UpdateEmployee(int id, EmployeeDto employee)
         {
-            Employee employee2 = Mapper.Map<Employee>(employee);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -85,8 +80,7 @@ namespace BuellerWebApi.Controllers
 
             try
             {
-                //doesnt update date modified, not sure how to fix
-                repo.Update(employee2);
+                repo.Update(Mapper.Map<Employee>(employee));
             }
 
             catch (DbUpdateConcurrencyException)
@@ -104,19 +98,17 @@ namespace BuellerWebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/Employees/{id}
-        [HttpPost]
+        [HttpDelete]
         [Route("Delete/{id}")]
         public IHttpActionResult DeleteEmployee(int id)
         {
-            EmployeeDto employee = Mapper.Map<EmployeeDto>(repo.GetById(id));
+            var employee = repo.GetById(id);
             if (employee == null)
             {
                 return NotFound();
             }
 
-            Employee employee2 = Mapper.Map<Employee>(employee);
-            repo.Delete(employee2);
+            repo.Delete(employee);
 
             return Ok(employee);
         }
@@ -125,7 +117,7 @@ namespace BuellerWebApi.Controllers
         [Route("Type/{type}")]
         public IHttpActionResult GetEmployeesByType(string type)
         {
-            IEnumerable<EmployeeDto> employees = repo.GetEmployeesByType(type);
+            var employees = repo.GetEmployeesByType(type);
             if (employees.Count() == 0)
             {
                 return NotFound();
@@ -138,7 +130,7 @@ namespace BuellerWebApi.Controllers
         [Route("Name")]
         public IHttpActionResult GetEmployeesByNameAscending()
         {
-            IEnumerable<EmployeeDto> employees = repo.GetEmployeesByNameAscending();
+            var employees = repo.GetEmployeesByNameAscending();
             if (employees.Count() == 0)
             {
                 return NotFound();
@@ -146,13 +138,19 @@ namespace BuellerWebApi.Controllers
 
             return Ok(employees);
         }
+
+        private bool EmployeeExists(int id)
+        {
+            return repo.Table.Count(e => e.EmployeeID == id) > 0;
+        }
+
         #endregion
         #region Employee Accounts
         [HttpGet]
         [Route("Account/GetAll")]
         public IHttpActionResult GetEmployeeAccounts()
         {
-            var accounts = Mapper.Map<IEnumerable<EmployeeAccountDto>>(accountRepo.Table.ToList());
+            var accounts = accountRepo.Table.ToList();
             if (accounts.Count() == 0)
             {
                 return NotFound();
@@ -169,17 +167,16 @@ namespace BuellerWebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            EmployeeAccount employeeAccount2 = Mapper.Map<EmployeeAccount>(employeeAccount);
-            accountRepo.Insert(employeeAccount2);
+            accountRepo.Insert(Mapper.Map<EmployeeAccount>(employeeAccount));
 
             return CreatedAtRoute("AddEmployeeAccount", new { id = employeeAccount.EmployeeAccountId }, employeeAccount);
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("Account/Delete/{id}")]
         public IHttpActionResult DeleteEmployeeAccount(int id)
         {
-            EmployeeAccount employeeAccount = accountRepo.GetById(id);
+            var employeeAccount = accountRepo.GetById(id);
             if (employeeAccount == null)
             {
                 return NotFound();
@@ -194,7 +191,7 @@ namespace BuellerWebApi.Controllers
         [Route("Account/GetById/{id}")]
         public IHttpActionResult GetEmployeeAccountById(int id)
         {
-            EmployeeAccountDto employeeAccount = Mapper.Map<EmployeeAccountDto>(accountRepo.GetById(id));
+            var employeeAccount = accountRepo.GetById(id);
             if (employeeAccount == null)
             {
                 return NotFound();
@@ -206,7 +203,7 @@ namespace BuellerWebApi.Controllers
         [Route("Account/GetByEmployeeId/{id}")]
         public IHttpActionResult GetAccountByEmployeeId(int id)
         {
-            EmployeeAccountDto employeeAccount = accountRepo.GetAccountByEmployeeId(id);
+            var employeeAccount = accountRepo.GetAccountByEmployeeId(id);
             if (employeeAccount == null)
             {
                 return NotFound();
@@ -218,18 +215,50 @@ namespace BuellerWebApi.Controllers
         [Route("Account/GetByPayPeriod/{period}")]
         public IHttpActionResult GetAccountsByPayPeriod(string period)
         {
-            IEnumerable<EmployeeAccountDto> employeeAccounts = accountRepo.GetAccountsByPayPeriod(period);
+            var employeeAccounts = accountRepo.GetAccountsByPayPeriod(period);
             if (employeeAccounts.Count() == 0)
             {
                 return NotFound();
             }
             return Ok(employeeAccounts);
         }
-        #endregion
 
-        private bool EmployeeExists(int id)
+        [HttpPut]
+        [Route("Account/AddAt/{id}")]
+        public IHttpActionResult AddAccountAt(int id, EmployeeAccountDto employeeAccount)
         {
-            return repo.Table.Count(e => e.EmployeeID == id) > 0;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id != employeeAccount.EmployeeAccountId)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                accountRepo.Update(Mapper.Map<EmployeeAccount>(employeeAccount));
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmployeeAccountExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
+
+        private bool EmployeeAccountExists(int id)
+        {
+            return accountRepo.Table.Count(e => e.EmployeeAccountId == id) > 0;
+        }
+        #endregion
     }
 }

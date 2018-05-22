@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bueller.DAL.Repos
 {
-    class GradeRepo : Crud<Grade>
+    public class GradeRepo : Crud<Grade>
     {
         private readonly IDbContext _context;
         public GradeRepo(IDbContext context) : base(context)

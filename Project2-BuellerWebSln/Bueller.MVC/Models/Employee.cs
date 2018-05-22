@@ -9,7 +9,7 @@ namespace Bueller.MVC.Models
 {
     public class Employee
     {
-
+        [ScaffoldColumn(false)]
         public int EmployeeID { get; set; }
 
         public int? OfficeNumber { get; set; }
@@ -77,17 +77,9 @@ namespace Bueller.MVC.Models
         [StringLength(100, ErrorMessage = "Employee type must be shorter than {1} characters")]
         public string EmployeeType { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
-        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
 
-        //[Required]
-        //[ScaffoldColumn(false)]
-        //public int EmployeeAccountId { get; set; }
-        //[ForeignKey("EmployeeAccountId")]
-        //public virtual EmployeeAccount EmployeeAccount { get; set; }
-
-        public virtual ICollection<Class> Classes { get; set; }
+        //public virtual ICollection<Class> Classes { get; set; }
     }
 }
