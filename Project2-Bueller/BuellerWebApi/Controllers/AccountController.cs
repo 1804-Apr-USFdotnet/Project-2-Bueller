@@ -74,6 +74,7 @@ namespace BuellerWebApi.Controllers
             // the only difference from Register 
             userManager.AddClaim(user.Id, new Claim(ClaimTypes.Role, role));
 
+            //login
             var authManager = Request.GetOwinContext().Authentication;
             var claimsIdentity = userManager.CreateIdentity(user, WebApiConfig.AuthenticationType);
 
