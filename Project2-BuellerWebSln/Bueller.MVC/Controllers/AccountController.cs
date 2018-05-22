@@ -12,6 +12,42 @@ namespace Bueller.MVC.Controllers
 {
     public class AccountController : AServiceController
     {
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Register(Account account, string role)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Account/RegisterRole/{role}");
+            apiRequest.Content = new ObjectContent<Account>(account, new JsonMediaTypeFormatter());
+
+            HttpResponseMessage apiResponse;
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            PassCookiesToClient(apiResponse);
+
+            return RedirectToAction("Index", "Home");
+        }
+
         // GET: Account/Login
         public ActionResult Login()
         {

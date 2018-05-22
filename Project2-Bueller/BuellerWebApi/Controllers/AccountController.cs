@@ -49,7 +49,7 @@ namespace BuellerWebApi.Controllers
         //}
 
         [HttpPost]
-        [Route("RegisterRole")]
+        [Route("RegisterRole/{role}")]
         [AllowAnonymous]
         public IHttpActionResult RegisterWithRoles(Account account, string role)
         {
