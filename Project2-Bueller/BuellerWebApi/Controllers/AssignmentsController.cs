@@ -92,7 +92,7 @@ namespace BuellerWebApi.Controllers
 
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
         {
