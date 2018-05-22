@@ -39,10 +39,6 @@ namespace BuellerWebApi.Controllers
         //    }
 
         //    userManager.Create(user, account.Password);
-        //    var authManager = Request.GetOwinContext().Authentication;
-        //    var claimsIdentity = userManager.CreateIdentity(user, "ApplicationCookie");
-
-        //    authManager.SignIn(new AuthenticationProperties { IsPersistent = true }, claimsIdentity);
 
 
         //    return Ok();
@@ -79,7 +75,7 @@ namespace BuellerWebApi.Controllers
             userManager.AddClaim(user.Id, new Claim(ClaimTypes.Role, role));
 
             var authManager = Request.GetOwinContext().Authentication;
-            var claimsIdentity = userManager.CreateIdentity(user, "ApplicationCookie");
+            var claimsIdentity = userManager.CreateIdentity(user, WebApiConfig.AuthenticationType);
 
             authManager.SignIn(new AuthenticationProperties { IsPersistent = true }, claimsIdentity);
 

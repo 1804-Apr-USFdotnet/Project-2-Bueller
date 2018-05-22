@@ -89,13 +89,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AssignmentDto.cs" />
+    <Compile Include="Models\ClassDto.cs" />
     <Compile Include="Models\EmployeeAccountDto.cs" />
     <Compile Include="Models\EmployeeDto.cs" />
     <Compile Include="Models\AutoMapperProfile.cs" />
     <Compile Include="Models\FileDto.cs" />
     <Compile Include="Models\GradeDto.cs" />
+    <Compile Include="Models\SubjectDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\AssignmentRepo.cs" />
+    <Compile Include="Repos\ClassRepo.cs" />
     <Compile Include="Repos\Crud.cs" />
     <Compile Include="Repos\EmployeeAccountRepo.cs" />
     <Compile Include="Repos\EmployeeRepo.cs" />
@@ -104,9 +107,9 @@
     <Compile Include="Repos\ICrud.cs" />
     <Compile Include="Repos\StudentAccountRepo.cs" />
     <Compile Include="Repos\StudentRepo.cs" />
+    <Compile Include="Repos\SubjectRepo.cs" />
     <Compile Include="Repos\TeacherAssignmentRepo.cs" />
     <Compile Include="Repos\UnitOfWork.cs" />
-    <Compile Include="Repos\UserAccountRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -11,8 +11,6 @@ namespace Bueller.DAL.Models
 {
     public class AssignmentDto : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int AssignmentId { get; set; }
 
