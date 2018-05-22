@@ -29,7 +29,7 @@ namespace BuellerWebApi.Controllers
             IEnumerable<Assignment> assignments = assignmentRepo.Table.ToList();
             if (assignments.Count() == 0)
             {
-                return NotFound();
+                return Ok(assignments);
             }
             return Ok(assignments);
         }
