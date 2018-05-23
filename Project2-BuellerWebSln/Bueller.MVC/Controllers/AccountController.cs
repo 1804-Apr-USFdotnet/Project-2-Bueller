@@ -69,7 +69,8 @@ namespace Bueller.MVC.Controllers
             return View(role);
         }
 
-        //client side validations not working...
+        //prevent registering account only and backing out of creating corresponding model...
+        // change register/login steps?
         //unathorized problem
         //1.  login on server side with register
         //2.  redirect to login action following register. but how to redirect where to go after login (home or enter info)... 

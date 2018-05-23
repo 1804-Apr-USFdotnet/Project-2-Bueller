@@ -25,6 +25,10 @@ namespace Bueller.MVC.Models
         [Display(Name = "Last Name")]
         [StringLength(100, ErrorMessage = "Last name cannot be more than 100 characters")]
         public string LastName { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(".{1,200}[@].{1,200}[.].{1,5}", ErrorMessage = "Email is too long, max 200 character on each side of @")]
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Street is required")]
         [DataType(DataType.Text)]
@@ -42,7 +46,8 @@ namespace Bueller.MVC.Models
         [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Country cannot be more than 100 characters")]
         public string Country { get; set; }
-        [Required(ErrorMessage = "Zipcode is required")]
+        [Required(ErrorMessage = "Zip code is required")]
+        [Display(Name = "Zip Code")]
         [RegularExpression("[0-9]{5}", ErrorMessage = "Invalid input")]
         [DataType(DataType.PostalCode)]
         public string Zipcode { get; set; }
