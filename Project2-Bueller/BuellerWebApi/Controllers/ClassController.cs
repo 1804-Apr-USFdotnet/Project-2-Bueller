@@ -10,16 +10,17 @@ using Microsoft.AspNet.Identity;
 
 namespace BuellerWebApi.Controllers
 {
+    [RoutePrefix("api/Class")]
     public class ClassController : ApiController
     {
-        UnitOfWork unit = new UnitOfWork();
-        private Crud<Class> classRepo;
-        private Crud<Student> studentRepo;
+        private readonly UnitOfWork unit = new UnitOfWork();
+        private readonly ClassRepo classRepo;
+        private readonly StudentRepo studentRepo;
 
         ClassController()
         {
-            classRepo = unit.Crud<Class>();
-            studentRepo = unit.Crud<Student>();
+            classRepo = unit.ClassRepo();
+            studentRepo = unit.StudentRepo();
         }
 
         // GET: api/Class
@@ -40,7 +41,7 @@ namespace BuellerWebApi.Controllers
         }
 
         [HttpGet]
-        [Route("~/api/Class/StudentClasses/{id}")]
+        [Route("StudentClasses/{id}")]
         public IHttpActionResult StudentClasses(int id)
         {
             //studentRepo.AddToClass();

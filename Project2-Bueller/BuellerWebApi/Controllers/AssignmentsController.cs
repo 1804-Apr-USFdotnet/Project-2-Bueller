@@ -1,4 +1,6 @@
-﻿using Bueller.DA.Models;
+﻿using AutoMapper;
+using Bueller.DA.Models;
+using Bueller.DAL.Models;
 using Bueller.DAL.Repos;
 using System;
 using System.Collections.Generic;
@@ -26,10 +28,10 @@ namespace BuellerWebApi.Controllers
         [Route("GetAll")]
         public IHttpActionResult GetAssignments()
         {
-            IEnumerable<Assignment> assignments = assignmentRepo.Table.ToList();
+            var assignments = assignmentRepo.Table.ToList();
             if (assignments.Count() == 0)
             {
-                return Content(HttpStatusCode.NotFound,"List is empty");
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(assignments);
         }
@@ -38,7 +40,7 @@ namespace BuellerWebApi.Controllers
         [Route("GetById/{id}")]
         public IHttpActionResult GetById(int id)
         {
-            Assignment assignment = assignmentRepo.GetById(id);
+            var assignment = assignmentRepo.GetById(id);
             if (assignment == null)
             {
                 return Content(HttpStatusCode.NotFound, "Item does not exist");
@@ -48,20 +50,20 @@ namespace BuellerWebApi.Controllers
 
         [HttpPost]
         [Route("Add", Name = "AddAssignment")]
-        public IHttpActionResult Post(Assignment assignment)
+        public IHttpActionResult Post(AssignmentDto assignment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            assignmentRepo.Insert(assignment);
+            assignmentRepo.Insert(Mapper.Map<Assignment>(assignment));
 
             return CreatedAtRoute("AddAssignment", new { id = assignment.AssignmentId }, assignment);
         }
 
         [HttpPut]
         [Route("AddAt/{id}")]
-        public IHttpActionResult Put(int id, Assignment assignment)
+        public IHttpActionResult Put(int id, AssignmentDto assignment)
         {
             if (!ModelState.IsValid)
             {
@@ -75,7 +77,7 @@ namespace BuellerWebApi.Controllers
 
             try
             {
-                assignmentRepo.Update(assignment);
+                assignmentRepo.Update(Mapper.Map<Assignment>(assignment));
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -96,7 +98,7 @@ namespace BuellerWebApi.Controllers
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
         {
-            Assignment assignment = assignmentRepo.GetById(id);
+            var assignment = assignmentRepo.GetById(id);
             if (assignment == null)
             {
                 return Content(HttpStatusCode.NotFound, "Item does not exist");
@@ -106,6 +108,41 @@ namespace BuellerWebApi.Controllers
             return Ok(assignment);
         }
 
+        [HttpGet]
+        [Route("GetByClassId/{id}")]
+        public IHttpActionResult GetAssignmentsByClassId(int id)
+        {
+            var assignments = assignmentRepo.GetAssignmentsByClassId(id);
+            if (assignments.Count() == 0)
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+            return Ok(assignments);
+        }
+
+        [HttpGet]
+        [Route("GetWithFiles")]
+        public IHttpActionResult GetAssignmentsWithFiles()
+        {
+            var assignments = assignmentRepo.GetAssignmentsWithFiles();
+            if (assignments.Count() == 0)
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+            return Ok(assignments);
+        }
+
+        [HttpGet]
+        [Route("GetByDueDate/{duedate}")]
+        public IHttpActionResult GetAssignmentsByDueDate(DateTime duedate)
+        {
+            var assignments = assignmentRepo.GetAssignmentsByDueDate(duedate);
+            if (assignments.Count() == 0)
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+            return Ok(assignments);
+        }
         private bool AssignmentExists(int id)
         {
             return assignmentRepo.Table.Count(e => e.AssignmentId == id) > 0;

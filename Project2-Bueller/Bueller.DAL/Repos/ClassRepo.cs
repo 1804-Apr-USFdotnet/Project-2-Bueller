@@ -43,5 +43,30 @@ namespace Bueller.DAL.Repos
             }
             return false;
         }
+
+        public IEnumerable<Class> GetClassesByTeacherId(int id)
+        {
+            return this.Table.Where(x => x.TeacherId == id).ToList();
+        }
+
+        public IEnumerable<Class> GetClassesWithStudents()
+        {
+            return this.Table.Where(x => x.Students.Count() > 0).ToList();
+        }
+
+        public IEnumerable<Class> GetClassesWithAssignments()
+        {
+            return this.Table.Where(x => x.Assignments.Count() > 0).ToList();
+        }
+
+        public IEnumerable<Class> GetClassesByCredits(int credits)
+        {
+            return this.Table.Where(x => x.Credits == credits).ToList();
+        }
+
+        public IEnumerable<Class> GetClassesByRoomNumber(string room)
+        {
+            return this.Table.Where(x => x.RoomNumber.Equals(room)).ToList();
+        }
     }
 }

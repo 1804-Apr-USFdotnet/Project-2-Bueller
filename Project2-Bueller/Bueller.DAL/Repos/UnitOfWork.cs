@@ -172,5 +172,40 @@ namespace Bueller.DAL.Repos
             }
             return (GradeRepo)_repositories[type];
         }
+
+        public ClassRepo ClassRepo()
+        {
+            if (_repositories == null)
+            {
+                _repositories = new Dictionary<string, object>();
+            }
+
+            var type = typeof(ClassRepo).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(ClassRepo);
+                var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
+                _repositories.Add(type, repositoryInstance);
+            }
+            return (ClassRepo)_repositories[type];
+        }
+        public StudentRepo StudentRepo()
+        {
+            if (_repositories == null)
+            {
+                _repositories = new Dictionary<string, object>();
+            }
+
+            var type = typeof(StudentRepo).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(StudentRepo);
+                var repositoryInstance = Activator.ReferenceEquals(repositoryType, _context);
+                _repositories.Add(type, repositoryInstance);
+            }
+            return (StudentRepo)_repositories[type];
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace BuellerWebApi.Controllers
             var employees = repo.Table.ToList();
             if (employees.Count() == 0)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(employees);
         }
@@ -45,7 +45,7 @@ namespace BuellerWebApi.Controllers
             var employee = repo.GetById(id);
             if (employee == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             return Ok(employee);
         }
@@ -87,7 +87,7 @@ namespace BuellerWebApi.Controllers
             {
                 if (!EmployeeExists(id))
                 {
-                    return NotFound();
+                    return Content(HttpStatusCode.NotFound, "Item does not exist");
                 }
                 else
                 {
@@ -105,7 +105,7 @@ namespace BuellerWebApi.Controllers
             var employee = repo.GetById(id);
             if (employee == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
 
             repo.Delete(employee);
@@ -120,7 +120,7 @@ namespace BuellerWebApi.Controllers
             var employees = repo.GetEmployeesByType(type);
             if (employees.Count() == 0)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
 
             return Ok(employees);
@@ -133,7 +133,7 @@ namespace BuellerWebApi.Controllers
             var employees = repo.GetEmployeesByNameAscending();
             if (employees.Count() == 0)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
 
             return Ok(employees);
@@ -153,7 +153,7 @@ namespace BuellerWebApi.Controllers
             var accounts = accountRepo.Table.ToList();
             if (accounts.Count() == 0)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(accounts);
         }
@@ -179,7 +179,7 @@ namespace BuellerWebApi.Controllers
             var employeeAccount = accountRepo.GetById(id);
             if (employeeAccount == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
 
             accountRepo.Delete(employeeAccount);
@@ -194,7 +194,7 @@ namespace BuellerWebApi.Controllers
             var employeeAccount = accountRepo.GetById(id);
             if (employeeAccount == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             return Ok(employeeAccount);
         }
@@ -206,7 +206,7 @@ namespace BuellerWebApi.Controllers
             var employeeAccount = accountRepo.GetAccountByEmployeeId(id);
             if (employeeAccount == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             return Ok(employeeAccount);
         }
@@ -218,7 +218,7 @@ namespace BuellerWebApi.Controllers
             var employeeAccounts = accountRepo.GetAccountsByPayPeriod(period);
             if (employeeAccounts.Count() == 0)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(employeeAccounts);
         }
@@ -244,7 +244,7 @@ namespace BuellerWebApi.Controllers
             {
                 if (!EmployeeAccountExists(id))
                 {
-                    return NotFound();
+                    return Content(HttpStatusCode.NotFound, "Item does not exist");
                 }
                 else
                 {

@@ -51,6 +51,10 @@ namespace Bueller.DA.Models
         [RegularExpression("[(]{1}[0-9]{3}[)]{1}[ ]{1}[0-9]{3}[-]{1}[0-9]{4}", ErrorMessage = "Format must be (###) ###-####")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(".{1,200}[@].{1,200}[.].{1,5}", ErrorMessage = "Email is too long, max 200 character on each side of @")]
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Grade is required")]
         [StringLength(100, ErrorMessage = "Grade cannot be more than 100 characters")]

@@ -99,6 +99,10 @@
     <Compile Include="Migrations\201805202256546_addDateTimeToModels.Designer.cs">
       <DependentUpon>201805202256546_addDateTimeToModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805231259314_addemailtostudent.cs" />
+    <Compile Include="Migrations\201805231259314_addemailtostudent.Designer.cs">
+      <DependentUpon>201805231259314_addemailtostudent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeePayment.cs" />
     <Compile Include="Models\EmployeeSalary.cs" />
@@ -127,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805202256546_addDateTimeToModels.resx">
       <DependentUpon>201805202256546_addDateTimeToModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805231259314_addemailtostudent.resx">
+      <DependentUpon>201805231259314_addemailtostudent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
