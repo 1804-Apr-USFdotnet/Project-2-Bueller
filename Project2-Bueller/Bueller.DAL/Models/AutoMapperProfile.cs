@@ -15,7 +15,12 @@ namespace Bueller.DAL.Models
             CreateMap<Employee, EmployeeDto>().ReverseMap();
             CreateMap<EmployeeAccount, EmployeeAccountDto>().ReverseMap();
             CreateMap<File, FileDto>().ReverseMap();
-           
+            CreateMap<Class, ClassDto>().ReverseMap();
+            CreateMap<Subject, SubjectDto>().ReverseMap();
+            CreateMap<Student, StudentDto>().ReverseMap();
+            CreateMap<StudentAccount, StudentAccountDto>().ReverseMap();
+            CreateMap<Grade, GradeDto>().ReverseMap();
+            CreateMap<Assignment, AssignmentDto>().ReverseMap();
         }
     }
 }

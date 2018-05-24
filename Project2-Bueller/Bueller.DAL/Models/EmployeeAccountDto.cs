@@ -11,8 +11,6 @@ namespace Bueller.DAL.Models
 {
     public class EmployeeAccountDto : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int EmployeeAccountId { get; set; }
 

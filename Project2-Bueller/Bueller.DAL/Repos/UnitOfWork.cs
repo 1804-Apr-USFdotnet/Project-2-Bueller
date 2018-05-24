@@ -226,24 +226,5 @@ namespace Bueller.DAL.Repos
 
             return (SubjectRepo)_repositories[type];
         }
-
-        public TeacherAssignmentRepo TeacherAssignmentRepo()
-        {
-            if (_repositories == null)
-            {
-                _repositories = new Dictionary<string, object>();
-            }
-
-            var type = typeof(TeacherAssignmentRepo).Name;
-
-            if (!_repositories.ContainsKey(type))
-            {
-                var repositoryType = typeof(TeacherAssignmentRepo);
-                var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
-                _repositories.Add(type, repositoryInstance);
-            }
-
-            return (TeacherAssignmentRepo)_repositories[type];
-        }
     }
 }

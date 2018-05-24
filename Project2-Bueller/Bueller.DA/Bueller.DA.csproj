@@ -106,6 +106,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeePayment.cs" />
     <Compile Include="Models\EmployeeSalary.cs" />
+    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentAccount.cs" />
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Class.cs" />
@@ -115,7 +116,6 @@
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\IDbContext.cs" />
     <Compile Include="Models\ABaseEntity.cs" />
-    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
