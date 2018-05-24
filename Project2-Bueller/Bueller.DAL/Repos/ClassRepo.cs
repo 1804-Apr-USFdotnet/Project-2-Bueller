@@ -50,6 +50,10 @@ namespace Bueller.DAL.Repos
         {
             return this.Table.Where(x => x.TeacherId == id).ToList();
         }
+        public IEnumerable<Class> GetClassesByTeacherEmail(string email)
+        {
+            return this.Table.Where(x => x.Teacher.Email == email).ToList();
+        }
 
         public IEnumerable<Class> GetClassesWithStudents()
         {
