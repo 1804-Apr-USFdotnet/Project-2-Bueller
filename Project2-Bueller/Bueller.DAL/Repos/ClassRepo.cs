@@ -17,7 +17,7 @@ namespace Bueller.DAL.Repos
 
         public bool HasClassOnThisDay(string day, int classId)
         {
-            var cls = this.Table.Where(x => x.ClassId == classId).FirstOrDefault();
+            var cls = this.Table.FirstOrDefault(x => x.ClassId == classId);
             switch (day)
             {
                 case "Monday":
@@ -40,6 +40,8 @@ namespace Bueller.DAL.Repos
                     if (cls.Fri == 1)
                         return true;
                     break;
+                default:
+                    return false;
             }
             return false;
         }
@@ -51,12 +53,12 @@ namespace Bueller.DAL.Repos
 
         public IEnumerable<Class> GetClassesWithStudents()
         {
-            return this.Table.Where(x => x.Students.Count() > 0).ToList();
+            return this.Table.Where(x => x.Students.Any()).ToList();
         }
 
         public IEnumerable<Class> GetClassesWithAssignments()
         {
-            return this.Table.Where(x => x.Assignments.Count() > 0).ToList();
+            return this.Table.Where(x => x.Assignments.Any()).ToList();
         }
 
         public IEnumerable<Class> GetClassesByCredits(int credits)

@@ -150,7 +150,7 @@ namespace Bueller.DAL.Repos
             {
                 var repositoryType = typeof(FileRepo);
                 var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
-                _repositories.Add(type, repositoryType);
+                _repositories.Add(type, repositoryInstance);
             }
             return (FileRepo)_repositories[type];
         }
@@ -168,7 +168,7 @@ namespace Bueller.DAL.Repos
             {
                 var repositoryType = typeof(GradeRepo);
                 var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
-                _repositories.Add(type, repositoryType);
+                _repositories.Add(type, repositoryInstance);
             }
             return (GradeRepo)_repositories[type];
         }
@@ -202,10 +202,48 @@ namespace Bueller.DAL.Repos
             if (!_repositories.ContainsKey(type))
             {
                 var repositoryType = typeof(StudentRepo);
-                var repositoryInstance = Activator.ReferenceEquals(repositoryType, _context);
+                var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
                 _repositories.Add(type, repositoryInstance);
             }
             return (StudentRepo)_repositories[type];
+        }
+
+        public SubjectRepo SubjectRepo()
+        {
+            if (_repositories == null)
+            {
+                _repositories = new Dictionary<string, object>();
+            }
+
+            var type = typeof(SubjectRepo).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(SubjectRepo);
+                var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
+                _repositories.Add(type, repositoryInstance);
+            }
+
+            return (SubjectRepo)_repositories[type];
+        }
+
+        public TeacherAssignmentRepo TeacherAssignmentRepo()
+        {
+            if (_repositories == null)
+            {
+                _repositories = new Dictionary<string, object>();
+            }
+
+            var type = typeof(TeacherAssignmentRepo).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(TeacherAssignmentRepo);
+                var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
+                _repositories.Add(type, repositoryInstance);
+            }
+
+            return (TeacherAssignmentRepo)_repositories[type];
         }
     }
 }
