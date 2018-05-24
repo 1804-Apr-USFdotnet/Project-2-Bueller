@@ -47,6 +47,17 @@ namespace BuellerWebApi.Controllers
             }
             return Ok(assignment);
         }
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public IHttpActionResult GetByTeacherId(int id)
+        {
+            var assignment = assignmentRepo.GetAssignmentsByTeacherId(id);
+            if (assignment == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
+            }
+            return Ok(assignment);
+        }
 
         [HttpPost]
         [Route("Add", Name = "AddAssignment")]
@@ -113,7 +124,7 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetAssignmentsByClassId(int id)
         {
             var assignments = assignmentRepo.GetAssignmentsByClassId(id);
-            if (assignments.Count() == 0)
+            if (!assignments.Any())
             {
                 return Content(HttpStatusCode.NotFound, "List is empty");
             }
@@ -125,7 +136,7 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetAssignmentsWithFiles()
         {
             var assignments = assignmentRepo.GetAssignmentsWithFiles();
-            if (assignments.Count() == 0)
+            if (!assignments.Any())
             {
                 return Content(HttpStatusCode.NotFound, "List is empty");
             }
@@ -137,12 +148,13 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetAssignmentsByDueDate(DateTime duedate)
         {
             var assignments = assignmentRepo.GetAssignmentsByDueDate(duedate);
-            if (assignments.Count() == 0)
+            if (!assignments.Any())
             {
                 return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(assignments);
         }
+
         private bool AssignmentExists(int id)
         {
             return assignmentRepo.Table.Count(e => e.AssignmentId == id) > 0;

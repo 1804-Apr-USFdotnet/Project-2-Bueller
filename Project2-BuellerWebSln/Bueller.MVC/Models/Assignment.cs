@@ -15,6 +15,7 @@ namespace Bueller.MVC.Models
         [Required]
         [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Assignment name cannot be more than 100 characters")]
+        [Display(Name =" Assignment Title")]
         public string AssignmentName { get; set; }
 
         [Required(ErrorMessage = "Due date is required")]

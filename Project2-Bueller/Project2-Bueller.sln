@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuellerWebApi", "BuellerWeb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudUnitTest", "CrudUnitTest\CrudUnitTest.csproj", "{27934804-6DF9-4E54-8AD3-C35BAA3DEAF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossTableUnitTests", "CrossTableUnitTests\CrossTableUnitTests.csproj", "{7FD38D73-A952-43D9-A19A-C8C239EAF6CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{27934804-6DF9-4E54-8AD3-C35BAA3DEAF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27934804-6DF9-4E54-8AD3-C35BAA3DEAF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27934804-6DF9-4E54-8AD3-C35BAA3DEAF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FD38D73-A952-43D9-A19A-C8C239EAF6CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FD38D73-A952-43D9-A19A-C8C239EAF6CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FD38D73-A952-43D9-A19A-C8C239EAF6CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FD38D73-A952-43D9-A19A-C8C239EAF6CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

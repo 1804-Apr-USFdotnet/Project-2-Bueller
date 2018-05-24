@@ -15,12 +15,12 @@ namespace BuellerWebApi.Controllers
     public class StudentController : ApiController
     {
         private readonly UnitOfWork unit = new UnitOfWork();
-        private readonly Crud<Student> repo;
+        private readonly StudentRepo repo;
         private readonly StudentAccountRepo accountRepo;
 
         StudentController()
         {
-            repo = unit.Crud<Student>();
+            repo = unit.StudentRepo();
             accountRepo = unit.StudentAccountRepo();
         }
 
@@ -97,7 +97,6 @@ namespace BuellerWebApi.Controllers
 
             try
             {
-                //doesnt update date modified, not sure how to fix
                 repo.Update(value);
             }
 

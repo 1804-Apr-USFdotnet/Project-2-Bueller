@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using Bueller.MVC.Models;
+using Newtonsoft.Json;
 
 namespace Bueller.MVC.Controllers
 {
@@ -50,11 +51,55 @@ namespace Bueller.MVC.Controllers
             {
                 return View("Error");
             }
-            var result = apiResponse.Content.ReadAsStringAsync();
+           
+    
+            var assignments = await apiResponse.Content.ReadAsAsync< List<Assignment>>();
+         
+            return View( assignments);
+        }
 
 
-             var results = apiResponse.Content = new ObjectContent<Assignment>(assignment, new JsonMediaTypeFormatter());
-            return View( results);
+
+          public ViewResult Create()
+        {
+
+            return View();
+
+        }
+        [HttpPost]
+        public async Task<ActionResult> Create( Assignment assignment)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("Error");
+            }
+
+     
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Assignment/Add");
+            apiRequest.Content = new ObjectContent<Assignment>(assignment, new JsonMediaTypeFormatter());
+
+            HttpResponseMessage apiResponse;
+
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            
+
+            return RedirectToAction("Index");
         }
     }
 }
+

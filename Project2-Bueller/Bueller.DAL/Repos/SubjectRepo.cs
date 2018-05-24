@@ -15,6 +15,9 @@ namespace Bueller.DAL.Repos
             _context = context;
         }
 
-        
+        public IEnumerable<Subject> GetSubjectsByDepartment(string department)
+        {
+            return this.Table.Where(x => x.Department.Equals(department)).ToList();
+        }
     }
 }

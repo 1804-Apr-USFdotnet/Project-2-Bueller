@@ -31,7 +31,7 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetEmployees()
         {
             var employees = repo.Table.ToList();
-            if (employees.Count() == 0)
+            if (!employees.Any())
             {
                 return Content(HttpStatusCode.NotFound, "List is empty");
             }
@@ -118,7 +118,7 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetEmployeesByType(string type)
         {
             var employees = repo.GetEmployeesByType(type);
-            if (employees.Count() == 0)
+            if (!employees.Any())
             {
                 return Content(HttpStatusCode.NotFound, "List is empty");
             }
@@ -131,7 +131,7 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetEmployeesByNameAscending()
         {
             var employees = repo.GetEmployeesByNameAscending();
-            if (employees.Count() == 0)
+            if (!employees.Any())
             {
                 return Content(HttpStatusCode.NotFound, "List is empty");
             }
@@ -151,7 +151,7 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetEmployeeAccounts()
         {
             var accounts = accountRepo.Table.ToList();
-            if (accounts.Count() == 0)
+            if (!accounts.Any())
             {
                 return Content(HttpStatusCode.NotFound, "List is empty");
             }
@@ -216,7 +216,7 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetAccountsByPayPeriod(string period)
         {
             var employeeAccounts = accountRepo.GetAccountsByPayPeriod(period);
-            if (employeeAccounts.Count() == 0)
+            if (!employeeAccounts.Any())
             {
                 return Content(HttpStatusCode.NotFound, "List is empty");
             }
