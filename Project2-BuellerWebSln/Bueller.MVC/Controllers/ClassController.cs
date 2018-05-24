@@ -12,6 +12,11 @@ namespace Bueller.MVC.Controllers
 {
     public class ClassController : AServiceController
     {
+        //add instructor name to view for students? or withhold if teacher logged in...
+        //add enrollment count too?
+        //have create/edit/delete only show up for teachers
+        //details view for description and link to textbook purchase?
+
         // GET: Assignment
         [HttpGet]
         public async Task<ViewResult> Index()

@@ -9,8 +9,6 @@ namespace Bueller.MVC.Models
 {
     public class Class
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [ScaffoldColumn(false)]
         public int ClassId { get; set; }
         [Required(ErrorMessage = "Name is required")]
@@ -19,6 +17,7 @@ namespace Bueller.MVC.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Room number is required")]
         [DataType(DataType.Text)]
+        [Display(Name = "Room")]
         [StringLength(20, ErrorMessage = "Room number cannot be more than 100 characters")]
         public string RoomNumber { get; set; }
         [Required(ErrorMessage = "Section is required")]
@@ -34,11 +33,13 @@ namespace Bueller.MVC.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Start time is required")]
-        [Column(TypeName = "time")]
         [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Start Time")]
         public TimeSpan StartTime { get; set; }
         [Required(ErrorMessage = "End time is required")]
-        [Column(TypeName = "time")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        [Display(Name = "End Time")]
         [DataType(DataType.Time)]
         public TimeSpan EndTime { get; set; }
 
@@ -76,10 +77,20 @@ namespace Bueller.MVC.Models
 
         public virtual ICollection<Assignment> Assignments { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
-        [Column(TypeName = "datetime2")]
         public DateTime Modified { get; set; }
+
+        //[NotMapped]
+        [Display(Name = "Class Days")]
+        public string ClassDays
+        {
+            get
+            {
+                return ((Mon == 1) ? ("Mo") : "") + ((Tues == 1) ? ("Tu") : "") +
+                       ((Wed == 1) ? ("We") : "") + ((Thurs == 1) ? ("Th") : "") +
+                       ((Fri == 1) ? ("Fr") : "");
+            }
+        }
 
     }
 }
