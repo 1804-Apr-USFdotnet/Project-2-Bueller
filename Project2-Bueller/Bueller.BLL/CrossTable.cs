@@ -20,7 +20,7 @@ namespace Bueller.BLL
         private GradeRepo gradeRepo;
         private SubjectRepo subjectRepo;
 
-
+        //TODO add methods to controllers
         public CrossTable()
         {
             classRepo = unit.ClassRepo();

@@ -164,15 +164,38 @@ namespace BuellerWebApi.Controllers
             return Ok(subject);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("Subject/Add", Name = "AddSubject")]
         public IHttpActionResult AddSubject(SubjectDto subjectDto)
         {
-            return CreatedAtRoute("AddSubject", new {id = subjectDto.SubjectId}, subjectDto);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            subjectRepo.Insert(Mapper.Map<Subject>(subjectDto));
+
+            return CreatedAtRoute("AddSubject", new { id = subjectDto.SubjectId }, subjectDto);
         }
 
+        [HttpPut]
+        [Route("Subject/AddAt/{id}")]
+        public IHttpActionResult AddSubjectAt(int id)
+        {
+            return null;
+        }
 
+        [HttpDelete]
+        [Route("Subject/Delete/{id}")]
+        public IHttpActionResult DeleteSubject(int id)
+        {
+            return null;
+        }
 
+        private bool SubjectExists(int id)
+        {
+            return subjectRepo.Table.Count(e => e.SubjectId == id) > 0;
+        }
 
 
 

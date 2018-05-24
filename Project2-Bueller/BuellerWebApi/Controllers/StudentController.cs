@@ -30,7 +30,7 @@ namespace BuellerWebApi.Controllers
         #region Student
         [HttpGet]
         [Route("GetAll")]
-        public IHttpActionResult Get()
+        public IHttpActionResult GetStudents()
         {
             var students = repo.Table.ToList();
             if (!students.Any())
@@ -65,7 +65,7 @@ namespace BuellerWebApi.Controllers
         // GET: api/Student/5
         [HttpGet]
         [Route("GetById/{id}")]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult GetById(int id)
         {
             var student = repo.GetById(id);
             if (student == null)
@@ -79,7 +79,7 @@ namespace BuellerWebApi.Controllers
         // POST: api/Student
         [HttpPost]
         [Route("Add", Name = "AddStudent")]
-        public IHttpActionResult Post(StudentDto studentDto)
+        public IHttpActionResult AddStudent(StudentDto studentDto)
         {
             if (!ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace BuellerWebApi.Controllers
         // PUT: api/Student/
         [HttpPut]
         [Route("AddAt/{id}")]
-        public IHttpActionResult Put(int id, StudentDto studentDto)
+        public IHttpActionResult PutAt(int id, StudentDto studentDto)
         {
             if (!ModelState.IsValid)
             {
