@@ -16,7 +16,10 @@ node('master'){
     }
     stage('test'){
         try{
-           
+           dir('Project2-Bueller'){
+               bat "VSTest.Console.exe CrossTableUnitTests\\bin\\Debug\\CrossTableUnitTests.dll"
+               bat "VSTest.Console.exe CrudUnitTest\\bin\\Debug\\CrudUnitTest.dll"
+           }
         }
         catch(exc){
             slackError('test')
