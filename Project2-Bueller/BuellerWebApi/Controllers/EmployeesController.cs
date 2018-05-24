@@ -51,7 +51,7 @@ namespace BuellerWebApi.Controllers
         }
 
         [HttpGet]
-        [Route("GetByEmail/{email/}")]
+        [Route("GetByEmail/{email}/")]
         public IHttpActionResult GetEmployeeByEmail(string email)
         {
             var employee = repo.GetEmployeeByEmail(email);

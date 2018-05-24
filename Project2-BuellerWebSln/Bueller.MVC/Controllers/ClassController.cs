@@ -52,6 +52,43 @@ namespace Bueller.MVC.Controllers
             return View(classes);
         }
 
+
+        [HttpGet]
+        public async Task<ViewResult> TeacherClasses()
+        {
+
+            var teacherId = Request.Cookies["EmployeeId"].Value;
+
+            if (!ModelState.IsValid)
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherId/{teacherId}/");
+
+            HttpResponseMessage apiResponse;
+            Assignment assignment = new Assignment();
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+
+            var classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
+
+            return View(classes);
+        }
+
         // GET: Classes
         [HttpGet]
         public async Task<ViewResult> Details(int id)

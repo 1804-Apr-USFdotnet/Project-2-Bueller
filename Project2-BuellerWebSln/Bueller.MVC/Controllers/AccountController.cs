@@ -178,11 +178,13 @@ namespace Bueller.MVC.Controllers
              
 
             HttpCookie userEmailCookie = new HttpCookie("userEmailCookie");
-           userEmailCookie.Value = account.Email;
+             userEmailCookie.Value = account.Email;
 
             Response.Cookies.Add(userEmailCookie);
 
             PassCookiesToClient(apiResponse);
+
+            await AddEmployeeCookie(account.Email);
           
 
             return RedirectToAction("Index", "Home");
@@ -216,7 +218,17 @@ namespace Bueller.MVC.Controllers
 
             PassCookiesToClient(apiResponse);
 
-            Request.Cookies["userEmailCookie"].Value = "";
+            if (Request.Cookies["userEmailCookie"] == null)
+            {
+
+
+
+            }
+            else
+            {
+
+                Request.Cookies["userEmailCookie"].Value = "";
+            }
 
             return RedirectToAction("Index", "Home");
         }
@@ -224,7 +236,7 @@ namespace Bueller.MVC.Controllers
         public async Task AddEmployeeCookie(string email)
         {
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, "api/Employee/GetByEmail");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Employee/GetByEmail/{email}/");
 
             HttpResponseMessage apiResponse;
             Assignment assignment = new Assignment();
@@ -242,7 +254,6 @@ namespace Bueller.MVC.Controllers
             //{
            
             // }
-
             PassCookiesToClient(apiResponse);
 
             var employee = await apiResponse.Content.ReadAsAsync<Employee>();

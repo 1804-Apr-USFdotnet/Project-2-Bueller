@@ -43,10 +43,10 @@ namespace BuellerWebApi.Controllers
 
 
         [HttpGet]
-        [Route("GetByTeacherEmail/{email}/")]
-        public IHttpActionResult GetClassByTeacherEmail(string email)
+        [Route("GetByTeacherId/{id}/")]
+        public IHttpActionResult GetClassByTeacherId(int id)
         {
-            var classes = classRepo.GetClassesByTeacherEmail(email);
+            var classes = classRepo.GetClassesByTeacherId(id);
             if (!classes.Any())
             {
                 return Content(HttpStatusCode.NotFound, "List is empty");
