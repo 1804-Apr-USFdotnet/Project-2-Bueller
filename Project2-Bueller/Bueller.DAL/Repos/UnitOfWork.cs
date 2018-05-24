@@ -9,8 +9,6 @@ using Bueller.DA;
 
 namespace Bueller.DAL.Repos
 {
-    //does not work correctly right now, just use a crud repo
-    //allows for dbcontext to not be referenced in web controllers
     public class UnitOfWork : IDisposable
     {
         private readonly IDbContext _context;

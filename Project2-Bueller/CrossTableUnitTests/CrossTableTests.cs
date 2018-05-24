@@ -20,7 +20,19 @@ namespace Bueller.BLL.Tests
 
             var actual = cross.GetGradesByStudentId(2);
 
-            Assert.AreEqual(expected,actual.First().EvaluationType);
+            Assert.AreEqual(expected, actual.First().EvaluationType);
+        }
+
+        [TestMethod()]
+        public void GetStudentsByTeacherIdTest()
+        {
+            CrossTable cross = new CrossTable();
+
+            var expected = "bobby";
+
+            var actual = cross.GetStudentsByTeacherId(8);
+
+            Assert.AreEqual(expected, actual.First().FirstName);
         }
     }
 }

@@ -5,8 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
+using System.Web;
 using System.Web.Http;
+using AutoMapper;
 using Bueller.DA.Models;
+using Bueller.DAL.Models;
 using Bueller.DAL.Repos;
 
 namespace BuellerWebApi.Controllers
@@ -18,23 +21,27 @@ namespace BuellerWebApi.Controllers
         private readonly StudentRepo repo;
         private readonly StudentAccountRepo accountRepo;
 
-        StudentController()
+        public StudentController()
         {
             repo = unit.StudentRepo();
             accountRepo = unit.StudentAccountRepo();
         }
 
-        // GET: api/Student
-        //public IEnumerable<Student> Get()
-        //{
-        //    return repo.Table.ToList();
-        //}
-
-        public HttpResponseMessage Get()
+        #region Student
+        [HttpGet]
+        [Route("GetAll")]
+        public IHttpActionResult GetStudents()
         {
-            return Request.CreateResponse(HttpStatusCode.Accepted, repo.Table.ToList());
+            var students = repo.Table.ToList();
+            if (!students.Any())
+            {
+                return Content(HttpStatusCode.NoContent, "List is empty");
+            }
+
+            return Ok(students);
         }
 
+        [HttpGet]
         [Route("GetLoginInfo")]
         public IHttpActionResult GetLoginInfo()
         {
@@ -56,55 +63,58 @@ namespace BuellerWebApi.Controllers
         }
 
         // GET: api/Student/5
-        public IHttpActionResult Get(int id)
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public IHttpActionResult GetById(int id)
         {
             var student = repo.GetById(id);
-            if (student != null)
+            if (student == null)
             {
-                return Ok(student);
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
-            return NotFound();
+
+            return Ok(student);
         }
 
         // POST: api/Student
-        public IHttpActionResult Post([FromBody] Student value)
+        [HttpPost]
+        [Route("Add", Name = "AddStudent")]
+        public IHttpActionResult AddStudent(StudentDto studentDto)
         {
-            //try
-            //{
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
-            repo.Insert(value);
-            return Ok();
-            //}
+            repo.Insert(Mapper.Map<Student>(studentDto));
+
+            return CreatedAtRoute("AddStudent", new { id = studentDto.StudentId }, studentDto);
         }
 
-        // PUT: api/Student/5
-        public IHttpActionResult Put(int id, [FromBody]Student value)
+        // PUT: api/Student/
+        [HttpPut]
+        [Route("AddAt/{id}")]
+        public IHttpActionResult PutAt(int id, StudentDto studentDto)
         {
-            //var student = repo.GetById(id);
-            //repo.Update();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != value.StudentId)
+            if (id != studentDto.StudentId)
             {
                 return BadRequest();
             }
 
             try
             {
-                repo.Update(value);
+                repo.Update(Mapper.Map<Student>(studentDto));
             }
 
             catch (DbUpdateConcurrencyException)
             {
-                if (!(repo.Table.Count(e => e.StudentId == id) > 0))
+                if (!StudentExists(id))
                 {
-                    return NotFound();
+                    return Content(HttpStatusCode.NotFound, "Item does not exist");
                 }
                 else
                 {
@@ -116,42 +126,66 @@ namespace BuellerWebApi.Controllers
         }
 
         // DELETE: api/Student/5
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public IHttpActionResult Delete(int id)
         {
             var student = repo.GetById(id);
+            if (student == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
+            }
+
             repo.Delete(student);
+
+            return Ok(student);
         }
 
+        private bool StudentExists(int id)
+        {
+            return repo.Table.Count(e => e.StudentId == id) > 0;
+        }
+
+        #endregion
         #region Student Account
+
         [HttpGet]
         [Route("Account/GetAll")]
-        public IEnumerable<StudentAccount> GetStudentAccounts()
+        public IHttpActionResult GetStudentAccounts()
         {
-            return accountRepo.Table.ToList();
+            var accounts = accountRepo.Table.ToList();
+
+            if (!accounts.Any())
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+
+            return Ok(accounts);
         }
 
         [HttpPost]
         [Route("Account/Add", Name = "AddStudentAccount")]
-        public IHttpActionResult AddStudentAccount(int StudentID, StudentAccount StudentAccount)
+        public IHttpActionResult AddStudentAccount(int id, StudentAccountDto StudentAccountDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            accountRepo.Insert(StudentAccount);
+            accountRepo.Insert(Mapper.Map<StudentAccount>(StudentAccountDto));
 
-            return CreatedAtRoute("AddStudentAccount", new { id = StudentAccount.StudentAccountId }, StudentAccount);
+            return CreatedAtRoute("AddStudentAccount", new { id = StudentAccountDto.StudentId }, StudentAccountDto);
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("Account/Delete/{id}")]
         public IHttpActionResult DeleteStudentAccount(int id)
         {
-            StudentAccount StudentAccount = accountRepo.GetById(id);
+            var StudentAccount = accountRepo.GetById(id);
+
             if (StudentAccount == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
 
             accountRepo.Delete(StudentAccount);
@@ -163,10 +197,11 @@ namespace BuellerWebApi.Controllers
         [Route("Account/GetById/{id}")]
         public IHttpActionResult GetStudentAccountById(int id)
         {
-            StudentAccount StudentAccount = accountRepo.GetById(id);
+            var StudentAccount = accountRepo.GetById(id);
+
             if (StudentAccount == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             return Ok(StudentAccount);
         }
@@ -175,10 +210,10 @@ namespace BuellerWebApi.Controllers
         [Route("Account/Owed")]
         public IHttpActionResult GetAccountsOwed()
         {
-            IEnumerable<StudentAccount> studentAccounts = accountRepo.GetAccountsOwed();
-            if (studentAccounts.Count() == 0)
+            var studentAccounts = accountRepo.GetAccountsOwed();
+            if (!studentAccounts.Any())
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(studentAccounts);
         }
@@ -187,10 +222,10 @@ namespace BuellerWebApi.Controllers
         [Route("Account/WithAid")]
         public IHttpActionResult GetAccountsWithAid()
         {
-            IEnumerable<StudentAccount> studentAccounts = accountRepo.GetAccountsWithAid();
-            if (studentAccounts.Count() == 0)
+            var studentAccounts = accountRepo.GetAccountsWithAid();
+            if (!studentAccounts.Any())
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(studentAccounts);
         }
@@ -199,10 +234,10 @@ namespace BuellerWebApi.Controllers
         [Route("Account/Owed/{owed}")]
         public IHttpActionResult GetAccountsByAmountOwed(double owed)
         {
-            IEnumerable<StudentAccount> studentAccounts = accountRepo.GetByAmountOwed(owed);
-            if (studentAccounts.Count() == 0)
+            var studentAccounts = accountRepo.GetByAmountOwed(owed);
+            if (!studentAccounts.Any())
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(studentAccounts);
         }
@@ -211,10 +246,10 @@ namespace BuellerWebApi.Controllers
         [Route("Account/GetByStudentId/{id}")]
         public IHttpActionResult GetAccountBytStudentId(int id)
         {
-            StudentAccount studentAccount = accountRepo.GetAccountByStudentId(id);
+            var studentAccount = accountRepo.GetAccountByStudentId(id);
             if (studentAccount == null)
             {
-                NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             return Ok(studentAccount);
         }

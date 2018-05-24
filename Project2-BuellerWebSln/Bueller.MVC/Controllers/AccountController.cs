@@ -56,22 +56,19 @@ namespace Bueller.MVC.Controllers
             }
             else 
             {
-                return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email });//or email
+                return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email});//or email
+                //return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email, employeetype = role });//or email
             }
         }
 
         public ActionResult RegisterStudentInfo(string email)
         {
-            //return View(email);
-            //ViewBag.Title = "RegisterStudentInfo";
-            //ViewBag.Email = email;
             return View();
         }
 
         [Route("RegisterEmployeeInfo/{role}")]
-        public ActionResult RegisterEmployeeInfo(string email)
+        public ActionResult RegisterEmployeeInfo(string email, string employeetype)
         {
-            //ViewBag.Email = email;
             return View();
         }
 
@@ -113,6 +110,8 @@ namespace Bueller.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        //middle name doesn't map...
+        //add employee type auto-fill...?
         [HttpPost]
         public async Task<ActionResult> RegisterEmployeeInfo(Employee employee)
         {

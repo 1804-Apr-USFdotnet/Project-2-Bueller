@@ -32,7 +32,7 @@ namespace Bueller.DAL.Repos
 
         public StudentAccount GetAccountByStudentId(int id)
         {
-            return this.Entities.Where(x => x.StudentId == id).FirstOrDefault();
+            return this.Entities.FirstOrDefault(x => x.StudentId == id);
         }
     }
 }
