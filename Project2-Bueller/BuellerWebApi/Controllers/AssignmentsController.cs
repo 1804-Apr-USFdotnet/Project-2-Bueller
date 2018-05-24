@@ -29,7 +29,7 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetAssignments()
         {
             var assignments = assignmentRepo.Table.ToList();
-            if (assignments.Count() == 0)
+            if (!assignments.Any())
             {
                 return Content(HttpStatusCode.NotFound, "List is empty");
             }

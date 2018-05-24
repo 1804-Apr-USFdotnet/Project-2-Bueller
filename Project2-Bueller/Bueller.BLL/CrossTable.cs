@@ -49,5 +49,15 @@ namespace Bueller.BLL
             return result;
 
         }
+
+        public IEnumerable<Student> GetStudentsByTeacherId(int id)
+        {
+            return null;
+        }
+
+        public IEnumerable<Employee> GetTeachersByStudnetId(int id)
+        {
+            return null;
+        }
     }
 }

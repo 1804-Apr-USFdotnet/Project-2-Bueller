@@ -27,6 +27,7 @@ namespace BuellerWebApi.Controllers
             subjectRepo = unit.SubjectRepo();
         }
 
+        #region Class
         // GET: api/Class
         [HttpGet]
         [Route("GetAll")]
@@ -133,5 +134,48 @@ namespace BuellerWebApi.Controllers
         {
             return classRepo.Table.Count(e => e.ClassId == id) > 0;
         }
+
+        #endregion
+        #region Subject
+
+        [HttpGet]
+        [Route("Subject/GetAll")]
+        public IHttpActionResult GetAllSubjects()
+        {
+            var subjects = subjectRepo.Table.ToList();
+            if (!subjects.Any())
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+
+            return Ok(subjects);
+        }
+
+        [HttpGet]
+        [Route("Subject/GetById/{id}")]
+        public IHttpActionResult GetSubjectById(int id)
+        {
+            var subject = subjectRepo.GetById(id);
+            if (subject == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
+            }
+
+            return Ok(subject);
+        }
+
+        [HttpPut]
+        [Route("Subject/Add", Name = "AddSubject")]
+        public IHttpActionResult AddSubject(SubjectDto subjectDto)
+        {
+            return CreatedAtRoute("AddSubject", new {id = subjectDto.SubjectId}, subjectDto);
+        }
+
+
+
+
+
+
+        #endregion
     }
 }
