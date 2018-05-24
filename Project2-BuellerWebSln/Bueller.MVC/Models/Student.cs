@@ -25,7 +25,7 @@ namespace Bueller.MVC.Models
         [Display(Name = "Last Name")]
         [StringLength(100, ErrorMessage = "Last name cannot be more than 100 characters")]
         public string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [DataType(DataType.EmailAddress)]
         [RegularExpression(".{1,200}[@].{1,200}[.].{1,5}", ErrorMessage = "Email is too long, max 200 character on each side of @")]
         public string Email { get; set; }

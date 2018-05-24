@@ -47,6 +47,17 @@ namespace BuellerWebApi.Controllers
             }
             return Ok(assignment);
         }
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public IHttpActionResult GetByTeacherId(int id)
+        {
+            var assignment = assignmentRepo.GetAssignmentsByTeacherId(id);
+            if (assignment == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
+            }
+            return Ok(assignment);
+        }
 
         [HttpPost]
         [Route("Add", Name = "AddAssignment")]

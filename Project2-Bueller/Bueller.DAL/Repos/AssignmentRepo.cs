@@ -19,6 +19,10 @@ namespace Bueller.DAL.Repos
         {
             return this.Entities.Where(x => x.ClassId == id).ToList();
         }
+        public IEnumerable<Assignment> GetAssignmentsByTeacherId(int id)
+        {
+            return this.Entities.Where(x => x.Class.TeacherId == id).ToList();
+        }
 
         public IEnumerable<Assignment> GetAssignmentsWithFiles()
         {
