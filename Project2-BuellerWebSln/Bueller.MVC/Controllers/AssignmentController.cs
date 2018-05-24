@@ -60,44 +60,12 @@ namespace Bueller.MVC.Controllers
 
 
 
-          public async Task<ViewResult> Create()
+
+        public ViewResult Create(int ClassId)
         {
-           
-            var email = this.Session["Email"];
+           Assignment assignment = new Assignment();
+            assignment.ClassId = ClassId;
 
-            Class  classObj= new Class();
-            Assignment assignment = new Assignment();
-
-           
-
-                HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherEmail/{email}/");
-
-                HttpResponseMessage apiResponse;
-
-
-           
-
-            try{
-       
-                apiResponse = await HttpClient.SendAsync(apiRequest);
-            }
-            catch
-            {
-                return View("Error");
-            }
-
-            if (!apiResponse.IsSuccessStatusCode)
-            {
-                return View("Error");
-            }
-
-            var classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
-            List<string> classNames = new List<string>();
-            foreach (var item in classes)
-            {
-                classNames.Add(item.Name);
-            }
-            assignment.AvailableClasses = new SelectList(classNames);
 
 
             return View(assignment);
@@ -105,9 +73,7 @@ namespace Bueller.MVC.Controllers
         }
         [HttpPost]
         public async Task<ActionResult> Create( Assignment assignment)
-        {
-
-           
+        {      
 
             if (!ModelState.IsValid)
             {
