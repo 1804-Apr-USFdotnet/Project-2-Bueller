@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using Bueller.MVC.Models;
+using Newtonsoft.Json;
 
 namespace Bueller.MVC.Controllers
 {
@@ -50,11 +51,11 @@ namespace Bueller.MVC.Controllers
             {
                 return View("Error");
             }
-            var result = apiResponse.Content.ReadAsStringAsync();
-
-
-             var results = apiResponse.Content = new ObjectContent<Assignment>(assignment, new JsonMediaTypeFormatter());
-            return View( results);
+           
+    
+            var assignmentAnswer = await apiResponse.Content.ReadAsAsync< List<Assignment>>();
+         
+            return View( assignmentAnswer);
         }
     }
 }
