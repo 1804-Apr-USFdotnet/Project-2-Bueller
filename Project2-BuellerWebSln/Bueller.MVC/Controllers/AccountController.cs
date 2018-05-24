@@ -52,24 +52,27 @@ namespace Bueller.MVC.Controllers
 
             if (role == "student")
             {
-                return RedirectToAction("RegisterStudentInfo", "Account", account.Email);
+                return RedirectToAction("RegisterStudentInfo", "Account", new {email = account.Email});
             }
             else 
             {
-                return RedirectToAction("RegisterEmployeeInfo", "Account", role);//or email
+                return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email });//or email
             }
         }
 
         public ActionResult RegisterStudentInfo(string email)
         {
             //return View(email);
+            //ViewBag.Title = "RegisterStudentInfo";
+            //ViewBag.Email = email;
             return View();
         }
 
         [Route("RegisterEmployeeInfo/{role}")]
-        public ActionResult RegisterEmployeeInfo(string role)
+        public ActionResult RegisterEmployeeInfo(string email)
         {
-            return View(role);
+            //ViewBag.Email = email;
+            return View();
         }
 
         //prevent registering account only and backing out of creating corresponding model...
@@ -118,7 +121,7 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Student");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Employee/Add");
             apiRequest.Content = new ObjectContent<Employee>(employee, new JsonMediaTypeFormatter());
 
             HttpResponseMessage apiResponse;

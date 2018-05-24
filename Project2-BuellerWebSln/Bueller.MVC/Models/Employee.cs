@@ -12,6 +12,7 @@ namespace Bueller.MVC.Models
         [ScaffoldColumn(false)]
         public int EmployeeID { get; set; }
 
+        [Display(Name = "Office Number")]
         public int? OfficeNumber { get; set; }
 
         [Required(ErrorMessage = "First name is required")]
@@ -54,7 +55,7 @@ namespace Bueller.MVC.Models
         [Required(ErrorMessage = "Zip code is required")]
         [DataType(DataType.PostalCode)]
         [Display(Name = "Zip Code")]
-        [RegularExpression("[0-9]{5}", ErrorMessage = "Zipcode must be 5 digits")]
+        [RegularExpression("[0-9]{5}", ErrorMessage = "Zip code must be 5 digits")]
         public int Zipcode { get; set; }
 
         [Required(ErrorMessage = "Street address is required")]
