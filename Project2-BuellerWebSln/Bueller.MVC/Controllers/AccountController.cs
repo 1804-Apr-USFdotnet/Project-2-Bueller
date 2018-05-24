@@ -19,6 +19,8 @@ namespace Bueller.MVC.Controllers
         }
 
         //create new model account too depending on role
+        //pass in email to register info view
+        //ability to delete user accounts...
         //prevent register/additional login once logged in... important? and hide logout when not logged in?...
         [HttpPost]
         public async Task<ActionResult> Register(Account account, string role)
@@ -50,16 +52,17 @@ namespace Bueller.MVC.Controllers
 
             if (role == "student")
             {
-                return RedirectToAction("RegisterStudentInfo", "Account");
+                return RedirectToAction("RegisterStudentInfo", "Account", account.Email);
             }
             else 
             {
-                return RedirectToAction("RegisterEmployeeInfo", "Account", role);
+                return RedirectToAction("RegisterEmployeeInfo", "Account", role);//or email
             }
         }
 
-        public ActionResult RegisterStudentInfo()
+        public ActionResult RegisterStudentInfo(string email)
         {
+            //return View(email);
             return View();
         }
 
@@ -71,6 +74,7 @@ namespace Bueller.MVC.Controllers
 
         //prevent registering account only and backing out of creating corresponding model...
         // change register/login steps?
+        //tie in account to person models
         //unathorized problem
         //1.  login on server side with register
         //2.  redirect to login action following register. but how to redirect where to go after login (home or enter info)... 
@@ -85,6 +89,37 @@ namespace Bueller.MVC.Controllers
 
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Student");
             apiRequest.Content = new ObjectContent<Student>(student, new JsonMediaTypeFormatter());
+
+            HttpResponseMessage apiResponse;
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            PassCookiesToClient(apiResponse);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RegisterEmployeeInfo(Employee employee)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Student");
+            apiRequest.Content = new ObjectContent<Employee>(employee, new JsonMediaTypeFormatter());
 
             HttpResponseMessage apiResponse;
             try
