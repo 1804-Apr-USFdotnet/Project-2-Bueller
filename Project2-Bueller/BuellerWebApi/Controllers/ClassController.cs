@@ -23,12 +23,11 @@ namespace BuellerWebApi.Controllers
         public ClassController()
         {
             classRepo = unit.ClassRepo();
-            //TODO add actions
             subjectRepo = unit.SubjectRepo();
         }
 
         #region Class
-        // GET: api/Class
+
         [HttpGet]
         [Route("GetAll")]
         public IHttpActionResult GetAllClasses()
@@ -43,7 +42,6 @@ namespace BuellerWebApi.Controllers
         }
 
 
-        // GET: api/Class
         [HttpGet]
         [Route("GetByTeacherEmail/{email}/")]
         public IHttpActionResult GetClassByTeacherEmail(string email)
@@ -56,7 +54,8 @@ namespace BuellerWebApi.Controllers
 
             return Ok(classes);
         }
-        // GET: api/Class/5
+  
+
         [HttpGet]
         [Route("GetById/{id}")]
         public IHttpActionResult Get(int id)
@@ -83,7 +82,7 @@ namespace BuellerWebApi.Controllers
             return NotFound();
         }
 
-        // POST: api/Class
+   
         [HttpPost]
         [Route("Add", Name = "AddClass")]
         public IHttpActionResult Post(ClassDto classDto)
@@ -97,7 +96,7 @@ namespace BuellerWebApi.Controllers
             return CreatedAtRoute("AddClass", new { id = classDto.ClassId }, classDto);
         }
 
-        // PUT: api/Class/5
+      
         public IHttpActionResult Put(int id, ClassDto classDto)
         {
             if (!ModelState.IsValid)
@@ -128,7 +127,7 @@ namespace BuellerWebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/Class/5
+   
         [HttpDelete]
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
@@ -194,16 +193,48 @@ namespace BuellerWebApi.Controllers
 
         [HttpPut]
         [Route("Subject/AddAt/{id}")]
-        public IHttpActionResult AddSubjectAt(int id)
+        public IHttpActionResult AddSubjectAt(int id, SubjectDto subjectDto)
         {
-            return null;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != subjectDto.SubjectId)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                subjectRepo.Update(Mapper.Map<Subject>(subjectDto));
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SubjectExists(id))
+                {
+                    return Content(HttpStatusCode.NotFound, "Item does not exist");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NotFound);
         }
 
         [HttpDelete]
         [Route("Subject/Delete/{id}")]
         public IHttpActionResult DeleteSubject(int id)
         {
-            return null;
+            var subject = subjectRepo.GetById(id);
+            if (subject == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
+            }
+
+            return Ok(subject);
         }
 
         private bool SubjectExists(int id)
