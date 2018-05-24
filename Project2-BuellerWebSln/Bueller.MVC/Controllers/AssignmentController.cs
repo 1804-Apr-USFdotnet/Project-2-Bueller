@@ -62,20 +62,23 @@ namespace Bueller.MVC.Controllers
 
           public async Task<ViewResult> Create()
         {
-
+           
             var email = this.Session["Email"];
 
             Class  classObj= new Class();
             Assignment assignment = new Assignment();
+
            
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherEmail/{email}");
 
-            HttpResponseMessage apiResponse;
-     
+                HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherEmail/{email}/");
+
+                HttpResponseMessage apiResponse;
 
 
-            try
-            {
+           
+
+            try{
+       
                 apiResponse = await HttpClient.SendAsync(apiRequest);
             }
             catch
@@ -104,11 +107,13 @@ namespace Bueller.MVC.Controllers
         public async Task<ActionResult> Create( Assignment assignment)
         {
 
+           
+
             if (!ModelState.IsValid)
             {
                 return View("Error");
             }
-
+            
      
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Assignment/Add");
             apiRequest.Content = new ObjectContent<Assignment>(assignment, new JsonMediaTypeFormatter());

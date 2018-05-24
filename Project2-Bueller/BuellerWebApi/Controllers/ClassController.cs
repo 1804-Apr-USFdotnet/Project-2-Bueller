@@ -55,6 +55,22 @@ namespace BuellerWebApi.Controllers
 
             return Ok(classes);
         }
+
+        // GET: api/Class
+        [HttpGet]
+        [Route("ConvertClassName/{className}")]
+        public IHttpActionResult ConvertClassNameToId(string className)
+        {
+            var classId = classRepo.ConvertClassNameIntoId(className);
+         if (classId < 1)
+            {
+                return Content(HttpStatusCode.NotFound, "No class Matches");
+            }
+            
+
+            
+            return Ok(classId);
+        }
         // GET: api/Class/5
         [HttpGet]
         [Route("GetById/{id}")]

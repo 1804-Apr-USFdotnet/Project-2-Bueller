@@ -23,6 +23,12 @@ namespace Bueller.DAL.Repos
             return Mapper.Map<IEnumerable<EmployeeDto>>(employee);
         }
 
+        public EmployeeDto GetEmployeeByEmail(string email)
+        {
+            var employee = this.Entities.Where(x => x.Email == email).FirstOrDefault();
+            return Mapper.Map<EmployeeDto>(employee);
+        }
+
         public IEnumerable<EmployeeDto> GetEmployeesByNameAscending()
         {
             var employees =  this.Entities.OrderBy(x => x.FirstName).ToList();

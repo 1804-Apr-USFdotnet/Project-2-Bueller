@@ -45,16 +45,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script>
-        $(function () {
-            $("#btnSubmit").click(function () {
-                alert('button clicked');
-
-                window.localStorage.setItem("email", document.getElementById('email').value);
-            }
-            );
-        });
-
-   
-    </script>
+ 
 }

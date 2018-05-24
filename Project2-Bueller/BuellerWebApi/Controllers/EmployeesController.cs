@@ -49,7 +49,19 @@ namespace BuellerWebApi.Controllers
             }
             return Ok(employee);
         }
-        
+
+        [HttpGet]
+        [Route("GetByEmail/{email/}")]
+        public IHttpActionResult GetEmployeeByEmail(string email)
+        {
+            var employee = repo.GetEmployeeByEmail(email);
+            if (employee == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
+            }
+            return Ok(employee);
+        }
+
         [HttpPost]
         [Route("Add", Name = "AddEmployee")]
         public IHttpActionResult AddEmployee(EmployeeDto employee)
