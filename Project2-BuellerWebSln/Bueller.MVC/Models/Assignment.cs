@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Bueller.MVC.Models
 {
@@ -34,7 +35,9 @@ namespace Bueller.MVC.Models
 
         public virtual ICollection<File> Files { get; set; }
 
-       
+        public IEnumerable<SelectListItem> AvailableClasses { get; set; }
+
+
         public DateTime Created { get; set; }
        
         public DateTime Modified { get; set; }
