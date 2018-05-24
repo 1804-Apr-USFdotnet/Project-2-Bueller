@@ -34,5 +34,29 @@ namespace Bueller.BLL.Tests
 
             Assert.AreEqual(expected, actual.First().FirstName);
         }
+
+        [TestMethod()]
+        public void GetClassesByStudentIdTest()
+        {
+            CrossTable cross = new CrossTable();
+
+            var expected = "Biology";
+
+            var actual = cross.GetClassesByStudentId(2);
+
+            Assert.AreEqual(expected,actual.First().Name);
+        }
+
+        [TestMethod()]
+        public void GetTeachersByStudnetIdTest()
+        {
+            CrossTable cross = new CrossTable();
+
+            var expected = "First Name";
+
+            var actual = cross.GetTeachersByStudnetId(2);
+
+            Assert.AreEqual(expected,actual.First().FirstName);
+        }
     }
 }

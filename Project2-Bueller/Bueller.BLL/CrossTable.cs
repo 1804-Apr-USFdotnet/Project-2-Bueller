@@ -62,10 +62,11 @@ namespace Bueller.BLL
 
         public IEnumerable<Employee> GetTeachersByStudnetId(int id)
         {
-           // var classes = classRepo.Table.Where(x=>x.st)
+            var classes = GetClassesByStudentId(id);
+            var teachers = classes.Select(x => x.Teacher);
 
 
-            return null;
+            return teachers;
         }
 
         public IEnumerable<Class> GetClassesByStudentId(int id)
