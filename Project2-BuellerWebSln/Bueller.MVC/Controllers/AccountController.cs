@@ -177,6 +177,7 @@ namespace Bueller.MVC.Controllers
             }
 
             PassCookiesToClient(apiResponse);
+            this.Session["Email"] = account.Email;
 
             return RedirectToAction("Index", "Home");
         }

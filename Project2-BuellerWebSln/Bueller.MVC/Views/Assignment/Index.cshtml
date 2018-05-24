@@ -15,7 +15,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Class.Teacher.FirstName)
         </th>
-        
+
     </tr>
 
     @foreach (var item in Model)
@@ -30,8 +30,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Class.Teacher.FirstName)
             </td>
-           
+
         </tr>
     }
 
 </table>
+<li>@Html.ActionLink("Create Assignment", "Create", "Assignment")</li>

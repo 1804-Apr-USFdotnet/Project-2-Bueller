@@ -41,6 +41,20 @@ namespace BuellerWebApi.Controllers
             return Ok(classes);
         }
 
+
+        // GET: api/Class
+        [HttpGet]
+        [Route("GetByTeacherEmail/{email}/")]
+        public IHttpActionResult GetClassByTeacherEmail(string email)
+        {
+            var classes = classRepo.GetClassesByTeacherEmail(email);
+            if (!classes.Any())
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+
+            return Ok(classes);
+        }
         // GET: api/Class/5
         [HttpGet]
         [Route("GetById/{id}")]

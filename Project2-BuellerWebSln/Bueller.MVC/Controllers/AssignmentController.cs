@@ -60,10 +60,44 @@ namespace Bueller.MVC.Controllers
 
 
 
-          public ViewResult Create()
+          public async Task<ViewResult> Create()
         {
 
-            return View();
+            var email = this.Session["Email"];
+
+            Class  classObj= new Class();
+            Assignment assignment = new Assignment();
+           
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherEmail/{email}");
+
+            HttpResponseMessage apiResponse;
+     
+
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
+            List<string> classNames = new List<string>();
+            foreach (var item in classes)
+            {
+                classNames.Add(item.Name);
+            }
+            assignment.AvailableClasses = new SelectList(classNames);
+
+
+            return View(assignment);
 
         }
         [HttpPost]
