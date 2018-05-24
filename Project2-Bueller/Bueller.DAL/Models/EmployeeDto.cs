@@ -23,7 +23,7 @@ namespace Bueller.DAL.Models
 
         [DataType(DataType.Text)]
         [StringLength(200, ErrorMessage = "Name must be shorter than {1} charcters")]
-        public string MiddelName { get; set; }
+        public string MiddleName { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
