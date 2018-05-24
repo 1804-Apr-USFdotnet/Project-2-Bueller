@@ -53,9 +53,9 @@ namespace Bueller.MVC.Controllers
             }
            
     
-            var assignmentAnswer = await apiResponse.Content.ReadAsAsync< List<Assignment>>();
+            var assignments = await apiResponse.Content.ReadAsAsync< List<Assignment>>();
          
-            return View( assignmentAnswer);
+            return View( assignments);
         }
     }
 }

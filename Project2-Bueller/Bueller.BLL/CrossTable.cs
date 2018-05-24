@@ -41,6 +41,8 @@ namespace Bueller.BLL
                 .Join(fileRepo.Table, x => x.FileId, y => y.FileId, (x, y) => new { Grade = x, File = y })
                 .Where(xy => xy.File.StudentId == id);
 
+      
+
             var result = new List<Grade>();
 
             foreach (var var in grades)
