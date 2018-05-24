@@ -17,7 +17,7 @@ namespace Bueller.MVC.Controllers
         //have create/edit/delete only show up for teachers
         //details view for description and link to textbook purchase?
 
-        // GET: Assignment
+        // GET: Classes
         [HttpGet]
         public async Task<ViewResult> Index()
         {
@@ -50,6 +50,41 @@ namespace Bueller.MVC.Controllers
             var classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
 
             return View(classes);
+        }
+
+        // GET: Classes
+        [HttpGet]
+        public async Task<ViewResult> Details(int id)
+        {
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("Error");
+            //}
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetById/{id}");
+
+            HttpResponseMessage apiResponse;
+            //Assignment assignment = new Assignment();
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+
+            var classresponse = await apiResponse.Content.ReadAsAsync<Class>();
+
+            return View(classresponse);
         }
     }
 }

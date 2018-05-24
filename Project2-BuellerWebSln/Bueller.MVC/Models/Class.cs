@@ -34,11 +34,11 @@ namespace Bueller.MVC.Models
 
         [Required(ErrorMessage = "Start time is required")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:h\\:mm}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start Time")]
         public TimeSpan StartTime { get; set; }
         [Required(ErrorMessage = "End time is required")]
-        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:h\\:mm}", ApplyFormatInEditMode = true)]
         [Display(Name = "End Time")]
         [DataType(DataType.Time)]
         public TimeSpan EndTime { get; set; }
@@ -91,6 +91,5 @@ namespace Bueller.MVC.Models
                        ((Fri == 1) ? ("Fr") : "");
             }
         }
-
     }
 }
