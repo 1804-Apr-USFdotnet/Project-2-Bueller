@@ -46,6 +46,7 @@
             </div>
         </div>
         
+        @*@if(@model.EmployeeType == "employee") {*@ 
         <div class="form-group">
             @Html.LabelFor(model => model.EmployeeType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -53,7 +54,12 @@
                 @Html.ValidationMessageFor(model => model.EmployeeType, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+        @*}
+        else
+        {
+            Model.EmployeeType = "teacher";
+        }*@
+
         <div class="form-group">
             @Html.LabelFor(model => model.OfficeNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
