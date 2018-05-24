@@ -39,7 +39,7 @@ namespace Bueller.BLL
                 .Join(fileRepo.Table, x => x.FileId, y => y.FileId, (x, y) => new { Grade = x, File = y })
                 .Where(xy => xy.File.StudentId == id);
 
-      
+
 
             var result = new List<Grade>();
 
@@ -54,12 +54,23 @@ namespace Bueller.BLL
 
         public IEnumerable<Student> GetStudentsByTeacherId(int id)
         {
-            return null;
+            var classes = classRepo.Table.Where(x => x.TeacherId == id).ToList();
+            var students = classes.SelectMany(x => x.Students);
+
+            return students;
         }
 
         public IEnumerable<Employee> GetTeachersByStudnetId(int id)
         {
+           // var classes = classRepo.Table.Where(x=>x.st)
+
+
             return null;
+        }
+
+        public IEnumerable<Class> GetClassesByStudentId(int id)
+        {
+            return classRepo.Table.Where(x => x.Students.Any(y => y.StudentId == id)).ToList();
         }
     }
 }
