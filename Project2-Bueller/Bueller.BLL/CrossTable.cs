@@ -19,7 +19,6 @@ namespace Bueller.BLL
         private StudentRepo studentRepo;
         private GradeRepo gradeRepo;
         private SubjectRepo subjectRepo;
-        private TeacherAssignmentRepo teacherAssignmentRepo;
 
 
         public CrossTable()
@@ -32,7 +31,6 @@ namespace Bueller.BLL
             studentRepo = unit.StudentRepo();
             gradeRepo = unit.GradeRepo();
             subjectRepo = unit.SubjectRepo();
-            teacherAssignmentRepo = unit.TeacherAssignmentRepo();
         }
 
         public IEnumerable<Grade> GetGradesByStudentId(int id)
