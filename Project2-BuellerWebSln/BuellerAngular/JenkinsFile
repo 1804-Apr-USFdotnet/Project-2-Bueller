@@ -5,8 +5,8 @@ node('master'){
     stage('build'){
         try{
             dir('Project2-BuellerWebSln/BuellerAngular'){
-                bat 'npm.cmd install'
-                bat 'npm.cmd run build'
+                bat 'npm install'
+                bat 'npm run build'
             }
         }
         catch(exc){
@@ -41,7 +41,7 @@ node('master'){
     stage('package'){
         try{
         dir('Project2-BuellerWebSln/BuellerAngular'){
-            bat 'npm.cmd run build -- --base-href /angularapp1/ --prod'
+            bat 'npm run build -- --base-href /angularapp1/ --prod'
         }
         }
         catch(exc){
