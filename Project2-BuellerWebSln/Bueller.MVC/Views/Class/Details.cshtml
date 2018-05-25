@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Bueller.MVC.Models.Class>
+﻿@model Bueller.MVC.Models.Class
 
 @{
     ViewBag.Title = "Details";
@@ -33,7 +33,7 @@
         <dd>
             @Html.DisplayFor(model => model.Credits)
         </dd>
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.ClassDays)
         </dt>
@@ -41,13 +41,13 @@
         <dd>
             @Html.DisplayFor(model => model.ClassDays)
         </dd>
-        
+
         <dt>
             Time
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartTime) - 
+            @Html.DisplayFor(model => model.StartTime) -
             @Html.DisplayFor(model => model.EndTime)
         </dd>
 
@@ -58,7 +58,7 @@
         <dd>
             @Html.DisplayFor(model => model.RoomNumber)
         </dd>
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
