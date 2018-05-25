@@ -25,7 +25,7 @@ namespace Bueller.MVC.Controllers
 
         // GET: Assignment
         [HttpGet]
-        public async Task<ViewResult> Index()
+        public async Task<ViewResult> Index(int id)
         {
 
             if (!ModelState.IsValid)
@@ -33,7 +33,7 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, "api/Assignment/GetAll");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Assignment/GetByClassId/{id}");
         
             HttpResponseMessage apiResponse;
             Assignment assignment = new Assignment();
