@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Account</h4>
+
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -27,7 +27,12 @@
             @Html.ValidationMessageFor(model => model.ClassId, "", new { @class = "text-danger" })
 
 
-            @Html.DropDownListFor(m => m.Class.Name, Model.AvailableClasses, "Select Class")
+            <br />
+
+            @Html.HiddenFor(m => m.ClassId)
+
+         @*@Html.DropDownListFor(m => m.Class.Name, Model.AvailableClasses, "Select Class")*@
+
         </div>
     </div>
 

@@ -46,6 +46,12 @@ namespace Bueller.DAL.Repos
             return false;
         }
 
+        public int ConvertClassNameIntoId(string ClassName)
+        {
+            return this.Table.Where(x => x.Name.StartsWith(ClassName)).Select(x => x.ClassId).FirstOrDefault();
+;
+        }
+
         public IEnumerable<Class> GetClassesByTeacherId(int id)
         {
             return this.Table.Where(x => x.TeacherId == id).ToList();
