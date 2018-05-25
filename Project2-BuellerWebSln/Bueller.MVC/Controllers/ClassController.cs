@@ -22,15 +22,8 @@ namespace Bueller.MVC.Controllers
         public async Task<ViewResult> Index()
         {
 
-            if (!ModelState.IsValid)
-            {
-                return View("Error");
-            }
-
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, "api/Class/GetAll");
-
             HttpResponseMessage apiResponse;
-            Assignment assignment = new Assignment();
 
             try
             {
@@ -45,7 +38,6 @@ namespace Bueller.MVC.Controllers
             {
                 return View("Error");
             }
-
 
             var classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
 
@@ -56,16 +48,9 @@ namespace Bueller.MVC.Controllers
         [HttpGet]
         public async Task<ViewResult> Details(int id)
         {
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return View("Error");
-            //}
-
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetById/{id}");
 
             HttpResponseMessage apiResponse;
-            //Assignment assignment = new Assignment();
 
             try
             {
@@ -80,7 +65,6 @@ namespace Bueller.MVC.Controllers
             {
                 return View("Error");
             }
-
 
             var classresponse = await apiResponse.Content.ReadAsAsync<Class>();
 
