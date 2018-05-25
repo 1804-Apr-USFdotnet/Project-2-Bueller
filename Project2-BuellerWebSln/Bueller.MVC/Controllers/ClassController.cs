@@ -15,7 +15,7 @@ namespace Bueller.MVC.Controllers
         //add instructor name to view for students? or withhold if teacher logged in...
         //add enrollment count too?
         //have create/edit/delete only show up for teachers
-        //details view for description and link to textbook purchase?
+        //details view for description and link to textbook purchase? subject and class level?
 
         // GET: Classes
         [HttpGet]
@@ -106,6 +106,50 @@ namespace Bueller.MVC.Controllers
             var classresponse = await apiResponse.Content.ReadAsAsync<Class>();
 
             return View(classresponse);
+        }
+
+
+        //right now subject id entered manually
+        public ActionResult Create()
+        {
+            //Assignment assignment = new Assignment();
+            //assignment.ClassId = ClassId;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(Class newClass)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("Error");
+            }
+
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Class/Add");
+            apiRequest.Content = new ObjectContent<Class>(newClass, new JsonMediaTypeFormatter());
+
+            HttpResponseMessage apiResponse;
+
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+
+
+            return RedirectToAction("Index");
         }
     }
 }

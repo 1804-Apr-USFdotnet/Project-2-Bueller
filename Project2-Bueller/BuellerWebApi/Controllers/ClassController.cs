@@ -84,6 +84,7 @@ namespace BuellerWebApi.Controllers
 
    
         [HttpPost]
+        [Authorize(Roles = "teacher")]
         [Route("Add", Name = "AddClass")]
         public IHttpActionResult Post(ClassDto classDto)
         {

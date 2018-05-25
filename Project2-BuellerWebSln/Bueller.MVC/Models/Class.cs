@@ -37,11 +37,45 @@ namespace Bueller.MVC.Models
         [DisplayFormat(DataFormatString = "{0:h\\:mm}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start Time")]
         public TimeSpan StartTime { get; set; }
+
+        [DataType(DataType.Text)]
+        public string StartTimeFormatted
+        {
+            get
+            {
+                if (TimeSpan.Compare(StartTime, TimeSpan.FromHours(13)) >= 0)
+                    return StartTime.Subtract(TimeSpan.FromHours(12)).ToString(@"h\:mm") + "PM";
+                if (TimeSpan.Compare(StartTime, TimeSpan.FromHours(1)) < 0)
+                    return StartTime.Add(TimeSpan.FromHours(12)).ToString(@"h\:mm") + "AM";
+                if (TimeSpan.Compare(StartTime, TimeSpan.FromHours(12)) >= 0)
+                    return StartTime.ToString(@"h\:mm") + "PM";
+                return StartTime.ToString(@"h\:mm") + "AM";
+                //return StartTime.ToString("{0:h\\:mm}") + "AM";
+            }
+        }
+
         [Required(ErrorMessage = "End time is required")]
         [DisplayFormat(DataFormatString = "{0:h\\:mm}", ApplyFormatInEditMode = true)]
         [Display(Name = "End Time")]
         [DataType(DataType.Time)]
         public TimeSpan EndTime { get; set; }
+
+        [DataType(DataType.Text)]
+        public string EndTimeFormatted
+        {
+            get
+            {
+                if (TimeSpan.Compare(EndTime, TimeSpan.FromHours(13)) >= 0)
+                    return EndTime.Subtract(TimeSpan.FromHours(12)).ToString(@"h\:mm") + "PM";
+                if (TimeSpan.Compare(EndTime, TimeSpan.FromHours(1)) <0)
+                    return EndTime.Add(TimeSpan.FromHours(12)).ToString(@"h\:mm") + "AM";
+                if (TimeSpan.Compare(EndTime, TimeSpan.FromHours(12)) >= 0)
+                    return EndTime.ToString(@"h\:mm") + "PM";
+                return EndTime.ToString(@"h\:mm") +"AM";
+            }
+        }
+
+
 
         //different ways to do this.. try 5 columns for now
         [Required]
