@@ -36,7 +36,7 @@ node('master'){
         }
         catch(exc){
             slackError('analyze')
-            throw exc
+            //throw exc
         }
     }
     stage('package'){
