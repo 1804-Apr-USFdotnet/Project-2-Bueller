@@ -14,15 +14,15 @@ node('master'){
             throw exc
         }
     }
-    stage('test'){
-        try{
+    // stage('test'){
+    //     try{
            
-        }
-        catch(exc){
-            slackError('test')
-            throw exc
-        }
-    }
+    //     }
+    //     catch(exc){
+    //         slackError('test')
+    //         throw exc
+    //     }
+    // }
     // stage('analyze'){
     //     try{
     //         dir('Project2-Bueller'){
