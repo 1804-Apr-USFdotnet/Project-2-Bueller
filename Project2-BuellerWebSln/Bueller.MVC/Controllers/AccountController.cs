@@ -56,8 +56,8 @@ namespace Bueller.MVC.Controllers
             }
             else 
             {
-                return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email});//or email
-                //return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email, employeetype = role });//or email
+                //return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email});//or email
+                return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email, type = role });//or email
             }
         }
 
@@ -66,9 +66,11 @@ namespace Bueller.MVC.Controllers
             return View();
         }
 
-        [Route("RegisterEmployeeInfo/{role}")]
-        public ActionResult RegisterEmployeeInfo(string email, string employeetype)
+        [Route("RegisterEmployeeInfo")]
+        public ActionResult RegisterEmployeeInfo(string email, string type)
         {
+            ViewBag.Type = type;
+            TempData["Role"] = type;
             return View();
         }
 
@@ -115,6 +117,12 @@ namespace Bueller.MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> RegisterEmployeeInfo(Employee employee)
         {
+            string role = (string)TempData.Peek("Role");
+            if (role == "teacher")
+            {
+                employee.EmployeeType = "teacher";
+            }
+
             if (!ModelState.IsValid)
             {
                 return View("Error");
