@@ -133,11 +133,6 @@ namespace BuellerWebApi.Controllers
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
-            var c = Request.Headers.GetCookies();
-            foreach (var var in c)
-            {
-                var.Expires = DateTime.Now.AddDays(-1);
-            }
             Request.GetOwinContext().Authentication.SignOut(WebApiConfig.AuthenticationType);
             return Ok();
         }
