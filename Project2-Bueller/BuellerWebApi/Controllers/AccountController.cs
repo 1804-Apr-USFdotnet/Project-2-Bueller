@@ -11,6 +11,8 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using Bueller.DAL.Repos;
+using Microsoft.Ajax.Utilities;
 
 
 namespace BuellerWebApi.Controllers
@@ -18,6 +20,16 @@ namespace BuellerWebApi.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
+        private readonly UnitOfWork unit = new UnitOfWork();
+        private StudentRepo studentRepo;
+        private EmployeeRepo employeeRepo;
+
+        public AccountController()
+        {
+            studentRepo = unit.StudentRepo();
+            employeeRepo = unit.EmployeeRepo();
+        }
+        //TODO add find model account by login account email
         //[HttpPost]
         //[Route("Register")]
         //[AllowAnonymous]
@@ -123,6 +135,42 @@ namespace BuellerWebApi.Controllers
         {
             Request.GetOwinContext().Authentication.SignOut(WebApiConfig.AuthenticationType);
             return Ok();
+        }
+
+
+        //in uri have email and type of account to look for (student/employee)
+        [HttpGet]
+        [Route("GetAccount/{email}/{type}")]
+        public IHttpActionResult GetAccountByEmail(string email, string type)
+        {
+            dynamic account;
+            bool match = false;
+            if (type.Equals("employee"))
+            {
+                account = employeeRepo.Table.FirstOrDefault(x => x.Email.Equals(email));
+                match = true;
+                if (account != null)
+                {
+                    return Ok(account);
+                }
+            }
+
+            if (type.Equals("student"))
+            {
+                account = studentRepo.Table.FirstOrDefault(x => x.Email.Equals(email));
+                match = true;
+                if (account != null)
+                {
+                    return Ok(account);
+                }
+            }
+
+            if (match)
+            {
+                return Content(HttpStatusCode.NotFound, "Email does not exist");
+            }
+
+            return BadRequest();
         }
     }
 }
