@@ -145,7 +145,7 @@ namespace BuellerWebApi.Controllers
         {
             dynamic account;
             bool match = false;
-            if (type.Equals("employee"))
+            if (type.Equals("employee") || type.Equals("teacher"))
             {
                 account = employeeRepo.Table.FirstOrDefault(x => x.Email.Equals(email));
                 match = true;
