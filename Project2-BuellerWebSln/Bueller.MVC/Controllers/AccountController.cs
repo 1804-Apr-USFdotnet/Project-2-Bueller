@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.EnterpriseServices;
 using System.Linq;
@@ -58,7 +59,7 @@ namespace Bueller.MVC.Controllers
             else
             {
                 //return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email});//or email
-                return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email, type = role });//or email
+                return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email, employeetype = role });//or email
             }
         }
 
@@ -67,11 +68,13 @@ namespace Bueller.MVC.Controllers
             return View();
         }
 
+        //not safe to pass role in url.. potential security problem if url modified after registering with role
+        //solution: separate register employee and teacher
         [Route("RegisterEmployeeInfo")]
-        public ActionResult RegisterEmployeeInfo(string email, string type)
+        public ActionResult RegisterEmployeeInfo(string email, string employeetype)
         {
-            ViewBag.Type = type;
-            TempData["Role"] = type;
+            ViewBag.Type = employeetype;
+            //TempData["Role"] = employeetype;
             return View();
         }
 
@@ -113,16 +116,14 @@ namespace Bueller.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //middle name doesn't map...
-        //add employee type auto-fill...?
         [HttpPost]
         public async Task<ActionResult> RegisterEmployeeInfo(Employee employee)
         {
-            string role = (string)TempData.Peek("Role");
-            if (role == "teacher")
-            {
-                employee.EmployeeType = "teacher";
-            }
+            //string role = (string)TempData.Peek("Role");
+            //if (role == "teacher")
+            //{
+            //    employee.EmployeeType = "teacher";
+            //}
 
             if (!ModelState.IsValid)
             {
