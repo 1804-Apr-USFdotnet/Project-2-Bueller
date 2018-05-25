@@ -19,9 +19,7 @@ namespace Bueller.MVC.Controllers
         {
             return View();
         }
-
-        //create new model account too depending on role
-        //pass in email to register info view
+        
         //ability to delete user accounts...
         //prevent register/additional login once logged in... important? and hide logout when not logged in?...
         [HttpPost]
@@ -70,6 +68,7 @@ namespace Bueller.MVC.Controllers
 
         //not safe to pass role in url.. potential security problem if url modified after registering with role
         //solution: separate register employee and teacher
+        //but also emails... use tempdata instead of passing data in URL???.... do later if time
         [Route("RegisterEmployeeInfo")]
         public ActionResult RegisterEmployeeInfo(string email, string employeetype)
         {
@@ -81,10 +80,6 @@ namespace Bueller.MVC.Controllers
         //prevent registering account only and backing out of creating corresponding model...
         // change register/login steps?
         //tie in account to person models
-        //unathorized problem
-        //1.  login on server side with register
-        //2.  redirect to login action following register. but how to redirect where to go after login (home or enter info)... 
-        //    way to keep track of how got to login action? straight from home or from register
         [HttpPost]
         public async Task<ActionResult> RegisterStudentInfo(Student student)
         {
