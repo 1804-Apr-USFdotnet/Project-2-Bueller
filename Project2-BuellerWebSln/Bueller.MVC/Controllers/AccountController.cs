@@ -219,15 +219,18 @@ namespace Bueller.MVC.Controllers
             }
 
 
-            if (Request.Cookies["userEmailCookie"] != null)
-            {
-                var c = new HttpCookie("userEmailCookie");
-                var c2 = new HttpCookie("EmployeeId");
-                c2.Expires = DateTime.Now.AddDays(-1);
-                c.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(c2);
-                Response.Cookies.Add(c);
-            }
+            //if (Request.Cookies["userEmailCookie"] != null)
+            //{
+            //    var c = new HttpCookie("userEmailCookie");
+            //    var c2 = new HttpCookie("EmployeeId");
+            //    var c3 = new HttpCookie("StudentId");
+            //    c3.Expires = DateTime.Now.AddDays(-1);
+            //    c2.Expires = DateTime.Now.AddDays(-1);
+            //    c.Expires = DateTime.Now.AddDays(-1);
+            //    Response.Cookies.Add(c3);
+            //    Response.Cookies.Add(c2);
+            //    Response.Cookies.Add(c);
+            //}
 
             PassCookiesToClient(apiResponse);
             return RedirectToAction("Index", "Home");
