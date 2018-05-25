@@ -37,7 +37,7 @@ namespace Bueller.MVC.Controllers
                 var contentString = await apiResponse.Content.ReadAsStringAsync();
                 ViewBag.Message = "Logged in! Result: " + contentString;
             }
-
+            
             return View();
         }
 

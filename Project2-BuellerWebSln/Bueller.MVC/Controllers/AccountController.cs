@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -52,9 +53,9 @@ namespace Bueller.MVC.Controllers
 
             if (role == "student")
             {
-                return RedirectToAction("RegisterStudentInfo", "Account", new {email = account.Email});
+                return RedirectToAction("RegisterStudentInfo", "Account", new { email = account.Email });
             }
-            else 
+            else
             {
                 //return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email});//or email
                 return RedirectToAction("RegisterEmployeeInfo", "Account", new { email = account.Email, type = role });//or email
@@ -183,17 +184,18 @@ namespace Bueller.MVC.Controllers
             {
                 return View("Error");
             }
-             
+
 
             HttpCookie userEmailCookie = new HttpCookie("userEmailCookie");
-             userEmailCookie.Value = account.Email;
+            userEmailCookie.Value = account.Email;
 
             Response.Cookies.Add(userEmailCookie);
 
+            await AddEmployeeCookie(account.Email);
+
             PassCookiesToClient(apiResponse);
 
-            await AddEmployeeCookie(account.Email);
-          
+
 
             return RedirectToAction("Index", "Home");
         }
@@ -224,20 +226,18 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
+
+            if (Request.Cookies["userEmailCookie"] != null)
+            {
+                var c = new HttpCookie("userEmailCookie");
+                var c2 = new HttpCookie("EmployeeId");
+                c2.Expires = DateTime.Now.AddDays(-1);
+                c.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(c2);
+                Response.Cookies.Add(c);
+            }
+
             PassCookiesToClient(apiResponse);
-
-            if (Request.Cookies["userEmailCookie"] == null)
-            {
-
-
-
-            }
-            else
-            {
-
-                Request.Cookies["userEmailCookie"].Value = "";
-            }
-
             return RedirectToAction("Index", "Home");
         }
 
@@ -251,16 +251,16 @@ namespace Bueller.MVC.Controllers
 
             //try
             //{
-                apiResponse = await HttpClient.SendAsync(apiRequest);
+            apiResponse = await HttpClient.SendAsync(apiRequest);
             //}
             //catch
             //{
 
             //}
-           
+
             //if (!apiResponse.IsSuccessStatusCode)
             //{
-           
+
             // }
             PassCookiesToClient(apiResponse);
 

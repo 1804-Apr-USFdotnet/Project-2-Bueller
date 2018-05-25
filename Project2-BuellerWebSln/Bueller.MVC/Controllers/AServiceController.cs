@@ -12,7 +12,7 @@ namespace Bueller.MVC.Controllers
     public class AServiceController : Controller
     {
         protected static readonly HttpClient HttpClient = new HttpClient(new HttpClientHandler() {UseCookies = false});
-        private static readonly Uri serviceUri = new Uri("http://localhost:57265/");
+        private static readonly Uri serviceUri = new Uri("http://13.59.126.130/BuellerWebApi_deploy/");
         private static readonly string cookieName = "AuthTestCookie";
         private static readonly string cookieName2 = "TeacherId";
 
