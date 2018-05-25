@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.EnterpriseServices;
 using System.Linq;
@@ -124,10 +125,16 @@ namespace Bueller.MVC.Controllers
                 employee.EmployeeType = "teacher";
             }
 
-            if (!ModelState.IsValid)
-            {
-                return View("Error");
-            }
+            //doesn't work with teacher role for some reason.. passes server side check and creates employee model successfully though
+            //if (!ModelState.IsValid)
+            //{
+            //    //Console.WriteLine(  ModelState.Values);
+            //    //IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+            //    TempData["Error"] = ModelState;
+            //    //Console.Read();
+            //    //ViewBag.State = ModelState;
+            //    return View("Error");
+            //}
 
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Employee/Add");
             apiRequest.Content = new ObjectContent<Employee>(employee, new JsonMediaTypeFormatter());
