@@ -4,9 +4,8 @@ node('master'){
     }
     stage('build'){
         try{
-            dir('Project2-Bueller/AngularApp'){
-                bat 'npm install'
-                bat 'npm run build'
+            dir('Project2-BuellerWebSln/Bueller.MVC'){
+                //bat 'npm install'
             }
         }
         catch(exc){
@@ -40,8 +39,8 @@ node('master'){
     // }
     stage('package'){
         try{
-        dir('Project2-Bueller/BuellerWebApi'){
-            bat 'npm run build -- --base-href /angularapp1/ --prod'
+        dir('Project2-BuellerWebSln/Bueller.MVC'){
+            //bat ''
         }
         }
         catch(exc){
@@ -49,17 +48,17 @@ node('master'){
             throw exc
         }
     }
-    stage('deploy'){
-        try{
-            dir('BuellerWebApi/'){
-                bat "\"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\" -source:package='C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2\\BuellerWebApi\\obj\\Debug\\Package\\RReviews.Web.zip' -dest:auto,computerName=\"https://ec2-13-59-126-130.us-east-2.compute.amazonaws.com:8172/msdeploy.axd\",userName=\"Administrator\",password=\"Playhocke7\",authtype=\"basic\",includeAcls=\"False\" -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:\"C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2\\BuellerWebApi\\obj\\Debug\\Package\\BuellerWebApi.SetParameters.xml\" -AllowUntrusted=True"
-        }
-        }
-        catch(exc){
-            slackError('deploy')
-            throw exc
-        }
-    }
+    // stage('deploy'){
+    //     try{
+    //         dir('BuellerWebApi/'){
+    //             bat "\"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\" -source:package='C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2\\BuellerWebApi\\obj\\Debug\\Package\\Bueller.MVC.Web.zip' -dest:auto,computerName=\"https://ec2-13-59-126-130.us-east-2.compute.amazonaws.com:8172/msdeploy.axd\",userName=\"Administrator\",password=\"Playhocke7\",authtype=\"basic\",includeAcls=\"False\" -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:\"C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2\\BuellerWebApi\\obj\\Debug\\Package\\BuellerWebApi.SetParameters.xml\" -AllowUntrusted=True"
+    //     }
+    //     }
+    //     catch(exc){
+    //         slackError('deploy')
+    //         throw exc
+    //     }
+    // }
 }
 
 def slackError(stageName) {
