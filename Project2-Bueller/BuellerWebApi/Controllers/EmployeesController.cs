@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Bueller.BLL;
 
 namespace BuellerWebApi.Controllers
 {
@@ -18,11 +19,13 @@ namespace BuellerWebApi.Controllers
         private readonly UnitOfWork unit = new UnitOfWork();
         private readonly EmployeeRepo repo;
         private readonly EmployeeAccountRepo accountRepo;
+        private CrossTable cross;
 
         EmployeesController()
         {
             repo = unit.EmployeeRepo();
             accountRepo = unit.EmployeeAccountRepo();
+            cross = new CrossTable();
         }
 
         #region Employees
@@ -37,7 +40,7 @@ namespace BuellerWebApi.Controllers
             }
             return Ok(employees);
         }
-        
+
         [HttpGet]
         [Route("GetById/{id}")]
         public IHttpActionResult GetEmployeeById(int id)
@@ -75,7 +78,7 @@ namespace BuellerWebApi.Controllers
 
             return CreatedAtRoute("AddEmployee", new { id = employee.EmployeeID }, employee);
         }
-        
+
         [HttpPut]
         [Route("AddAt/{id}")]
         public IHttpActionResult UpdateEmployee(int id, EmployeeDto employee)
@@ -149,6 +152,19 @@ namespace BuellerWebApi.Controllers
             }
 
             return Ok(employees);
+        }
+
+        [HttpGet]
+        [Route("GetStudentsByTeacherId/{id}")]
+        public IHttpActionResult GetStudentsByTeacherId(int id)
+        {
+            var students = cross.GetStudentsByTeacherId(id);
+            if (!students.Any())
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+
+            return Ok(students);
         }
 
         private bool EmployeeExists(int id)

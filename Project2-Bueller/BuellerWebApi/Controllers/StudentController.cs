@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using AutoMapper;
+using Bueller.BLL;
 using Bueller.DA.Models;
 using Bueller.DAL.Models;
 using Bueller.DAL.Repos;
@@ -20,11 +21,13 @@ namespace BuellerWebApi.Controllers
         private readonly UnitOfWork unit = new UnitOfWork();
         private readonly StudentRepo repo;
         private readonly StudentAccountRepo accountRepo;
+        private CrossTable cross;
 
         public StudentController()
         {
             repo = unit.StudentRepo();
             accountRepo = unit.StudentAccountRepo();
+            cross = new CrossTable();
         }
 
         #region Student
@@ -139,6 +142,45 @@ namespace BuellerWebApi.Controllers
             repo.Delete(student);
 
             return Ok(student);
+        }
+
+        [HttpGet]
+        [Route("GetGradesByStudentId/{id}")]
+        public IHttpActionResult GetGradesByStudentId(int id)
+        {
+            var grades = cross.GetGradesByStudentId(id);
+            if (!grades.Any())
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+
+            return Ok(grades);
+        }
+
+        [HttpGet]
+        [Route("GetTeachersByStudentId/{id}")]
+        public IHttpActionResult GetTeachersByStudentId(int id)
+        {
+            var teachers = cross.GetTeachersByStudnetId(id);
+            if (!teachers.Any())
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+
+            return Ok(teachers);
+        }
+
+        [HttpGet]
+        [Route("GetClassesByStudentId/{id}")]
+        public IHttpActionResult GetClassesByStudentId(int id)
+        {
+            var classes = cross.GetClassesByStudentId(id);
+            if (!classes.Any())
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+
+            return Ok(classes);
         }
 
         private bool StudentExists(int id)
