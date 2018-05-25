@@ -66,7 +66,7 @@ namespace BuellerWebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!role.Equals("student") && !role.Equals("faculty") && !role.Equals("employee"))
+            if (!role.Equals("student") && !role.Equals("teacher") && !role.Equals("employee"))
             {
                 return BadRequest(role);
             }

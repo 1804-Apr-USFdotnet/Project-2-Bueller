@@ -46,7 +46,7 @@
             </div>
         </div>
         
-        @*@if(@model.EmployeeType == "employee") {*@ 
+        @if(ViewBag.Type != "teacher") {
         <div class="form-group">
             @Html.LabelFor(model => model.EmployeeType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -54,10 +54,17 @@
                 @Html.ValidationMessageFor(model => model.EmployeeType, "", new { @class = "text-danger" })
             </div>
         </div>
-        @*}
-        else
+        }
+        @*else
         {
-            Model.EmployeeType = "teacher";
+            //Model.EmployeeType = "teacher";
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmployeeType, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EmployeeType, new { htmlAttributes = new { @class = "form-control" , @Value = "teacher", @readonly = "readonly"}})
+                    @Html.ValidationMessageFor(model => model.EmployeeType, "", new { @class = "text-danger" })
+                </div>
+            </div>
         }*@
 
         <div class="form-group">
