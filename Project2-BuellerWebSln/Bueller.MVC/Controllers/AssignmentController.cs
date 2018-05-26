@@ -34,10 +34,10 @@ namespace Bueller.MVC.Controllers
             }
 
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Assignment/GetByClassId/{id}");
-        
+
             HttpResponseMessage apiResponse;
             Assignment assignment = new Assignment();
-           
+
             try
             {
                 apiResponse = await HttpClient.SendAsync(apiRequest);
@@ -51,11 +51,11 @@ namespace Bueller.MVC.Controllers
             {
                 return View("Error");
             }
-           
-    
-            var assignments = await apiResponse.Content.ReadAsAsync< List<Assignment>>();
-         
-            return View( assignments);
+
+
+            var assignments = await apiResponse.Content.ReadAsAsync<List<Assignment>>();
+
+            return View(assignments);
         }
 
 
@@ -63,7 +63,7 @@ namespace Bueller.MVC.Controllers
 
         public ViewResult Create(int ClassId)
         {
-           Assignment assignment = new Assignment();
+            Assignment assignment = new Assignment();
             assignment.ClassId = ClassId;
 
 
@@ -72,15 +72,15 @@ namespace Bueller.MVC.Controllers
 
         }
         [HttpPost]
-        public async Task<ActionResult> Create( Assignment assignment)
-        {      
+        public async Task<ActionResult> Create(Assignment assignment)
+        {
 
             if (!ModelState.IsValid)
             {
                 return View("Error");
             }
-            
-     
+
+
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Assignment/Add");
             apiRequest.Content = new ObjectContent<Assignment>(assignment, new JsonMediaTypeFormatter());
 
@@ -101,7 +101,7 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            
+
 
             return RedirectToAction("Index");
         }
