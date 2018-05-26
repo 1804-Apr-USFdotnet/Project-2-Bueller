@@ -14,7 +14,7 @@ namespace Bueller.MVC.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, "api/Student/GetLoginInfo");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, "api/Account/GetLoginInfo");
             HttpResponseMessage apiResponse;
             try
             {
