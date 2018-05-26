@@ -75,6 +75,7 @@ namespace Bueller.MVC.Models
         public virtual Subject Subject { get; set; }
 
         [Required]
+        [Display(Name = "Subject")]
         public string SubjectName { get; set; }
 
         //public virtual ICollection<Student> Students { get; set; }

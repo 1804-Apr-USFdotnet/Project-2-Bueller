@@ -46,20 +46,22 @@ namespace Bueller.MVC.Controllers
 
 
         [HttpGet]
-        public async Task<ViewResult> TeacherClasses()
+        public async Task<ViewResult> MyClasses()
         {
 
-            var teacherId = Request.Cookies["Id"].Value;
+            var id = Request.Cookies["Id"].Value;
+            var role = Request.Cookies["Role"].Value;
 
-            if (!ModelState.IsValid)
-            {
-                return View("Error");
-            }
+            HttpRequestMessage apiRequest;
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherId/{teacherId}/");
+            if (role == "student")
+                apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByStudentId/{id}");
+            else if(role == "teacher")
+                apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherId/{id}/");
+            else
+                apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetAll");
 
             HttpResponseMessage apiResponse;
-            Assignment assignment = new Assignment();
 
             try
             {
