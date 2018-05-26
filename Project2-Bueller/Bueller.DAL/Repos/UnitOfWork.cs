@@ -25,6 +25,11 @@ namespace Bueller.DAL.Repos
             _context = context;
         }
 
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+
         public void Dispose()
         {
             Dispose(true);

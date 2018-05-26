@@ -110,8 +110,74 @@ namespace Bueller.MVC.Controllers
             return View(classresponse);
         }
 
+        // GET: Classes
+        [HttpGet]
+        public async Task<ActionResult> Enroll(int id)
+        {
+            if (Request.Cookies.Get("Role").Value != "student")
+            {
+                return View("Error");
+            }
 
-        //right now subject id entered manually
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetById/{id}");
+
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var classresponse = await apiResponse.Content.ReadAsAsync<Class>();
+
+            return View(classresponse);
+            //return RedirectToAction("Index");
+        }
+
+        // GET: Enroll
+        [HttpGet]
+        public async Task<ActionResult> EnrollConfirmed(int id)
+        {
+            if (Request.Cookies.Get("Role").Value != "student")
+            {
+                return View("Error");
+            }
+
+            var studentid = Convert.ToInt32(Request.Cookies.Get("Id").Value);
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/Enroll/{id}/{studentid}");
+
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var classresponse = await apiResponse.Content.ReadAsAsync<Class>();
+
+            //return View(classresponse);
+            return RedirectToAction("MyClasses");
+        }
+
+
         public async Task<ActionResult> Create()
         {
             //Assignment assignment = new Assignment();

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
+using Bueller.BLL;
 using Bueller.DA.Models;
 using Bueller.DAL.Models;
 using Bueller.DAL.Repos;
@@ -19,11 +20,13 @@ namespace BuellerWebApi.Controllers
         private readonly UnitOfWork unit = new UnitOfWork();
         private readonly ClassRepo classRepo;
         private readonly SubjectRepo subjectRepo;
+        private CrossTable cross;
 
         public ClassController()
         {
             classRepo = unit.ClassRepo();
             subjectRepo = unit.SubjectRepo();
+            cross = new CrossTable();
         }
 
         #region Class
@@ -82,7 +85,23 @@ namespace BuellerWebApi.Controllers
             return NotFound();
         }
 
-   
+        [HttpGet]
+        [Route("Enroll/{id}/{studentid}")]
+        public IHttpActionResult EnrollStudent(int id, int studentid)
+        {
+            //studentRepo.AddToClass();
+            //var classes = studentRepo.Table.Where(x => x.StudentId == id).SelectMany(x => x.Classes).ToList();
+            //var classes = classRepo.Table.Where(x => x.Students.Any(a => a.StudentId == id)).ToList();
+            //if (classes != null)
+            //{
+            //    return Ok(classes);
+            //}
+            //return NotFound();
+            cross.EnrollStudent(id, studentid);
+            return Ok();
+        }
+
+
         [HttpPost]
         [Authorize(Roles = "teacher")]
         [Route("Add", Name = "AddClass")]
