@@ -46,20 +46,22 @@ namespace Bueller.MVC.Controllers
 
 
         [HttpGet]
-        public async Task<ViewResult> TeacherClasses()
+        public async Task<ViewResult> MyClasses()
         {
 
-            var teacherId = Request.Cookies["Id"].Value;
+            var id = Request.Cookies["Id"].Value;
+            var role = Request.Cookies["Role"].Value;
 
-            if (!ModelState.IsValid)
-            {
-                return View("Error");
-            }
+            HttpRequestMessage apiRequest;
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherId/{teacherId}/");
+            if (role == "student")
+                apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByStudentId/{id}");
+            else if(role == "teacher")
+                apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherId/{id}/");
+            else
+                apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetAll");
 
             HttpResponseMessage apiResponse;
-            Assignment assignment = new Assignment();
 
             try
             {
@@ -108,8 +110,74 @@ namespace Bueller.MVC.Controllers
             return View(classresponse);
         }
 
+        // GET: Classes
+        [HttpGet]
+        public async Task<ActionResult> Enroll(int id)
+        {
+            if (Request.Cookies.Get("Role").Value != "student")
+            {
+                return View("Error");
+            }
 
-        //right now subject id entered manually
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetById/{id}");
+
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var classresponse = await apiResponse.Content.ReadAsAsync<Class>();
+
+            return View(classresponse);
+            //return RedirectToAction("Index");
+        }
+
+        // GET: Enroll
+        [HttpGet]
+        public async Task<ActionResult> EnrollConfirmed(int id)
+        {
+            if (Request.Cookies.Get("Role").Value != "student")
+            {
+                return View("Error");
+            }
+
+            var studentid = Convert.ToInt32(Request.Cookies.Get("Id").Value);
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/Enroll/{id}/{studentid}");
+
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var classresponse = await apiResponse.Content.ReadAsAsync<Class>();
+
+            //return View(classresponse);
+            return RedirectToAction("MyClasses");
+        }
+
+
         public async Task<ActionResult> Create()
         {
             //Assignment assignment = new Assignment();

@@ -210,9 +210,10 @@
     <Content Include="Views\Assignment\Index.cshtml" />
     <Content Include="Views\Assignment\Create.cshtml" />
     <Content Include="Views\Class\Index.cshtml" />
-    <Content Include="Views\Class\TeacherClasses.cshtml" />
     <Content Include="Views\Class\Details.cshtml" />
     <Content Include="Views\Class\Create.cshtml" />
+    <Content Include="Views\Class\MyClasses.cshtml" />
+    <Content Include="Views\Class\Enroll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

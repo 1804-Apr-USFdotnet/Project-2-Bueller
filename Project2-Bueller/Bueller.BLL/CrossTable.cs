@@ -34,6 +34,20 @@ namespace Bueller.BLL
             subjectRepo = unit.SubjectRepo();
         }
 
+        public void EnrollStudent(int classid, int studentid)
+        {
+            var student = studentRepo.GetById(studentid);
+            var classresult = classRepo.GetById(classid);
+            classresult.Students.Add(student);
+            unit.SaveChanges();
+
+            //var student1 = _context.Set<Student>().FirstOrDefault(s => s.FirstName == "bobby");
+            //var class1 = _context.Set<Class>().Find(3);
+            //class1.Students.Add(student1);
+
+            //_context.SaveChanges();
+        }
+
         public IEnumerable<GradeDto> GetGradesByStudentId(int id)
         {
             var grades = gradeRepo.Table
