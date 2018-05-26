@@ -151,6 +151,7 @@
     <Compile Include="Controllers\AssignmentController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,11 +213,14 @@
     <Content Include="Views\Class\Details.cshtml" />
     <Content Include="Views\Class\Create.cshtml" />
     <Content Include="Views\Class\MyClasses.cshtml" />
+    <Content Include="Views\Class\Enroll.cshtml" />
+    <Content Include="Views\Class\TeacherClasses.cshtml" />
     <Content Include="Views\Class\EnrollConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AService\" />
+    <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
