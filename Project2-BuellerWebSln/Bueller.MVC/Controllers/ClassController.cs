@@ -120,6 +120,10 @@ namespace Bueller.MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(Class newClass)
         {
+            if (Request.Cookies.Get("Role").Value == "teacher")
+            {
+                newClass.TeacherId = Convert.ToInt32(Request.Cookies.Get("Id").Value);
+            }
 
             if (!ModelState.IsValid)
             {
