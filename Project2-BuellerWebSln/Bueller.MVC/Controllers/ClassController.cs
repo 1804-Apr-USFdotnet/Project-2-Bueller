@@ -112,7 +112,7 @@ namespace Bueller.MVC.Controllers
 
         // GET: Classes
         [HttpGet]
-        public async Task<ActionResult> Enroll(int id)
+        public async Task<ActionResult> EnrollConfirm(int id)
         {
             if (Request.Cookies.Get("Role").Value != "student")
             {
@@ -139,13 +139,14 @@ namespace Bueller.MVC.Controllers
 
             var classresponse = await apiResponse.Content.ReadAsAsync<Class>();
 
+            ViewBag.Id = id;
             return View(classresponse);
             //return RedirectToAction("Index");
         }
 
         // GET: Enroll
         [HttpGet]
-        public async Task<ActionResult> EnrollConfirmed(int id)
+        public async Task<ActionResult> Enroll(int id)
         {
             if (Request.Cookies.Get("Role").Value != "student")
             {

@@ -1,7 +1,7 @@
 ﻿@model Bueller.MVC.Models.Class
 
 @{
-    ViewBag.Title = "Enroll";
+    ViewBag.Title = "EnrollConfirm";
 }
 
 <h2>Details</h2>
@@ -76,12 +76,16 @@
         </dd>
 
     </dl>
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+    @*@using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Enroll" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Enroll" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }*@
 </div>
+<p>
+    @Html.ActionLink("Enroll", "Enroll", new { id = ViewBag.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
