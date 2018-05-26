@@ -41,6 +41,7 @@ namespace Bueller.MVC.Controllers
 
             var classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
 
+            ViewBag.Role = Request.Cookies["Role"].Value;
             return View(classes);
         }
 
@@ -184,6 +185,11 @@ namespace Bueller.MVC.Controllers
             //Assignment assignment = new Assignment();
             //assignment.ClassId = ClassId;
 
+            if (Request.Cookies.Get("Role").Value != "teacher")
+            {
+                return View("Error");
+            }
+
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, "api/Class/Subject/GetAllNames");
             HttpResponseMessage apiResponse;
 
@@ -211,30 +217,32 @@ namespace Bueller.MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(Class newClass)
         {
-            if (Request.Cookies.Get("Role").Value == "teacher")
+            if (Request.Cookies.Get("Role").Value != "teacher")
             {
-                HttpRequestMessage apiRequest2 = CreateRequestToService(HttpMethod.Get, $"api/Class/Subject/GetByName/{newClass.SubjectName}");
-                HttpResponseMessage apiResponse2;
-
-                try
-                {
-                    apiResponse2 = await HttpClient.SendAsync(apiRequest2);
-                }
-                catch
-                {
-                    return View("Error");
-                }
-
-                if (!apiResponse2.IsSuccessStatusCode)
-                {
-                    return View("Error");
-                }
-
-                var subject = await apiResponse2.Content.ReadAsAsync<Subject>();
-
-                newClass.SubjectId = subject.SubjectId;
-                newClass.TeacherId = Convert.ToInt32(Request.Cookies.Get("Id").Value);
+                return View("Error");
             }
+            HttpRequestMessage apiRequest2 = CreateRequestToService(HttpMethod.Get, $"api/Class/Subject/GetByName/{newClass.SubjectName}");
+            HttpResponseMessage apiResponse2;
+
+            try
+            {
+                apiResponse2 = await HttpClient.SendAsync(apiRequest2);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse2.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var subject = await apiResponse2.Content.ReadAsAsync<Subject>();
+
+            newClass.SubjectId = subject.SubjectId;
+            newClass.TeacherId = Convert.ToInt32(Request.Cookies.Get("Id").Value);
+
 
             if (!ModelState.IsValid)
             {
