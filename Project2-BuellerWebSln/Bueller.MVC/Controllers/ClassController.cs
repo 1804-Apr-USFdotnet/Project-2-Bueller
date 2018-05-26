@@ -81,6 +81,7 @@ namespace Bueller.MVC.Controllers
 
             var classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
 
+            ViewBag.Role = Request.Cookies["Role"].Value;
             return View(classes);
         }
 
