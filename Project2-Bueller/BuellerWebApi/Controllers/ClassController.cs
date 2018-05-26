@@ -69,7 +69,7 @@ namespace BuellerWebApi.Controllers
         }
 
         [HttpGet]
-        [Route("StudentClasses/{id}")]
+        [Route("GetByStudentId/{id}")]
         public IHttpActionResult StudentClasses(int id)
         {
             //studentRepo.AddToClass();

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Bueller.MVC.Models;
 
 namespace Bueller.MVC.Controllers
 {
@@ -36,8 +37,17 @@ namespace Bueller.MVC.Controllers
             {
                 var contentString = await apiResponse.Content.ReadAsStringAsync();
                 ViewBag.Message = "Logged in! Result: " + contentString;
+
+                string role = contentString.Substring(contentString.IndexOf(":")+2);
+
+                var cookie = Request.Cookies.Get("userEmailCookie");
+                if (cookie != null)
+                {
+                    string email = cookie.Value;
+                    await AddCookie(email, role);
+                }
             }
-            
+
             return View();
         }
 
@@ -53,6 +63,47 @@ namespace Bueller.MVC.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public async Task AddCookie(string email, string role)
+        {
+
+            //HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Employee/GetByEmail/{email}/");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Account/GetAccount/{email}/{role}");
+
+            HttpResponseMessage apiResponse;
+            Assignment assignment = new Assignment();
+
+            //try
+            //{
+            apiResponse = await HttpClient.SendAsync(apiRequest);
+            //}
+            //catch
+            //{
+
+            //}
+
+            //if (!apiResponse.IsSuccessStatusCode)
+            //{
+
+            // }
+            //PassCookiesToClient(apiResponse);
+            HttpCookie Id = new HttpCookie("Id");
+            if (role == "teacher" || role == "employee")
+            {
+                var employee = await apiResponse.Content.ReadAsAsync<Employee>();
+
+                Id.Value = employee.EmployeeID.ToString();
+            }
+            else if (role == "student")
+            {
+                var employee = await apiResponse.Content.ReadAsAsync<Student>();
+
+                Id.Value = employee.StudentId.ToString();
+            }
+
+            Response.Cookies.Add(Id);
+
         }
     }
 }

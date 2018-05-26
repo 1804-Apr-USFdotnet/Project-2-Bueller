@@ -60,9 +60,10 @@ namespace BuellerWebApi.Controllers
             bool isAdmin = user.IsInRole("admin");
 
             // get all user's roles
-            List<string> roles = user.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value.ToString()).ToList();
-
-            return Ok($"Authenticated {username}, with roles: [{string.Join(", ", roles)}]!");
+            //List<string> roles = user.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value.ToString()).ToList();
+            string role = user.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value.ToString()).FirstOrDefault();
+            //return Ok($"Authenticated {username}, with roles: [{string.Join(", ", roles)}]!");
+            return Ok($"Authenticated {username}/nRole: {role}");
         }
 
         // GET: api/Student/5
