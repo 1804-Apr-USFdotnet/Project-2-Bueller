@@ -50,6 +50,11 @@ namespace Bueller.MVC.Controllers
 
             PassCookiesToClient(apiResponse);
 
+            HttpCookie userEmailCookie = new HttpCookie("userEmailCookie");
+            userEmailCookie.Value = account.Email;
+
+            Response.Cookies.Add(userEmailCookie);
+
             if (role == "student")
             {
                 return RedirectToAction("RegisterStudentInfo", "Account", new { email = account.Email });
@@ -88,7 +93,7 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Student");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Student/Add");
             apiRequest.Content = new ObjectContent<Student>(student, new JsonMediaTypeFormatter());
 
             HttpResponseMessage apiResponse;
@@ -191,10 +196,6 @@ namespace Bueller.MVC.Controllers
 
             //await AddEmployeeCookie(account.Email);
 
-
-
-
-
             return RedirectToAction("Index", "Home");
         }
 
@@ -228,21 +229,14 @@ namespace Bueller.MVC.Controllers
             if (Request.Cookies["userEmailCookie"] != null)
             {
                 var c = new HttpCookie("userEmailCookie");
-                var c2 = new HttpCookie("EmployeeId");
-                var c3 = new HttpCookie("StudentId");
+                var c2 = new HttpCookie("Id");
+                var c3 = new HttpCookie("Role");
                 c3.Expires = DateTime.Now.AddDays(-1);
                 c2.Expires = DateTime.Now.AddDays(-1);
                 c.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(c3);
                 Response.Cookies.Add(c2);
                 Response.Cookies.Add(c);
-
-                var c4 = new HttpCookie("Id");
-                var c5 = new HttpCookie("Role");
-                c4.Expires = DateTime.Now.AddDays(-1);
-                c5.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(c4);
-                Response.Cookies.Add(c5);
             }
 
             PassCookiesToClient(apiResponse);
