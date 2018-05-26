@@ -236,6 +236,13 @@ namespace Bueller.MVC.Controllers
                 Response.Cookies.Add(c3);
                 Response.Cookies.Add(c2);
                 Response.Cookies.Add(c);
+
+                var c4 = new HttpCookie("Id");
+                var c5 = new HttpCookie("Role");
+                c4.Expires = DateTime.Now.AddDays(-1);
+                c5.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(c4);
+                Response.Cookies.Add(c5);
             }
 
             PassCookiesToClient(apiResponse);

@@ -36,9 +36,12 @@ namespace Bueller.MVC.Controllers
             else
             {
                 var contentString = await apiResponse.Content.ReadAsStringAsync();
-                ViewBag.Message = "Logged in! Result: " + contentString;
 
-                string role = contentString.Substring(contentString.IndexOf(":")+2);
+                //string role = contentString.Substring(contentString.IndexOf(":") + 3, contentString.LastIndexOf("]"));
+                string role = contentString.Substring(contentString.IndexOf(":") + 2).TrimEnd('"');
+                ViewBag.Message = "Logged in! Result: " + contentString + "\n" + role;
+
+
 
                 var cookie = Request.Cookies.Get("userEmailCookie");
                 if (cookie != null)
@@ -88,6 +91,7 @@ namespace Bueller.MVC.Controllers
 
             // }
             //PassCookiesToClient(apiResponse);
+
             HttpCookie Id = new HttpCookie("Id");
             if (role == "teacher" || role == "employee")
             {
@@ -103,6 +107,10 @@ namespace Bueller.MVC.Controllers
             }
 
             Response.Cookies.Add(Id);
+
+            HttpCookie Role = new HttpCookie("Role");
+            Role.Value = role;
+            Response.Cookies.Add(Role);
 
         }
     }
