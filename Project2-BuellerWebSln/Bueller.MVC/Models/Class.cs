@@ -74,6 +74,9 @@ namespace Bueller.MVC.Models
         [ForeignKey("SubjectId")]
         public virtual Subject Subject { get; set; }
 
+        [Required]
+        public string SubjectName { get; set; }
+
         //public virtual ICollection<Student> Students { get; set; }
 
         public virtual ICollection<Assignment> Assignments { get; set; }

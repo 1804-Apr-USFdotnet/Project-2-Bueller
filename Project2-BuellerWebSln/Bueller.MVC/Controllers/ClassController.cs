@@ -110,10 +110,32 @@ namespace Bueller.MVC.Controllers
 
 
         //right now subject id entered manually
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             //Assignment assignment = new Assignment();
             //assignment.ClassId = ClassId;
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, "api/Class/Subject/GetAllNames");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var subjects = await apiResponse.Content.ReadAsAsync<List<string>>();
+            var subjectselectlist = subjects.Select(c => new SelectListItem {Text = c, Value = c}).ToList();
+
+            ViewBag.Subjects = subjectselectlist;
             return View();
         }
 
@@ -122,6 +144,26 @@ namespace Bueller.MVC.Controllers
         {
             if (Request.Cookies.Get("Role").Value == "teacher")
             {
+                HttpRequestMessage apiRequest2 = CreateRequestToService(HttpMethod.Get, $"api/Class/Subject/GetByName/{newClass.SubjectName}");
+                HttpResponseMessage apiResponse2;
+
+                try
+                {
+                    apiResponse2 = await HttpClient.SendAsync(apiRequest2);
+                }
+                catch
+                {
+                    return View("Error");
+                }
+
+                if (!apiResponse2.IsSuccessStatusCode)
+                {
+                    return View("Error");
+                }
+
+                var subject = await apiResponse2.Content.ReadAsAsync<Subject>();
+
+                newClass.SubjectId = subject.SubjectId;
                 newClass.TeacherId = Convert.ToInt32(Request.Cookies.Get("Id").Value);
             }
 

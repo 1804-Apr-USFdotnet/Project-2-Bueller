@@ -169,10 +169,36 @@ namespace BuellerWebApi.Controllers
         }
 
         [HttpGet]
+        [Route("Subject/GetAllNames")]
+        public IHttpActionResult GetAllSubjectNames()
+        {
+            var subjects = subjectRepo.Table.Select(t => t.Name).ToList();
+            if (!subjects.Any())
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+
+            return Ok(subjects);
+        }
+
+        [HttpGet]
         [Route("Subject/GetById/{id}")]
         public IHttpActionResult GetSubjectById(int id)
         {
             var subject = subjectRepo.GetById(id);
+            if (subject == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
+            }
+
+            return Ok(subject);
+        }
+
+        [HttpGet]
+        [Route("Subject/GetByName/{name}")]
+        public IHttpActionResult GetSubjectByName(string name)
+        {
+            var subject = subjectRepo.GetByName(name);
             if (subject == null)
             {
                 return Content(HttpStatusCode.NotFound, "Item does not exist");
