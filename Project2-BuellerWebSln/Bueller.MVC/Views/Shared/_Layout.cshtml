@@ -21,11 +21,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li>@Html.ActionLink("Classes", "Index", "Class")</li>
-                    @if (Response.Cookies["Role"].Value=="Teacher")
-                    {
-                        <li>@Html.ActionLink(" Teacher Classes", "TeacherClasses", "Class")</li>
-                    }
                     <li>@Html.ActionLink("My Classes", "MyClasses", "Class")</li>
                     <li>@Html.ActionLink("All Classes", "Index", "Class")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
