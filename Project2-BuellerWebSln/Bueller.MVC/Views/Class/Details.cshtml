@@ -33,6 +33,14 @@
         <dd>
             @Html.DisplayFor(model => model.Credits)
         </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Teacher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Teacher.FirstName) @Html.DisplayFor(model => model.Teacher.LastName)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.ClassDays)

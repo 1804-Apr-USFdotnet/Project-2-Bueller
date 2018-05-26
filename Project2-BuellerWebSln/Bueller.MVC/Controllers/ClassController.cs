@@ -49,7 +49,7 @@ namespace Bueller.MVC.Controllers
         public async Task<ViewResult> TeacherClasses()
         {
 
-            var teacherId = Request.Cookies["EmployeeId"].Value;
+            var teacherId = Request.Cookies["Id"].Value;
 
             if (!ModelState.IsValid)
             {

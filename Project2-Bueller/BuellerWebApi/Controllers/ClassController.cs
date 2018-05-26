@@ -97,7 +97,9 @@ namespace BuellerWebApi.Controllers
             return CreatedAtRoute("AddClass", new { id = classDto.ClassId }, classDto);
         }
 
-      
+        [HttpPut]
+        [Authorize(Roles = "teacher")]
+        [Route("Edit")]
         public IHttpActionResult Put(int id, ClassDto classDto)
         {
             if (!ModelState.IsValid)
@@ -130,6 +132,7 @@ namespace BuellerWebApi.Controllers
 
    
         [HttpDelete]
+        [Authorize(Roles = "teacher")]
         [Route("Delete/{id}")]
         public IHttpActionResult Delete(int id)
         {
