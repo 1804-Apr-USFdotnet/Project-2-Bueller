@@ -52,7 +52,7 @@ node('master'){
     stage('deploy'){
         try{
             dir('Bueller.MVC/obj/Debug/Package'){
-                bat "\"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\" -source:package='C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2_MVC\\Project2-BuellerWebSln\\Bueller.MVC\\obj\Debug\\Package\\Bueller.MVC.zip' -dest:auto,computerName=\"${deploy_location}\",userName=\"Administrator\",password=\"${Deploy_Password}\",authtype=\"basic\",includeAcls=\"False\" -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:\"C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2_MVC\\Projec2-BuellerWebSln\\Bueller.MVC\\obj\\Debug\\Package\\Bueller.MVC.SetParameters.xml\" -AllowUntrusted=True"
+                bat "\"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\" -source:package='C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2_MVC\\Project2-BuellerWebSln\\Bueller.MVC\\obj\\Debug\\Package\\Bueller.MVC.zip' -dest:auto,computerName=\"${deploy_location}\",userName=\"Administrator\",password=\"${Deploy_Password}\",authtype=\"basic\",includeAcls=\"False\" -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:\"C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2_MVC\\Projec2-BuellerWebSln\\Bueller.MVC\\obj\\Debug\\Package\\Bueller.MVC.SetParameters.xml\" -AllowUntrusted=True"
         }
         }
         catch(exc){
