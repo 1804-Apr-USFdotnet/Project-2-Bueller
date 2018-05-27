@@ -1,4 +1,8 @@
-﻿@model Bueller.MVC.Models.Grade
+﻿
+
+
+
+@model Bueller.MVC.Models.Grade
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,26 +13,52 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+<div class="form-horizontal">
 
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.HiddenFor(model => model.FileId)
-            @Html.LabelFor(model => model.GradeLetter, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(m => m.Comment, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.HiddenFor(model => model.FileId)
+      
+        @Html.LabelFor(model => model.GradeLetter, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(m => m.GradeLetter, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.GradeLetter, "", new { @class = "text-danger" })
+        <br />
+        @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(m => m.Comment, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+ 
+        <br />
+        @Html.LabelFor(model => model.EvaluationType, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(m => m.EvaluationType, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.EvaluationType, "", new { @class = "text-danger" })
+
+        <br />
+        @Html.LabelFor(model => model.Score, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(m => m.Score, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Score, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+   
+
+
+       
+
+
+    </div>
+    <br />
+    <br />
 
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Submit Grade" class="btn btn-default" />
-            </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit Grade" class="btn btn-default" />
         </div>
     </div>
+</div>
 }
+
 

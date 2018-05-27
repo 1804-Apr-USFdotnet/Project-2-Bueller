@@ -35,9 +35,10 @@
             @Html.DisplayFor(modelItem => item.Modified)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FileId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.FileId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FileId })
+            @Html.ActionLink("Edit", "Edit", new { id = item.FileId }) |
+            @Html.ActionLink("Grade Assignment", "Create", "Grade", new { fileId = item.FileId }, null) |
+            @Html.ActionLink("Details", "Details", new { id = item.FileId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.FileId })
         </td>
     </tr>
 }

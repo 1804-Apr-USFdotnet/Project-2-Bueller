@@ -13,8 +13,20 @@ namespace Bueller.MVC.Controllers
     public class GradeController : AServiceController
     {
         // GET: Grade
+        public ActionResult Create(int fileId)
+        {
+            Grade grade = new Grade();
+            grade.FileId = fileId;
+
+
+            return View(grade);
+        }
+
         public ActionResult Index()
         {
+      
+
+
             return View();
         }
 
@@ -34,7 +46,7 @@ namespace Bueller.MVC.Controllers
             }
 
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/FileGrade/Grade/Add");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/Grade/Add");
             apiRequest.Content = new ObjectContent<Grade>(newGrade, new JsonMediaTypeFormatter());
 
             HttpResponseMessage apiResponse;
