@@ -1,0 +1,13 @@
+<p>
+  book works!
+</p>
+
+<button (click)="getBooks()">Search</button>
+<div *ngIf="books">
+  <h3>Books:</h3>
+  <ol>
+    <li *ngFor="let book of books">
+     {{book.Title}}
+    </li>
+  </ol>
+</div>
