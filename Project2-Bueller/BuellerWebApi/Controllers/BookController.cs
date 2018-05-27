@@ -8,17 +8,15 @@ using System.Web.Http;
 
 namespace BuellerWebApi.Controllers
 {
+    [RoutePrefix("api/book")]
     public class BookController : ApiController
     {
 
-        [RoutePrefix("api/book")]
-        public class AssignmentsController : ApiController
-        {
             // GET: api/Assignments
             private readonly UnitOfWork unit = new UnitOfWork();
             private readonly BookRepo bookRepo;
 
-            public AssignmentsController()
+            public BookController()
             {
                 bookRepo = unit.BookRepo();
             }
@@ -27,6 +25,7 @@ namespace BuellerWebApi.Controllers
 
 
             [HttpGet]
+            [AllowAnonymous]
             [Route("GetAll")]
             public IHttpActionResult GetBooks()
             {
@@ -43,7 +42,7 @@ namespace BuellerWebApi.Controllers
 
 
             [HttpGet]
-            [Route("GetbooksbyClassId/ {id}")]
+            [Route("GetbooksbyClassId/{id}")]
             public IHttpActionResult GetBooksByClassId(int id)
             {
                 var books = bookRepo.GetBookbyClassId(id);
@@ -56,4 +55,3 @@ namespace BuellerWebApi.Controllers
         }
     }
 
-}
