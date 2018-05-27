@@ -85,6 +85,9 @@ namespace Bueller.MVC.Models
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
 
+        [Display(Name = "Enrollment Count")]
+        public int EnrollmentCount { get; set; }
+
         //[NotMapped]
         [Display(Name = "Class Days")]
         public string ClassDays

@@ -86,6 +86,20 @@ namespace BuellerWebApi.Controllers
         }
 
         [HttpGet]
+        [Route("EnrollmentCount/{id}")]
+        public IHttpActionResult EnrollmentCount(int id)
+        {
+            //studentRepo.AddToClass();
+            //var classes = studentRepo.Table.Where(x => x.StudentId == id).SelectMany(x => x.Classes).ToList();
+            var count = classRepo.GetEnrollmentCount(id);
+            if (count != null)
+            {
+                return Ok(count);
+            }
+            return NotFound();
+        }
+
+        [HttpGet]
         [Route("Enroll/{id}/{studentid}")]
         public IHttpActionResult EnrollStudent(int id, int studentid)
         {

@@ -66,6 +66,12 @@ namespace Bueller.DAL.Repos
             return this.Table.Where(x => x.Students.Any()).ToList();
         }
 
+        public int GetEnrollmentCount(int id)
+        {
+            return this.Table.FirstOrDefault(x => x.ClassId == id).Students.Count();
+            //return this.Entities.Find(id).Students.Count();
+        }
+
         public IEnumerable<Class> GetClassesWithAssignments()
         {
             return this.Table.Where(x => x.Assignments.Any()).ToList();
