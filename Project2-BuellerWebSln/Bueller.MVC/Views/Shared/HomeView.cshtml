@@ -19,10 +19,10 @@
             @Html.ActionLink("Bueller", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            @*<ul class="nav navbar-nav">
                 <li>@Html.ActionLink("About", "About", "Home")</li>
                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-            </ul>
+            </ul>*@
             <ul class="nav navbar-nav navbar-right">
                 <li>@Html.ActionLink("Register", "Register", "Account")</li>
                 <li>@Html.ActionLink("Login", "Login", "Account")</li>
@@ -34,7 +34,7 @@
     @RenderBody()
     <hr />
     <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <p>&copy; @DateTime.Now.Year - Bueller | @Html.ActionLink("About", "About", "Home") | @Html.ActionLink("Contact", "Contact", "Home")</p>
     </footer>
 </div>
 
