@@ -35,7 +35,7 @@ namespace Bueller.DAL.Models
 
         public int ClassId { get; set; }
         [ForeignKey("ClassId")]
-        public virtual Class Class { get; set; }
+        public virtual ClassDto Class { get; set; }
 
         [Column(TypeName = "datetime2")]
         public DateTime Created { get; set; }
