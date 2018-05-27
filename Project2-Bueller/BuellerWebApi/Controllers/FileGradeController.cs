@@ -110,7 +110,7 @@ namespace BuellerWebApi.Controllers
         [Route("File/GetByStudentId/{id}")]
         public IHttpActionResult GetFilesByStudentId(int id)
         {
-            var files = fileRepo.GetFilesByStudentId(id);
+            var files = fileRepo.GetFilesByStudentId(id).ToList();
             if (files.Count() == 0)
             {
                 return NotFound();
@@ -122,7 +122,7 @@ namespace BuellerWebApi.Controllers
         [Route("File/GetByName/{name}")]
         public IHttpActionResult GetFilesByName(string name)
         {
-            var files = fileRepo.GetFilesByName(name);
+            var files = fileRepo.GetFilesByName(name).ToList();
             if (files.Count() == 0)
             {
                 return NotFound();
@@ -134,7 +134,7 @@ namespace BuellerWebApi.Controllers
         [Route("File/GetByClassId/{classId}")]
         public IHttpActionResult GetFilesByClassId(int classId)
         {
-            var files = fileRepo.GetFilesByClassId(classId);
+            var files = fileRepo.GetFilesByClassId(classId).ToList();
             if (files.Count() == 0)
             {
                 return NotFound();

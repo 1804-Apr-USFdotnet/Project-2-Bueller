@@ -19,18 +19,18 @@ namespace Bueller.DAL.Repos
 
         public IEnumerable<FileDto> GetFilesByStudentId(int id)
         {
-            var temp = this.Entities.Where(x => x.StudentId == id);
+            var temp = this.Entities.Where(x => x.StudentId == id).ToList();
             return Mapper.Map<IEnumerable<FileDto>>(temp);
         }
          public IEnumerable<FileDto> GetFilesByName(string name)
         {
-            var temp = this.Entities.Where(x => x.FileName == name);
+            var temp = this.Entities.Where(x => x.FileName == name).ToList();
             return Mapper.Map<IEnumerable<FileDto>>(temp);
         }
 
         public IEnumerable<FileDto> GetFilesByClassId(int classId)
         {
-            var temp = this.Entities.Where(x => x.Assignment.ClassId == classId);
+            var temp = this.Entities.Where(x => x.Assignment.ClassId == classId).ToList();
             return Mapper.Map<IEnumerable<FileDto>>(temp);
         }
     }
