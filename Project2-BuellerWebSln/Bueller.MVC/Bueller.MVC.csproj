@@ -216,7 +216,6 @@
     <Content Include="Views\Class\Details.cshtml" />
     <Content Include="Views\Class\Create.cshtml" />
     <Content Include="Views\Class\MyClasses.cshtml" />
-    <Content Include="Views\Class\TeacherClasses.cshtml" />
     <Content Include="Views\Class\EnrollConfirm.cshtml" />
     <Content Include="Views\Shared\TeacherView.cshtml" />
     <Content Include="Views\Shared\EmployeeView.cshtml" />
