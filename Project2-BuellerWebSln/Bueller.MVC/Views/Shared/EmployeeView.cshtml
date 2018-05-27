@@ -25,6 +25,7 @@
             </ul>*@
             <ul class="nav navbar-nav navbar-right">
                 <li style="padding: 15px; color: white">@Request.Cookies["userEmailCookie"].Value (@Request.Cookies["Role"].Value)</li>
+                <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
                 <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
             </ul>
         </div>

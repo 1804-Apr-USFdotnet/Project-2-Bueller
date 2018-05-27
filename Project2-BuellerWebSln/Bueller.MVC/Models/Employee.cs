@@ -58,9 +58,9 @@ namespace Bueller.MVC.Models
         [RegularExpression("[0-9]{5}", ErrorMessage = "Zip code must be 5 digits")]
         public int Zipcode { get; set; }
 
-        [Required(ErrorMessage = "Street address is required")]
+        [Required(ErrorMessage = "Street is required")]
         [DataType(DataType.Text)]
-        [Display(Name = "Street Address")]
+        [Display(Name = "Street")]
         [StringLength(200, ErrorMessage = "Street address must be shorter than {1} characters")]
         public string StreetAddress { get; set; }
 
@@ -69,9 +69,9 @@ namespace Bueller.MVC.Models
         [RegularExpression(".{1,200}[@].{1,200}[.].{1,5}", ErrorMessage = "Email is too long, max 200 character on each side of @")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Personal phone number is required")]
+        [Required(ErrorMessage = "Phone number is required")]
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Personal Phone Number")]
+        [Display(Name = "Phone Number")]
         [RegularExpression("[(]{1}[0-9]{3}[)]{1}[ ]{1}[0-9]{3}[-]{1}[0-9]{4}", ErrorMessage = "Format must be (###) ###-####")]
         public string PersonalPhoneNumber { get; set; }
 

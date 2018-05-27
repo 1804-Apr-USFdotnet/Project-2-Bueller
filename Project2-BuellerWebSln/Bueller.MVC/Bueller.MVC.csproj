@@ -153,6 +153,7 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -227,6 +228,8 @@
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\File\AddFile.cshtml" />
     <Content Include="Views\File\GetByIdStudent.cshtml" />
+    <Content Include="Views\Profile\Employee.cshtml" />
+    <Content Include="Views\Profile\Student.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
