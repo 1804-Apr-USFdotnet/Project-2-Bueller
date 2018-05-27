@@ -22,7 +22,7 @@ namespace Bueller.DAL.Repos
             var temp = this.Entities.Where(x => x.StudentId == id).ToList();
             return Mapper.Map<IEnumerable<FileDto>>(temp);
         }
-         public IEnumerable<FileDto> GetFilesByName(string name)
+        public IEnumerable<FileDto> GetFilesByName(string name)
         {
             var temp = this.Entities.Where(x => x.FileName == name).ToList();
             return Mapper.Map<IEnumerable<FileDto>>(temp);
@@ -32,6 +32,13 @@ namespace Bueller.DAL.Repos
         {
             var temp = this.Entities.Where(x => x.Assignment.ClassId == classId).ToList();
             return Mapper.Map<IEnumerable<FileDto>>(temp);
+        }
+
+        public IEnumerable<FileDto> GetByAsnIdAndStudentId(int studentId, int assignmentId)
+        {
+            var temp = this.Entities.Where(x => x.StudentId == studentId);
+            var temp2 = temp.Where(y => y.AssignmentId == assignmentId).ToList();
+            return Mapper.Map<IEnumerable<FileDto>>(temp2);
         }
     }
 }

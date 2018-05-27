@@ -38,14 +38,14 @@ namespace Bueller.MVC.Controllers
             return View(files);
         }
 
-        public async Task<ActionResult> GetById(int id)
+        public async Task<ActionResult> GetById(int studentId, int assignmentId)
         {
-            if (id == 0)
+            if (studentId == 0 || assignmentId == 0)
             {
                 return View("Error");
             }
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetByStudentId/{id}");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetByAsnIdAndStudentId/{studentId}/{assignmentId}");
             HttpResponseMessage apiResponse;
 
             try

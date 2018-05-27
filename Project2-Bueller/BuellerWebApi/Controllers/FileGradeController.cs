@@ -111,7 +111,7 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetFilesByStudentId(int id)
         {
             var files = fileRepo.GetFilesByStudentId(id).ToList();
-            if (files.Count() == 0)
+            if (!files.Any())
             {
                 return NotFound();
             }
@@ -123,7 +123,7 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetFilesByName(string name)
         {
             var files = fileRepo.GetFilesByName(name).ToList();
-            if (files.Count() == 0)
+            if (!files.Any())
             {
                 return NotFound();
             }
@@ -135,10 +135,23 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetFilesByClassId(int classId)
         {
             var files = fileRepo.GetFilesByClassId(classId).ToList();
-            if (files.Count() == 0)
+            if (!files.Any())
             {
                 return NotFound();
             }
+            return Ok(files);
+        }
+
+        [HttpGet]
+        [Route("File/GetByAsnIdAndStudentId/{studentId}/{assignmentId}")]
+        public IHttpActionResult GetByAsnIdAndStudentId(int studentId, int assignmentId)
+        {
+            var files = fileRepo.GetByAsnIdAndStudentId(studentId, assignmentId).ToList();
+            if (!files.Any())
+            {
+                return Content(HttpStatusCode.NoContent, "List is empty");
+            }
+
             return Ok(files);
         }
 
