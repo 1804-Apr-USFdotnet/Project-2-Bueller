@@ -193,11 +193,6 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            //Employee emp = await apiResponse.Content.ReadAsAsync<Employee>();
-
-            //if (emp == null)
-            //    return View("Error");
-
             return RedirectToAction("Index");
         }
 
@@ -236,6 +231,43 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
 
             return View(stu);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditStudent(Student student)
+        {
+            var role = Request.Cookies["Role"].Value;
+
+            if (role != "student")
+            {
+                return View("Error");
+            }
+
+            var id = Request.Cookies["Id"].Value;
+            var email = Request.Cookies["userEmailCookie"].Value;
+
+            student.Email = email;
+            student.StudentId = Convert.ToInt32(id);
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Put, $"api/Student/AddAt/{id}");
+            apiRequest.Content = new ObjectContent<Student>(student, new JsonMediaTypeFormatter());
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            return RedirectToAction("Index");
         }
 
         // POST: Profile/Edit/5
