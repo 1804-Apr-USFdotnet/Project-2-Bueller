@@ -105,6 +105,11 @@ namespace Bueller.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<ActionResult> Delete(int id)
+        {
+            return null;
+        }
     }
 }
 

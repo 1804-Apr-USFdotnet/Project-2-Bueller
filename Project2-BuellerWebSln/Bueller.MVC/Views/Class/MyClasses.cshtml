@@ -7,8 +7,8 @@
 <h2>My Classes</h2>
 
 @*<p>
-    @Html.ActionLink("Enroll", "Enroll")
-</p>*@
+        @Html.ActionLink("Enroll", "Enroll")
+    </p>*@
 <table class="table">
     <tr>
         <th>
@@ -35,7 +35,8 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -53,7 +54,7 @@
                 @Html.DisplayFor(modelItem => item.ClassDays)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartTimeFormatted) - 
+                @Html.DisplayFor(modelItem => item.StartTimeFormatted) -
                 @Html.DisplayFor(modelItem => item.EndTimeFormatted)
             </td>
             <td>
@@ -62,20 +63,24 @@
             <td>
                 @if (ViewBag.Role == "teacher")
                 {
-                    <p>                @Html.ActionLink("Details", "Details", new {id = item.ClassId}) |
-                        @Html.ActionLink("Assignments", "Index", "Assignment", new {id = item.ClassId}, null) |
-                        @Html.ActionLink("Edit", "Edit", new {id = item.ClassId}) |
-                        @Html.ActionLink("Delete", "Delete", new {id = item.ClassId})</p>
+                    <p>
+                        @Html.ActionLink("Details", "Details", new { id = item.ClassId }) |
+                        @Html.ActionLink("Assignments", "Index", "Assignment", new { id = item.ClassId }, null) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ClassId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ClassId })
+                    </p>
                 }
                 else
                 {
-                    <p>                @Html.ActionLink("Details", "Details", new {id = item.ClassId}) |
-                        @Html.ActionLink("Assignments", "Index", "Assignment", new {id = item.ClassId}, null)</p>
+                    <p>
+                        @Html.ActionLink("Details", "Details", new { id = item.ClassId }) |
+                        @Html.ActionLink("Assignments", "Index", "Assignment", new { id = item.ClassId }, null)
+                    </p>
                 }
                 @*@Html.ActionLink("Details", "Details", new {id = item.ClassId}) |
-                @Html.ActionLink("Assignments", "Index", "Assignment", new {id = item.ClassId}, null) |
-                @Html.ActionLink("Edit", "Edit", new {id = item.ClassId}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.ClassId})*@
+                    @Html.ActionLink("Assignments", "Index", "Assignment", new {id = item.ClassId}, null) |
+                    @Html.ActionLink("Edit", "Edit", new {id = item.ClassId}) |
+                    @Html.ActionLink("Delete", "Delete", new {id = item.ClassId})*@
             </td>
         </tr>
     }
