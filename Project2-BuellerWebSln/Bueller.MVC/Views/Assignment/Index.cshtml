@@ -30,8 +30,8 @@
             <td>
                 @if (Request.Cookies["Role"].Value == "student")
                 {
-                    @Html.ActionLink("Add File", "AddFile", "File", new { AssignmentId = item.AssignmentId, StudentId = Response.Cookies["Id"].Value }, null);
-                    @Html.ActionLink("View Files", "GetById", "File", new { id = Response.Cookies["Id"].Value }, null);
+                    @Html.ActionLink("Add File", "AddFile", "File", new { AssignmentId = item.AssignmentId, StudentId = Request.Cookies["Id"].Value }, null);
+                    @Html.ActionLink("View Files", "GetById", "File", new { id = Request.Cookies["Id"].Value }, null);
                 }
                 @if (Request.Cookies["Role"].Value == "teacher")
                 {
