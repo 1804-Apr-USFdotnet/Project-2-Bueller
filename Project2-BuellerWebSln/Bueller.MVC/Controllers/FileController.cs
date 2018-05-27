@@ -38,7 +38,7 @@ namespace Bueller.MVC.Controllers
             return View(files);
         }
 
-        public async Task<ActionResult> GetById(int studentId, int assignmentId)
+        public async Task<ActionResult> GetByIdStudent(int studentId, int assignmentId)
         {
             if (studentId == 0 || assignmentId == 0)
             {

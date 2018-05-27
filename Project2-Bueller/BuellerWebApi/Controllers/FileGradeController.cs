@@ -30,9 +30,9 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetAllFiles()
         {
             var files = fileRepo.Table.ToList();
-            if (files.Count() == 0)
+            if (!files.Any())
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(files);
         }
@@ -44,7 +44,7 @@ namespace BuellerWebApi.Controllers
             var file = fileRepo.GetById(id);
             if (file == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             return Ok(file);
         }
@@ -83,7 +83,7 @@ namespace BuellerWebApi.Controllers
             {
                 if (!FileExists(id))
                 {
-                    return NotFound();
+                    return Content(HttpStatusCode.NotFound, "Item does not exist");
                 }
                 else
                 {
@@ -100,7 +100,7 @@ namespace BuellerWebApi.Controllers
             var file = fileRepo.GetById(id);
             if (file == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             fileRepo.Delete(file);
             return Ok(file);
@@ -113,7 +113,7 @@ namespace BuellerWebApi.Controllers
             var files = fileRepo.GetFilesByStudentId(id).ToList();
             if (!files.Any())
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(files);
         }
@@ -125,7 +125,7 @@ namespace BuellerWebApi.Controllers
             var files = fileRepo.GetFilesByName(name).ToList();
             if (!files.Any())
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(files);
         }
@@ -137,7 +137,7 @@ namespace BuellerWebApi.Controllers
             var files = fileRepo.GetFilesByClassId(classId).ToList();
             if (!files.Any())
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(files);
         }
@@ -155,6 +155,19 @@ namespace BuellerWebApi.Controllers
             return Ok(files);
         }
 
+        [HttpGet]
+        [Route("File/GetByAssignmentId/{id}")]
+        public IHttpActionResult GetByAssignmentId(int id)
+        {
+            var files = fileRepo.GetByAssignmentId(id).ToList();
+            if (!files.Any())
+            {
+                return Content(HttpStatusCode.NotFound, "List is empty");
+            }
+
+            return Ok(files);
+        }
+
         private bool FileExists(int id)
         {
             return fileRepo.Table.Count(e => e.FileId == id) > 0;
@@ -166,9 +179,9 @@ namespace BuellerWebApi.Controllers
         public IHttpActionResult GetAllGrades()
         {
             var grades = gradeRepo.Table.ToList();
-            if (grades.Count() == 0)
+            if (!grades.Any())
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(grades);
         }
@@ -180,7 +193,7 @@ namespace BuellerWebApi.Controllers
             var grade = gradeRepo.GetById(id);
             if (grade == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             return Ok(grade);
         }
@@ -221,7 +234,7 @@ namespace BuellerWebApi.Controllers
             {
                 if (!GradeExists(id))
                 {
-                    return NotFound();
+                    return Content(HttpStatusCode.NotFound, "Item does not exist");
                 }
                 else
                 {
@@ -238,7 +251,7 @@ namespace BuellerWebApi.Controllers
             var grade = gradeRepo.GetById(id);
             if (grade == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Item does not exist");
             }
             gradeRepo.Delete(Mapper.Map<Grade>(grade));
 
@@ -249,10 +262,10 @@ namespace BuellerWebApi.Controllers
         [Route("Grade/GetFailing")]
         public IHttpActionResult GetFailingGrade()
         {
-            var grades = gradeRepo.GetFailingGrades();
-            if (grades.Count() == 0)
+            var grades = gradeRepo.GetFailingGrades().ToList();
+            if (!grades.Any())
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "List is empty");
             }
             return Ok(grades);
         }

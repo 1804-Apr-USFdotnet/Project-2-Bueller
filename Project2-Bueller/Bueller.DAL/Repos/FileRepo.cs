@@ -40,5 +40,11 @@ namespace Bueller.DAL.Repos
             var temp2 = temp.Where(y => y.AssignmentId == assignmentId).ToList();
             return Mapper.Map<IEnumerable<FileDto>>(temp2);
         }
+
+        public IEnumerable<FileDto> GetByAssignmentId(int id)
+        {
+            var temp = this.Entities.Where(x => x.AssignmentId == id).ToList();
+            return Mapper.Map<IEnumerable<FileDto>>(temp);
+        }
     }
 }
