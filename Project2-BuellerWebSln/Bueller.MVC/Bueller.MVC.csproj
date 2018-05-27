@@ -216,22 +216,22 @@
     <Content Include="Views\Class\Details.cshtml" />
     <Content Include="Views\Class\Create.cshtml" />
     <Content Include="Views\Class\MyClasses.cshtml" />
+    <Content Include="Views\Class\Enroll.cshtml" />
+    <Content Include="Views\Class\TeacherClasses.cshtml" />
     <Content Include="Views\Class\EnrollConfirm.cshtml" />
     <Content Include="Views\Shared\TeacherView.cshtml" />
     <Content Include="Views\Shared\EmployeeView.cshtml" />
     <Content Include="Views\Shared\StudentView.cshtml" />
     <Content Include="Views\Shared\HomeView.cshtml" />
-    <Content Include="Views\Student\StudentAssignments.cshtml" />
-    <Content Include="Views\File\Index.cshtml" />
-    <Content Include="Views\File\GetById.cshtml" />
-    <Content Include="Views\File\AddFile.cshtml" />
     <Content Include="Views\File\ClassFiles.cshtml" />
     <Content Include="Views\Grade\Create.cshtml" />
     <Content Include="Views\Grade\Index.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AService\" />
+    <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
