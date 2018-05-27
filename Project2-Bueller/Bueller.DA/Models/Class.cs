@@ -76,6 +76,7 @@ namespace Bueller.DA.Models
 
         public virtual ICollection<Student> Students { get; set; }
 
+        public virtual ICollection<Book> Books { get; set; }
         public virtual ICollection<Assignment> Assignments { get; set; }
 
         [Column(TypeName = "datetime2")]

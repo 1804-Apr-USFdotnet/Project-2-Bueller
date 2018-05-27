@@ -21,6 +21,7 @@ namespace Bueller.DAL.Models
             CreateMap<StudentAccount, StudentAccountDto>().ReverseMap();
             CreateMap<Grade, GradeDto>().ReverseMap();
             CreateMap<Assignment, AssignmentDto>().ReverseMap();
+            CreateMap<Book, BookDto>().ReverseMap();
         }
     }
 }

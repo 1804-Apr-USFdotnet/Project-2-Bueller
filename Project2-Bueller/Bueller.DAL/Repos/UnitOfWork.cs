@@ -229,5 +229,24 @@ namespace Bueller.DAL.Repos
 
             return (SubjectRepo)_repositories[type];
         }
+
+        public BookRepo BookRepo()
+        {
+            if (_repositories == null)
+            {
+                _repositories = new Dictionary<string, object>();
+            }
+
+            var type = typeof(BookRepo).Name;
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(BookRepo);
+                var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
+                _repositories.Add(type, repositoryInstance);
+            }
+
+            return (BookRepo)_repositories[type];
+        }
     }
 }

@@ -10,6 +10,24 @@ namespace Bueller.DA
 {
     public class BuellerContext : DbContext, IDbContext
     {
+
+
+
+        //public static void Main(string[] args)
+        //{
+        //    Console.WriteLine("Creating db");
+        //    BuellerContext db = new BuellerContext();
+        //    Book book = new Book()           {
+        //        BookTitle = "Math 101",
+        //        ClassId = 2, 
+        //        Price = 24.99m
+        //   };
+        //    db.Books.Add(book);
+        //    db.SaveChanges();
+    
+        //    }
+
+
         public BuellerContext() : base("BuellerDb")
         {
 
@@ -24,6 +42,7 @@ namespace Bueller.DA
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Book> Books { get; set; }
 
         public override int SaveChanges()
         {

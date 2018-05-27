@@ -103,7 +103,12 @@
     <Compile Include="Migrations\201805231259314_addemailtostudent.Designer.cs">
       <DependentUpon>201805231259314_addemailtostudent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805270500066_added books.cs" />
+    <Compile Include="Migrations\201805270500066_added books.Designer.cs">
+      <DependentUpon>201805270500066_added books.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Book.cs" />
     <Compile Include="Models\EmployeePayment.cs" />
     <Compile Include="Models\EmployeeSalary.cs" />
     <Compile Include="Models\Student.cs" />
@@ -134,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805231259314_addemailtostudent.resx">
       <DependentUpon>201805231259314_addemailtostudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805270500066_added books.resx">
+      <DependentUpon>201805270500066_added books.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
