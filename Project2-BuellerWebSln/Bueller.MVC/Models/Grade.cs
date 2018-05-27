@@ -43,4 +43,3 @@ namespace Bueller.MVC.Models
         public DateTime Modified { get; set; }
     }
 }
-}

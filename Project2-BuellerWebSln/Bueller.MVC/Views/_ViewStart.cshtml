@@ -1,3 +1,18 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Response.Cookies["Role"].Value == "teacher")
+    {
+        Layout = "~/Views/Shared/TeacherView.cshtml";
+    }
+    else if (Response.Cookies["Role"].Value == "student")
+    {
+        Layout = "~/Views/Shared/StudentView.cshtml";
+    }
+    else if (Response.Cookies["Role"].Value == "employee")
+    {
+        Layout = "~/Views/Shared/EmployeeView.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/HomeView.cshtml";
+    }
 }
