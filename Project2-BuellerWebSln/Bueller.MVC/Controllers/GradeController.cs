@@ -1,0 +1,62 @@
+﻿using Bueller.MVC.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Bueller.MVC.Controllers
+{
+    public class GradeController : AServiceController
+    {
+        // GET: Grade
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Create(Grade newGrade)
+        {
+            if (Request.Cookies.Get("Role").Value != "teacher")
+            {
+                return View("Error");
+            }
+
+
+            if (!ModelState.IsValid)
+            {
+                return View("Error");
+            }
+
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Post, $"api/FileGrade/Grade/Add");
+            apiRequest.Content = new ObjectContent<Grade>(newGrade, new JsonMediaTypeFormatter());
+
+            HttpResponseMessage apiResponse;
+
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+
+
+            return RedirectToAction("Index");
+        }
+    }
+}

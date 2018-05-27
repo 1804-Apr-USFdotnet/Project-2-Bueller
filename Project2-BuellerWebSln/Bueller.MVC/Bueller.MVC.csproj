@@ -150,6 +150,8 @@
     <Compile Include="Controllers\AServiceController.cs" />
     <Compile Include="Controllers\AssignmentController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
@@ -160,6 +162,7 @@
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\File.cs" />
+    <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -220,6 +223,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AService\" />
+    <Folder Include="Views\File\" />
+    <Folder Include="Views\Grade\" />
     <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>

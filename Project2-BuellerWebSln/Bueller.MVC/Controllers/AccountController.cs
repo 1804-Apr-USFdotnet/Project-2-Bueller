@@ -176,8 +176,9 @@ namespace Bueller.MVC.Controllers
             {
                 apiResponse = await HttpClient.SendAsync(apiRequest);
             }
-            catch
+            catch(Exception ex)
             {
+                Console.Write(ex.Message);
                 return View("Error");
             }
 
