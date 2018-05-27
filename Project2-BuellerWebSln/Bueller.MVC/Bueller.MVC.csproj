@@ -230,6 +230,7 @@
     <Content Include="Views\File\GetByIdStudent.cshtml" />
     <Content Include="Views\Profile\Employee.cshtml" />
     <Content Include="Views\Profile\Student.cshtml" />
+    <Content Include="Views\Profile\EditEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
