@@ -3,7 +3,7 @@
     {
         Layout = "~/Views/Shared/HomeView.cshtml";
     }
-    if (Request.Cookies["Role"].Value == "teacher")
+    else if (Request.Cookies["Role"].Value == "teacher")
     {
         Layout = "~/Views/Shared/TeacherView.cshtml";
     }
