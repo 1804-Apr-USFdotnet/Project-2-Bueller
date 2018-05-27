@@ -76,6 +76,7 @@ namespace Bueller.MVC.Controllers
             return View(file);
         }
 
+        [HttpPost]
         public async Task<ActionResult> AddFile(File file)
         {
             if (!ModelState.IsValid)

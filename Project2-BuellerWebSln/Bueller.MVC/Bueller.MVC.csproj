@@ -225,6 +225,8 @@
     <Content Include="Views\Grade\Create.cshtml" />
     <Content Include="Views\Grade\Index.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\File\GetById.cshtml" />
+    <Content Include="Views\File\AddFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

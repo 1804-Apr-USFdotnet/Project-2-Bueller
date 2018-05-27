@@ -28,22 +28,22 @@
                 @Html.DisplayFor(modelItem => item.Class.Teacher.FirstName)
             </td>
             <td>
-                @if (Response.Cookies["Role"].Value == "student")
+                @if (Request.Cookies["Role"].Value == "student")
                 {
-                    @Html.ActionLink("Add File", "AddFile", "File", new { AssignmentId = item.AssignmentId, StudentId = Response.Cookies["Id"].Value }, null);
-                    @Html.ActionLink("View Files", "GetById", "File", new { id = Response.Cookies["Id"].Value }, null);
+                    @Html.ActionLink("Add File | ", "AddFile", "File", new { AssignmentId = item.AssignmentId, StudentId = Response.Cookies["Id"].Value }, null)
+                    @Html.ActionLink("View Files", "GetById", "File", new {id = Response.Cookies["Id"].Value}, null)
                 }
-                @if (Response.Cookies["Role"].Value == "teacher")
+                @if (Request.Cookies["Role"].Value == "teacher")
                 {
-                    @Html.ActionLink("View all Files", "Index", "File", null, null);
-                    @Html.ActionLink("Delete", "Delete", new { id = item.AssignmentId });
+                    @Html.ActionLink("View all Files | ", "Index", "File", null, null)
+                    @Html.ActionLink("Delete", "Delete", new { id = item.AssignmentId })
                 }
             </td>
         </tr>
     }
 
 </table>
-@if (Response.Cookies["Role"].Value == "teacher")
+@if (Request.Cookies["Role"].Value == "teacher")
 {
     <li>@Html.ActionLink("Create Assignment", "Create", "Assignment")</li>
 }
