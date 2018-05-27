@@ -1,4 +1,8 @@
 ﻿@{
+    if (Request.Cookies["Role"] == null)
+    {
+        Layout = "~/Views/Shared/HomeView.cshtml";
+    }
     if (Request.Cookies["Role"].Value == "teacher")
     {
         Layout = "~/Views/Shared/TeacherView.cshtml";
