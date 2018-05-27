@@ -53,7 +53,7 @@ node('master'){
     stage('deploy'){
         try{
             dir("BuellerWebApi\\obj\\Debug\\Package"){
-                bat "\"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\" -source:package='C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2\\Project2-Bueller\\BuellerWebApi\\obj\\Debug\\Package\\BuellerWebApi.zip' -dest:auto,computerName=\"https://ec2-13-59-126-130.us-east-2.compute.amazonaws.com:8172/msdeploy.axd\",userName=\"Administrator\",password=\"Playhocke7\",authtype=\"basic\",includeAcls=\"False\" -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:\"C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2\\Project2-Bueller\\BuellerWebApi\\obj\\Debug\\Package\\BuellerWebApi.SetParameters.xml\" -AllowUntrusted=True"
+                bat "\"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\" -source:package='C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2\\Project2-Bueller\\BuellerWebApi\\obj\\Debug\\Package\\BuellerWebApi.zip' -dest:auto,computerName=\"${service_deploy_location}/msdeploy.axd\",userName=\"Administrator\",password=\"${service_password}\",authtype=\"basic\",includeAcls=\"False\" -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:\"C:\\Program Files (x86)\\Jenkins\\workspace\\Project_2\\Project2-Bueller\\BuellerWebApi\\obj\\Debug\\Package\\BuellerWebApi.SetParameters.xml\" -AllowUntrusted=True"
                 slackSend message:"Deployment Complete"  
         }
         }
