@@ -130,6 +130,18 @@ namespace BuellerWebApi.Controllers
             return Ok(files);
         }
 
+        [HttpGet]
+        [Route("File/GetByClassId/{classId}")]
+        public IHttpActionResult GetFilesByClassId(int classId)
+        {
+            var files = fileRepo.GetFilesByClassId(classId);
+            if (files.Count() == 0)
+            {
+                return NotFound();
+            }
+            return Ok(files);
+        }
+
         private bool FileExists(int id)
         {
             return fileRepo.Table.Count(e => e.FileId == id) > 0;
@@ -231,6 +243,8 @@ namespace BuellerWebApi.Controllers
             }
             return Ok(grades);
         }
+
+
 
         private bool GradeExists(int id)
         {

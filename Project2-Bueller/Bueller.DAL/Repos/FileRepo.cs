@@ -27,5 +27,11 @@ namespace Bueller.DAL.Repos
             var temp = this.Entities.Where(x => x.FileName == name);
             return Mapper.Map<IEnumerable<FileDto>>(temp);
         }
+
+        public IEnumerable<FileDto> GetFilesByClassId(int classId)
+        {
+            var temp = this.Entities.Where(x => x.Assignment.ClassId == classId);
+            return Mapper.Map<IEnumerable<FileDto>>(temp);
+        }
     }
 }
