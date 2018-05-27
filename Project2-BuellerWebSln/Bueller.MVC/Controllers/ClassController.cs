@@ -109,6 +109,26 @@ namespace Bueller.MVC.Controllers
 
             var classresponse = await apiResponse.Content.ReadAsAsync<Class>();
 
+            HttpRequestMessage apiRequest2 = CreateRequestToService(HttpMethod.Get, $"api/Class/EnrollmentCount/{id}");
+            HttpResponseMessage apiResponse2;
+
+            try
+            {
+                apiResponse2 = await HttpClient.SendAsync(apiRequest2);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse2.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var count = await apiResponse2.Content.ReadAsAsync<int>();
+            classresponse.EnrollmentCount = count;
+
             return View(classresponse);
         }
 
