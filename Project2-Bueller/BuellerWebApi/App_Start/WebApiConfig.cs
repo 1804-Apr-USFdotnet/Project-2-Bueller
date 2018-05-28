@@ -17,7 +17,7 @@ namespace BuellerWebApi
             // Web API configuration and services
 
 
-            var corsattr = new EnableCorsAttribute("http://localhost:4200", "*", "*");
+            var corsattr = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(corsattr);
 
             config.Filters.Add(new AuthorizeAttribute());

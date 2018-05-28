@@ -35,6 +35,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.FileId }) |
+                    @Html.ActionLink("Grade File", "Create", "Grade", new { fileId = item.FileId }, null) |
                     @Html.ActionLink("Details", "Details", new { id = item.FileId }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.FileId })
                 </td>

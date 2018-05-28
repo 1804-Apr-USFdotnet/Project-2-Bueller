@@ -74,7 +74,7 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetById/{id}");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetByAssignmentId/{id}");
             HttpResponseMessage apiResponse;
 
             try
