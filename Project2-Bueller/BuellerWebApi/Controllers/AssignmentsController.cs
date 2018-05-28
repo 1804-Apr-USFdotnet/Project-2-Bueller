@@ -48,7 +48,7 @@ namespace BuellerWebApi.Controllers
             return Ok(assignment);
         }
         [HttpGet]
-        [Route("GetById/{id}")]
+        [Route("GetByTeacherId/{id}")]
         public IHttpActionResult GetByTeacherId(int id)
         {
             var assignment = assignmentRepo.GetAssignmentsByTeacherId(id);

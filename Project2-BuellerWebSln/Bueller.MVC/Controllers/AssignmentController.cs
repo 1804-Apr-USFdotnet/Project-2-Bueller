@@ -16,10 +16,10 @@ namespace Bueller.MVC.Controllers
     {
 
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+        public AssignmentController()
+        {
+            ViewBag.Title = "AssignmentController";
+        }
 
 
 
@@ -53,6 +53,7 @@ namespace Bueller.MVC.Controllers
                 assignments = await apiResponse.Content.ReadAsAsync<List<Assignment>>();
             }
 
+            ViewBag.classid = id;
 
 
             return View(assignments);
@@ -103,9 +104,10 @@ namespace Bueller.MVC.Controllers
 
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("MyClasses", "Class");
         }
 
+        [HttpGet]
         public async Task<ActionResult> Delete(int id)
         {
             if (id == 0)
@@ -113,6 +115,31 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Assignment/GetById/{id}");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var file = await apiResponse.Content.ReadAsAsync<Assignment>();
+
+            return View(file);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<ActionResult> ConfirmDelete(int id)
+        {
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Delete, $"api/Assignment/Delete/{id}");
             HttpResponseMessage apiResponse;
 
@@ -130,8 +157,9 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("MyClasses", "Class");
         }
+
     }
 }
 
