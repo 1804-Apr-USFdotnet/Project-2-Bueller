@@ -42,7 +42,8 @@ namespace BuellerWebApi.Controllers
 
 
             [HttpGet]
-            [Route("GetbooksbyClassId/{id}")]
+        [AllowAnonymous]
+        [Route("GetbooksbyClassId/{id}")]
             public IHttpActionResult GetBooksByClassId(int id)
             {
                 var books = bookRepo.GetBookbyClassId(id);
