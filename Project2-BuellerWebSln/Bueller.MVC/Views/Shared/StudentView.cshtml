@@ -37,7 +37,7 @@
                     <li>
                         <a class="nav-link" href="@Url.Action("Logout","Account")">Logout</a>
                     </li>
-                    <li style="padding-top: 7.5px; padding-left: 0px; color: white">
+                    <li style="padding-top: 7.5px; color: white">
                         @Request.Cookies["userEmailCookie"].Value (@Request.Cookies["Role"].Value)
                         @*<a class="nav-link disabled"> @Request.Cookies["userEmailCookie"].Value (@Request.Cookies["Role"].Value)</a>*@
                     </li>
