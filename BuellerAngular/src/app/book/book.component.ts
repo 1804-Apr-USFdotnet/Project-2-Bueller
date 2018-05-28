@@ -8,8 +8,8 @@ import { Book } from "../models/Book";
 })
 export class BookComponent implements OnInit {
 
- books: Book[] = [
-    {Title: "", price: 70.00,  classId: 1}
+ books:  [
+  {}  
   ];
   constructor(private bookSvc: BookService) { }
 
@@ -17,7 +17,9 @@ export class BookComponent implements OnInit {
   }
   getBooks(){
 this.bookSvc.getAllBooks( (response) => {
-      this.books = response.results;
+  
+      this.books = response;
+      console.log(response);
     });
 
   }

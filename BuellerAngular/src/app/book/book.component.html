@@ -3,11 +3,16 @@
 </p>
 
 <button (click)="getBooks()">Search</button>
-<div *ngIf="books">
+<!-- <div *ngIf="books"> -->
   <h3>Books:</h3>
   <ol>
     <li *ngFor="let book of books">
-     {{book.Title}}
+     {{book.BookTitle}}
+     {{book.Price}}
+
+    </li>
+<li>
+
     </li>
   </ol>
-</div>
+<!-- </div> -->

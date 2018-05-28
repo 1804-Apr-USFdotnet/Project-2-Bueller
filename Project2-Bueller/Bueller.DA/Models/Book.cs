@@ -26,6 +26,8 @@ namespace Bueller.DA.Models
         [Required]
         public decimal Price { get; set; }
 
+
+        public string BookDescription { get; set; }
         //[Required]
         //[ScaffoldColumn(false)]
         //public int GradeId { get; set; }
