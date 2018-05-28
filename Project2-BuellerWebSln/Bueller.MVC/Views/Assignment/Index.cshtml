@@ -38,7 +38,7 @@
                 }
                 @if (Request.Cookies["Role"].Value == "teacher")
                 {
-                    @Html.ActionLink("View all Files | ", "Index", "File", null, null)
+                    @Html.ActionLink("View all Files | ", "GetByIdAssignment", "File", new {id = item.AssignmentId}, null)
                     @Html.ActionLink("Delete", "Delete", new { id = item.AssignmentId })
                 }
             </td>
@@ -48,5 +48,5 @@
 </table>
 @if (Request.Cookies["Role"].Value == "teacher")
 {
-    <li>@Html.ActionLink("Create Assignment", "Create", "Assignment")</li>
+    <li>@Html.ActionLink("Create Assignment", "Create", "Assignment", new{ClassId = ViewBag.classid}, null)</li>
 }

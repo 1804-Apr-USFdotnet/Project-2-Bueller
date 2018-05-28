@@ -71,7 +71,7 @@ namespace Bueller.MVC.Models
 
         //public virtual ICollection<File> Files { get; set; }
 
-        //public virtual ICollection<Class> Classes { get; set; }
+        public virtual ICollection<Class> Classes { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
