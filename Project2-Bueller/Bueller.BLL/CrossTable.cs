@@ -67,7 +67,7 @@ namespace Bueller.BLL
         public IEnumerable<StudentDto> GetStudentsByTeacherId(int id)
         {
             var classes = classRepo.Table.Where(x => x.TeacherId == id).ToList();
-            var students = classes.SelectMany(x => x.Students);
+            var students = classes.SelectMany(x => x.Students).Distinct();
 
             return Mapper.Map<IEnumerable<StudentDto>>(students).ToList();
         }
@@ -75,7 +75,7 @@ namespace Bueller.BLL
         public IEnumerable<EmployeeDto> GetTeachersByStudnetId(int id)
         {
             var classes = GetClassesByStudentId(id);
-            var teachers = classes.Select(x => x.Teacher).ToList();
+            var teachers = classes.Select(x => x.Teacher).Where(x => x != null).Distinct().ToList();
 
             return Mapper.Map<IEnumerable<EmployeeDto>>(teachers);
         }

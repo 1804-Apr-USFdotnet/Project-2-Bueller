@@ -57,6 +57,7 @@ namespace Bueller.MVC.Models
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Grade is required")]
+        [Display(Name = "Class Level")]
         [StringLength(100, ErrorMessage = "Grade cannot be more than 100 characters")]
         public string Grade { get; set; }
 
@@ -78,8 +79,10 @@ namespace Bueller.MVC.Models
         //[NotMapped]
         public int Credits { get; set; }
         //[NotMapped]
+        [Display(Name = "Enrollment Status")]
         public string StudentType { get; set; }
         //[NotMapped]
+        [Display(Name = "Grade")]
         public double AverageGrade { get; set; }
     }
 }
