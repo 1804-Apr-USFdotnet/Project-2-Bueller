@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewBag.Title - Bueller</title>
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -37,11 +37,11 @@
                     <li>
                         <a class="nav-link" href="@Url.Action("Logout","Account")">Logout</a>
                     </li>
-                    <li>
-                        <a class="nav-link disabled">@Request.Cookies["userEmailCookie"].Value (@Request.Cookies["Role"].Value)</a>
-                    </li>
+
                 </ul>
+
             </div>
+            @Request.Cookies["userEmailCookie"].Value (@Request.Cookies["Role"].Value)
         </div>
     </nav>
     <div style="height: 60px"></div>
