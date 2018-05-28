@@ -21,7 +21,8 @@
           <th scope="row"> {{i + 1}}</th>
           <td>{{book.BookTitle}}</td>
           <td>{{book.Price}}</td>
-          <td>{{book.BookDescription}}</td>
+          <!-- <td>{{book.BookDescription}}</td> -->
+        <td>  <a routerLink="/bookByClass/{{book.ClassId}}">{{book.ClassId}}</a> </td>
         </tr>
     
       </tbody>
