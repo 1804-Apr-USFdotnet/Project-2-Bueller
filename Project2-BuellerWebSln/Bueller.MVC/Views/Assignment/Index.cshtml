@@ -34,11 +34,11 @@
                 @if (Request.Cookies["Role"].Value == "student")
                 {
                     @Html.ActionLink("Add File | ", "AddFile", "File", new { AssignmentId = item.AssignmentId, StudentId = Request.Cookies["Id"].Value }, null)
-                    @Html.ActionLink("View Files", "GetByIdStudent", "File", new {studentId = Request.Cookies["Id"].Value, assignmentId = item.AssignmentId}, null)
+                    @Html.ActionLink("View Files", "GetByIdStudent", "File", new { studentId = Request.Cookies["Id"].Value, assignmentId = item.AssignmentId }, null)
                 }
                 @if (Request.Cookies["Role"].Value == "teacher")
                 {
-                    @Html.ActionLink("View all Files | ", "Index", "File", null, null)
+                    @Html.ActionLink("View all Files | ", "GetByIdAssignment", "File", new { id = item.AssignmentId }, null)
                     @Html.ActionLink("Delete", "Delete", new { id = item.AssignmentId })
                 }
             </td>
@@ -48,5 +48,5 @@
 </table>
 @if (Request.Cookies["Role"].Value == "teacher")
 {
-    <li>@Html.ActionLink("Create Assignment", "Create", "Assignment" , new{ClassId = id}, null)</li>
+    <li>@Html.ActionLink("Create Assignment", "Create", "Assignment", new { ClassId = id }, null)</li>
 }

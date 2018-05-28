@@ -67,6 +67,35 @@ namespace Bueller.MVC.Controllers
             return View(files);
         }
 
+        public async Task<ActionResult> GetByIdAssignment(int id)
+        {
+            if (id == 0)
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetById/{id}");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            List<File> files = new List<File>();
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                files = await apiResponse.Content.ReadAsAsync<List<File>>();
+            }
+
+
+            return View(files);
+        }
+
         public async Task<ActionResult> GetByIdStudent(int studentId, int assignmentId)
         {
             if (studentId == 0 || assignmentId == 0)

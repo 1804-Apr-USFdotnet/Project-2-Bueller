@@ -236,6 +236,8 @@
     <Content Include="Views\File\Details.cshtml" />
     <Content Include="Views\File\Edit.cshtml" />
     <Content Include="Views\File\Delete.cshtml" />
+    <Content Include="Views\Assignment\Delete.cshtml" />
+    <Content Include="Views\File\GetByIdAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
