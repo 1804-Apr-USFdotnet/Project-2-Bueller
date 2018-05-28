@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {Material  } from "./material.module";
+// import {Material  } from "./material.module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { BookComponent } from './book/book.component';
 import { HttpClientModule } from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BookByClassComponent } from './book-by-class/book-by-class.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   
     NavigationBarComponent,
     ClassesComponent,
-    BookComponent
+    BookComponent,
+    BookByClassComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    Material,
+    // Material,
     RouterModule
   
   ],
