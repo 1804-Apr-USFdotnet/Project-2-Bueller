@@ -22,6 +22,7 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("My Classes", "MyClasses", "Class")</li>
                 <li>@Html.ActionLink("All Classes", "Index", "Class")</li>
+                <li>@Html.ActionLink("My Teachers", "GetTeachers", "Student")</li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li style="padding: 15px; color: white">@Request.Cookies["userEmailCookie"].Value (@Request.Cookies["Role"].Value)</li>

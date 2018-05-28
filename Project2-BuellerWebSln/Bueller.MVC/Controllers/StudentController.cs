@@ -44,6 +44,32 @@ namespace Bueller.MVC.Controllers
             return View(assignment);
         }
 
+        public async Task<ActionResult> GetTeachers()
+        {
+            int id = Convert.ToInt32(Request.Cookies["Id"].Value);
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Student/GetTeachersByStudentId/{id}");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            List<Employee> files = new List<Employee>();
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                files = await apiResponse.Content.ReadAsAsync<List<Employee>>();
+            }
+
+
+            return View(files);
+        }
+
         // GET: Student/Details/5
         public ActionResult Details(int id)
         {
