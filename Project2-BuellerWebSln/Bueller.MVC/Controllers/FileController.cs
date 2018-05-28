@@ -7,7 +7,6 @@ using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Bueller.MVC.Models;
 
 namespace Bueller.MVC.Controllers
 {
@@ -28,12 +27,42 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            if (!apiResponse.IsSuccessStatusCode)
+            List<File> files = new List<File>();
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                files = await apiResponse.Content.ReadAsAsync<List<File>>();
+            }
+
+
+
+            return View(files);
+        }
+
+        public async Task<ActionResult> GetByIdClass(int classId)
+        {
+            if (classId == 0)
             {
                 return View("Error");
             }
 
-            var files = await apiResponse.Content.ReadAsAsync<List<File>>();
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetByClassId/{classId}");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            List<File> files = new List<File>();
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                files = await apiResponse.Content.ReadAsAsync<List<File>>();
+            }
+
 
             return View(files);
         }
@@ -57,12 +86,12 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            if (!apiResponse.IsSuccessStatusCode)
+            List<File> files = new List<File>();
+            if (apiResponse.IsSuccessStatusCode)
             {
-                return View("Error");
+                files = await apiResponse.Content.ReadAsAsync<List<File>>();
             }
 
-            var files = await apiResponse.Content.ReadAsAsync<List<File>>();
 
             return View(files);
         }

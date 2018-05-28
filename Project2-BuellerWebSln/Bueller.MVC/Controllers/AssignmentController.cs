@@ -47,13 +47,13 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            if (!apiResponse.IsSuccessStatusCode)
+            List<Assignment> assignments = new List<Assignment>();
+            if (apiResponse.IsSuccessStatusCode)
             {
-                return View("Error");
+                assignments = await apiResponse.Content.ReadAsAsync<List<Assignment>>();
             }
 
 
-            var assignments = await apiResponse.Content.ReadAsAsync<List<Assignment>>();
 
             return View(assignments);
         }
@@ -108,7 +108,29 @@ namespace Bueller.MVC.Controllers
 
         public async Task<ActionResult> Delete(int id)
         {
-            return null;
+            if (id == 0)
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Delete, $"api/Assignment/Delete/{id}");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

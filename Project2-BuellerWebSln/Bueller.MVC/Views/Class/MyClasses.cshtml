@@ -63,16 +63,13 @@
             <td>
                 @if (ViewBag.Role == "teacher")
                 {
-                <p>
-                    @Html.ActionLink("Details", "Details", new { id = item.ClassId }) |
-                    @Html.ActionLink("Assignments", "Index", "Assignment", new { id = item.ClassId }, null) |
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ClassId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ClassId }) |
-                    @Html.ActionLink("Submitted Assignments", "Index", "File", new { id = item.ClassId }, null)
-                </p>
-       
-
-
+                    <p>
+                        @Html.ActionLink("Details", "Details", new { id = item.ClassId }) |
+                        @Html.ActionLink("Assignments", "Index", "Assignment", new { id = item.ClassId }, null) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ClassId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ClassId }) |
+                        @Html.ActionLink("Submitted Files", "GetByIdClass", "File", new { classId = item.ClassId }, null)
+                    </p>
                 }
                 else
                 {

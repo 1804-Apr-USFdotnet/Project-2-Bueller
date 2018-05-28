@@ -232,6 +232,7 @@
     <Content Include="Views\Profile\Student.cshtml" />
     <Content Include="Views\Profile\EditEmployee.cshtml" />
     <Content Include="Views\Profile\EditStudent.cshtml" />
+    <Content Include="Views\File\GetByIdClass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
