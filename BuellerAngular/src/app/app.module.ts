@@ -11,6 +11,8 @@ import { BookComponent } from './book/book.component';
 import { HttpClientModule } from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BookByClassComponent } from './book-by-class/book-by-class.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,9 @@ import { BookByClassComponent } from './book-by-class/book-by-class.component';
     NgbModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    FilterPipeModule,
     FormsModule,
+    // Ng2SearchPipeModule,
     // Material,
     RouterModule
   

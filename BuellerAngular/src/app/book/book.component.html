@@ -6,6 +6,9 @@
 <!-- <div *ngIf="books"> -->
   <h3>Books:</h3>
 
+  <input class="form-control" type="text" name="search" [(ngModel)]="userFilter.BookTitle"> 
+  <h3>Books:</h3>
+
 
   <table   class="table">
       <thead>
@@ -17,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let book of books; let i = index">
+        <tr *ngFor="let book of books | filterBy : userFilter; let i = index">
           <th scope="row"> {{i + 1}}</th>
           <td>{{book.BookTitle}}</td>
           <td>{{book.Price}}</td>
@@ -27,5 +30,3 @@
     
       </tbody>
     </table>
-
-

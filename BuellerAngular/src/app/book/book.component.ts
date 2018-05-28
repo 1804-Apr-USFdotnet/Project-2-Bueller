@@ -15,19 +15,22 @@ export class BookComponent implements OnInit {
     'bookTitle', 'price'
   ]
  books:  [
-  {}  
+  {BookTitle: ''}  
   ];
+  public  userFilter: any = { BookTitle: 'math' };
+  
   constructor(private bookSvc: BookService) { }
 
   ngOnInit() {
-
-  }
-  getBooks(){
-this.bookSvc.getAllBooks( (response) => {
+    this.bookSvc.getAllBooks( (response) => {
   
       this.books = response;
       console.log(response);
     });
+
+
+  }
+  searchBooks(){
 
   }
 
