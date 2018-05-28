@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<Bueller.MVC.Models.Assignment>
-
+@{
+    ViewBag.Title = "AssignmentController";
+    int id = ViewBag.classid;
+}
 
 <table class="table">
     <tr>
@@ -45,5 +48,5 @@
 </table>
 @if (Request.Cookies["Role"].Value == "teacher")
 {
-    <li>@Html.ActionLink("Create Assignment", "Create", "Assignment")</li>
+    <li>@Html.ActionLink("Create Assignment", "Create", "Assignment" , new{ClassId = id}, null)</li>
 }

@@ -134,5 +134,142 @@ namespace Bueller.MVC.Controllers
 
             return RedirectToAction("MyClasses", "Class", null);
         }
+
+        public async Task<ActionResult> Edit(int id)
+        {
+            if (id == 0)
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetById/{id}");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            File file = new File();
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                file = await apiResponse.Content.ReadAsAsync<File>();
+            }
+
+            return View(file);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(int id, File file)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Put, $"api/File/AddAt/{id}");
+            apiRequest.Content = new ObjectContent<File>(file, new JsonMediaTypeFormatter());
+
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            return RedirectToAction("MyClasses", "Class");
+
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Delete(int id)
+        {
+            if (id == 0)
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetById/{id}");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var file = await apiResponse.Content.ReadAsAsync<File>();
+
+            return View(file);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<ActionResult> ConfirmDelete(int id)
+        {
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Delete, $"api/File/Delete/{id}");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            return RedirectToAction("MyClasses", "Class");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Details(int id)
+        {
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetById/{id}");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            File file = new File();
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                file = await apiResponse.Content.ReadAsAsync<File>();
+            }
+
+            return View(file);
+        }
     }
 }

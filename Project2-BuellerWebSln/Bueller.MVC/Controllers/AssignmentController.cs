@@ -16,10 +16,10 @@ namespace Bueller.MVC.Controllers
     {
 
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+        public AssignmentController()
+        {
+            ViewBag.Title = "AssignmentController";
+        }
 
 
 
@@ -53,6 +53,7 @@ namespace Bueller.MVC.Controllers
                 assignments = await apiResponse.Content.ReadAsAsync<List<Assignment>>();
             }
 
+            ViewBag.classid = id;
 
 
             return View(assignments);
@@ -103,7 +104,7 @@ namespace Bueller.MVC.Controllers
 
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("MyClasses","Class");
         }
 
         public async Task<ActionResult> Delete(int id)
