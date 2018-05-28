@@ -17,7 +17,7 @@ getBooksByClassId(
   onSuccess,
   onFail = (reason) => console.log(reason)) {
 
-    var url = "http://localhost:57265/api/book/GetbooksbyClassId/" + classId;
+    var url = "http://13.59.126.130/BuellerWebApi_deploy/api/book/GetbooksbyClassId/" + classId;
   var req = this.httpClient.get(url);
   var promise = req.toPromise();
 
@@ -35,7 +35,7 @@ getBooksByClassId(
     onSuccess,
     onFail = (reason) => console.log(reason)) {
    
-      var url = "http://localhost:57265/api/book/getAll";
+      var url = "http://13.59.126.130/BuellerWebApi_deploy/api/book/getAll";
    
     var req = this.httpClient.get(url);
     var promise = req.toPromise();
