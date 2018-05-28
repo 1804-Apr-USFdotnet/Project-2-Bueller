@@ -23,7 +23,6 @@ export class BookComponent implements OnInit {
 
   ngOnInit() {
     this.bookSvc.getAllBooks( (response) => {
-  
       this.books = response;
       console.log(response);
     });
