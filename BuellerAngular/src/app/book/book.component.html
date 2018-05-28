@@ -5,14 +5,26 @@
 <button (click)="getBooks()">Search</button>
 <!-- <div *ngIf="books"> -->
   <h3>Books:</h3>
-  <ol>
-    <li *ngFor="let book of books">
-     {{book.BookTitle}}
-     {{book.Price}}
 
-    </li>
-<li>
 
-    </li>
-  </ol>
+  <table   class="table">
+      <thead>
+        <tr >
+          <th scope="col">#</th>
+          <th scope="col">Book Title</th>
+          <th scope="col">Price</th>
+          <th scope="col">Book Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books; let i = index">
+          <th scope="row"> {{i + 1}}</th>
+          <td>{{book.BookTitle}}</td>
+          <td>{{book.Price}}</td>
+          <td>{{book.BookDescription}}</td>
+        </tr>
+    
+      </tbody>
+    </table>
 <!-- </div> -->
+
