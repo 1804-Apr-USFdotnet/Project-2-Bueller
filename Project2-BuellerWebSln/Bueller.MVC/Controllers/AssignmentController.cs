@@ -54,19 +54,23 @@ namespace Bueller.MVC.Controllers
             }
 
             ViewBag.classid = id;
+            //ViewBag.ClassName = "";
 
-
+            TempData["ClassId"] = id;
             return View(assignments);
         }
 
 
 
 
-        public ViewResult Create(int ClassId)
+        public ViewResult Create()
         {
             Assignment assignment = new Assignment();
-            assignment.ClassId = ClassId;
 
+            TempData.Keep("ClassId");
+            //ViewBag.RestaurantId = TempData.Peek("RestaurantId");
+            assignment.ClassId = Convert.ToInt32(TempData.Peek("ClassId"));
+            TempData.Keep("ClassId");
 
 
             return View(assignment);
@@ -104,7 +108,7 @@ namespace Bueller.MVC.Controllers
 
 
 
-            return RedirectToAction("MyClasses", "Class");
+            return RedirectToAction("Index", "Assignment", new { id = assignment.ClassId });
         }
 
         [HttpGet]
