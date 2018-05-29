@@ -44,11 +44,6 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            if (newGrade.File.Assignment.Class.TeacherId != Convert.ToInt32(Request.Cookies["Id"].Value))
-            {
-                return View("Error");
-            }
-
 
             if (!ModelState.IsValid)
             {
@@ -78,7 +73,7 @@ namespace Bueller.MVC.Controllers
 
 
 
-            return RedirectToAction("GetByIdAssignment","File", new {id = newGrade.File.AssignmentId});
+            return RedirectToAction("MyClasses","Class");
         }
     }
 }

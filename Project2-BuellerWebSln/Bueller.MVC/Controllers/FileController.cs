@@ -181,7 +181,7 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            return RedirectToAction("Index", "Assignment", new {id = file.Assignment.ClassId});
+            return RedirectToAction("MyClasses", "Class");
         }
 
         public async Task<ActionResult> Edit(int id)
@@ -260,7 +260,7 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            return RedirectToAction("Index", "Assignment", new { id = file.Assignment.ClassId });
+            return RedirectToAction("MyClasses", "Class");
 
         }
 
