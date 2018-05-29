@@ -296,5 +296,130 @@ namespace Bueller.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<ActionResult> Edit(int id)
+        {
+            if (id == 0)
+            {
+                return View("Error");
+            }
+
+            if (Request.Cookies["Role"].Value != "teacher")
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetById/{id}");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            Class classresult = new Class();
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                classresult = await apiResponse.Content.ReadAsAsync<Class>();
+            }
+
+            if (classresult.TeacherId != Convert.ToInt32(Request.Cookies["Id"].Value))
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest2 = CreateRequestToService(HttpMethod.Get, "api/Class/Subject/GetAllNames");
+            HttpResponseMessage apiResponse2;
+
+            try
+            {
+                apiResponse2 = await HttpClient.SendAsync(apiRequest2);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse2.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var subjects = await apiResponse2.Content.ReadAsAsync<List<string>>();
+            var subjects2 = subjects.OrderBy(q => q);
+            var subjectselectlist = subjects2.Select(c => new SelectListItem {Text = c, Value = c}).ToList();
+
+            ViewBag.Subjects = subjectselectlist;
+
+            return View(classresult);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(int id, Class classres)
+        {
+            if (Request.Cookies.Get("Role").Value != "teacher")
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest2 = CreateRequestToService(HttpMethod.Get, $"api/Class/Subject/GetByName/{classres.SubjectName}");
+            HttpResponseMessage apiResponse2;
+
+            try
+            {
+                apiResponse2 = await HttpClient.SendAsync(apiRequest2);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse2.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            var subject = await apiResponse2.Content.ReadAsAsync<Subject>();
+
+            classres.SubjectId = subject.SubjectId;
+            classres.TeacherId = Convert.ToInt32(Request.Cookies.Get("Id").Value);
+
+
+            if (!ModelState.IsValid)
+            {
+                return View("Error");
+            }
+
+            if (Request.Cookies["Role"].Value != "teacher")
+            {
+                return View("Error");
+            }
+
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Put, $"api/Class/Edit/{id}");
+            apiRequest.Content = new ObjectContent<Class>(classres, new JsonMediaTypeFormatter());
+
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("Error");
+            }
+
+            return RedirectToAction("MyClasses", "Class");
+
+        }
     }
 }
