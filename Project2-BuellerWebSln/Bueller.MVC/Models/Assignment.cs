@@ -13,14 +13,15 @@ namespace Bueller.MVC.Models
         public int AssignmentId { get; set; }
 
         // this will also be title of homework assignment
-        [Required]
+        [Required(ErrorMessage = "Assignment name is required")]
         [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Assignment name cannot be more than 100 characters")]
-        [Display(Name =" Assignment Title")]
+        [Display(Name ="Assignment Name")]
         public string AssignmentName { get; set; }
 
         [Required(ErrorMessage = "Due date is required")]
-
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Due Date")]
         public DateTime DueDate { get; set; }
 
         //[Required]
