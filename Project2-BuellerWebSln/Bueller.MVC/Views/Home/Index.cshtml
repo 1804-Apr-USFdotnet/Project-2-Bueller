@@ -1,10 +1,10 @@
-﻿@model Tuple<int,int,int>
+﻿@model Tuple<int, int, int>
 
 @{
     ViewBag.Title = "Home Page";
 }
 
-<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+<header class="masthead" style="background-image: url(https://s3.us-east-2.amazonaws.com/kbaynardbucket/home-bg.jpg)">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -18,17 +18,17 @@
     </div>
 </header>
 
-<div class="card-deck">
+<div class="card-deck" style="text-align: center">
     <div class="card">
         <div class="card-header">Total Enrollment</div>
-        <div class="card-body"></div>
+        <div class="card-body"><b>@Model.Item3 Students</b></div>
     </div>
     <div class="card">
         <div class="card-header">Total Faculty</div>
-        <div class="card-body"></div>
+        <div class="card-body"><b>@Model.Item2 Teachers</b></div>
     </div>
     <div class="card">
         <div class="card-header">Classes Offered</div>
-        <div class="card-body"></div>
+        <div class="card-body"><b>@Model.Item1 Classes</b></div>
     </div>
 </div>
