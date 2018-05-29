@@ -27,71 +27,71 @@
     <div class="card">
         <div class="card-header">Monday Classes</div>
         <div class="card-body">
-            <ol>
+            <ul>
                 @if (monClasses.Any())
                 {
                     foreach (var Class in monClasses)
                     {
-                        <li>@Class.Name, @Class.StartTime-@Class.EndTime</li>
+                        <li><b>@Class.Name</b>, @Class.StartTime-@Class.EndTime</li>
                     }
                 }
-            </ol>
+            </ul>
         </div>
     </div>
     <div class="card">
         <div class="card-header">Tuesday Classes</div>
         <div class="card-body">
-            <ol>
+            <ul>
                 @if (tueClasses.Any())
                 {
                     foreach (var Class in tueClasses)
                     {
-                        <li>@Class.Name, @Class.StartTime-@Class.EndTime</li>
+                        <li><b>@Class.Name</b>, @Class.StartTime-@Class.EndTime</li>
                     }
                 }
-            </ol>
+            </ul>
         </div>
     </div>
     <div class="card">
         <div class="card-header">Wednesday Classes</div>
         <div class="card-body">
-            <ol>
+            <ul>
                 @if (wedClasses.Any())
                 {
                     foreach (var Class in wedClasses)
                     {
-                        <li>@Class.Name, @Class.StartTime-@Class.EndTime</li>
+                        <li><b>@Class.Name</b>, @Class.StartTime-@Class.EndTime</li>
                     }
                 }
-            </ol>
+            </ul>
         </div>
     </div>
     <div class="card">
         <div class="card-header">Thursday Classes</div>
         <div class="card-body">
-            <ol>
+            <ul>
                 @if (thurClasses.Any())
                 {
                     foreach (var Class in thurClasses)
                     {
-                        <li>@Class.Name, @Class.StartTime-@Class.EndTime</li>
+                        <li><b>@Class.Name</b>, @Class.StartTime-@Class.EndTime</li>
                     }
                 }
-            </ol>
+            </ul>
         </div>
     </div>
     <div class="card">
         <div class="card-header">Friday Classes</div>
         <div class="card-body">
-            <ol>
+            <ul>
                 @if (friClasses.Any())
                 {
                     foreach (var Class in friClasses)
                     {
-                        <li>@Class.Name, @Class.StartTime-@Class.EndTime</li>
+                        <li><b>@Class.Name</b>, @Class.StartTime-@Class.EndTime</li>
                     }
                 }
-            </ol>
+            </ul>
         </div>
     </div>
 </div>
