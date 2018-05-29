@@ -73,10 +73,10 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            if (!apiResponse.IsSuccessStatusCode)
-            {
-                return View("Error");
-            }
+            //if (!apiResponse.IsSuccessStatusCode)
+            //{
+            //    return View("Error");
+            //}
 
 
             var classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
