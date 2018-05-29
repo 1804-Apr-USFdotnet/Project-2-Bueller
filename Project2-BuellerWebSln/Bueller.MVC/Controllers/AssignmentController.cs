@@ -152,10 +152,10 @@ namespace Bueller.MVC.Controllers
 
             var file = await apiResponse.Content.ReadAsAsync<Assignment>();
 
-            if (file.Class.TeacherId != Convert.ToInt32(Request.Cookies["Id"].Value))
-            {
-                return View("Error");
-            }
+            //if (file.Class.TeacherId != Convert.ToInt32(Request.Cookies["Id"].Value))
+            //{
+            //    return View("Error");
+            //}
 
             return View(file);
         }
