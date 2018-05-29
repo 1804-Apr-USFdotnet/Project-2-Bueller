@@ -16,6 +16,7 @@ namespace Bueller.MVC.Controllers
         {
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, "api/Account/GetLoginInfo");
             HttpResponseMessage apiResponse;
+            string role = "";
             try
             {
                 apiResponse = await HttpClient.SendAsync(apiRequest);
@@ -33,12 +34,13 @@ namespace Bueller.MVC.Controllers
                 }
                 ViewBag.Message = "Not logged in!";
             }
+
             else
             {
                 var contentString = await apiResponse.Content.ReadAsStringAsync();
 
                 //string role = contentString.Substring(contentString.IndexOf(":") + 3, contentString.LastIndexOf("]"));
-                string role = contentString.Substring(contentString.IndexOf(":") + 2).TrimEnd('"');
+                role = contentString.Substring(contentString.IndexOf(":") + 2).TrimEnd('"');
                 ViewBag.Message = "Logged in! Result: " + contentString + "\n" + role;
 
 
@@ -51,7 +53,67 @@ namespace Bueller.MVC.Controllers
                 }
             }
 
-            return View();
+            if (role != "teacher" && role != "student")
+            {
+                return RedirectToAction("IndexHome");
+            }
+            return RedirectToAction("IndexCalendar");
+
+        }
+
+        public async Task<ActionResult> IndexHome()
+        {
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Home/GetHome");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+
+            var result = await apiResponse.Content.ReadAsAsync<List<int>>();
+
+            return View("Index", result);
+        }
+
+        public async Task<ActionResult> IndexCalendar()
+        {
+            int id = Convert.ToInt32(Request.Cookies["Id"].Value);
+            string role = Request.Cookies["Role"].Value;
+
+            HttpRequestMessage apiRequest;
+            if (role == "student")
+            {
+                apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByStudentId/{id}");
+            }
+            else
+            {
+                apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherId/{id}");
+            }
+
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+            List<Class> classes = new List<Class>();
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
+            }
+
+            return View(classes);
         }
 
         public ActionResult About()

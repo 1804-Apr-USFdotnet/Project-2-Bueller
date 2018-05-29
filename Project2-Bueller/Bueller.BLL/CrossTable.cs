@@ -86,5 +86,11 @@ namespace Bueller.BLL
 
             return Mapper.Map<IEnumerable<ClassDto>>(classes);
         }
+
+        public List<int> GetHome()
+        {
+            var result = new List<int> { studentRepo.Table.Count(), employeeRepo.Table.Count(x => x.EmployeeType == "teacher"), classRepo.Table.Count() };
+            return result;
+        }
     }
 }

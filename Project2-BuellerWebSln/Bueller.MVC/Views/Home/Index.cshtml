@@ -1,8 +1,10 @@
-﻿@{
+﻿@model List<int>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+<header class="masthead" style="background-image: url(https://s3.us-east-2.amazonaws.com/kbaynardbucket/home-bg.jpg)">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -16,17 +18,17 @@
     </div>
 </header>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-         
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<div class="card-deck" style="text-align: center">
+    <div class="card">
+        <div class="card-header">Total Enrollment</div>
+        <div class="card-body"><b>@Model[0] Students</b></div>
     </div>
-    <div class="col-md-4">
-    
+    <div class="card">
+        <div class="card-header">Total Faculty</div>
+        <div class="card-body"><b>@Model[1] Teachers</b></div>
     </div>
-    <div class="col-md-4">
+    <div class="card">
+        <div class="card-header">Classes Offered</div>
+        <div class="card-body"><b>@Model[2] Classes</b></div>
     </div>
 </div>
