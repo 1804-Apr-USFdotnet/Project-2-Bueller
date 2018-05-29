@@ -28,9 +28,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Modified)
         </td>
-        <th>
-            @Html.DisplayNameFor(model => model.Student.FirstName) @Html.DisplayNameFor(model => model.Student.LastName)
-        </th>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.FirstName) @Html.DisplayFor(modelItem => item.Student.LastName)
+        </td>
         <td>
             @*@Html.ActionLink("Edit", "Edit", new { id=item.FileId }) |*@
             @Html.ActionLink("Grade File", "Create", "Grade", new { fileId = item.FileId }, null) @*|

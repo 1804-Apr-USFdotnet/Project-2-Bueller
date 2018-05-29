@@ -15,6 +15,11 @@ namespace Bueller.MVC.Controllers
         // GET: Grade
         public ActionResult Create(int fileId)
         {
+            if (Request.Cookies.Get("Role").Value != "teacher")
+            {
+                return View("Error");
+            }
+
             Grade grade = new Grade();
             grade.FileId = fileId;
 
@@ -35,6 +40,11 @@ namespace Bueller.MVC.Controllers
         public async Task<ActionResult> Create(Grade newGrade)
         {
             if (Request.Cookies.Get("Role").Value != "teacher")
+            {
+                return View("Error");
+            }
+
+            if (newGrade.File.Assignment.Class.TeacherId != Convert.ToInt32(Request.Cookies["Id"].Value))
             {
                 return View("Error");
             }
@@ -68,7 +78,7 @@ namespace Bueller.MVC.Controllers
 
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("GetByIdAssignment","File", new {id = newGrade.File.AssignmentId});
         }
     }
 }
