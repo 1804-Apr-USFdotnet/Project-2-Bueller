@@ -34,7 +34,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Files", "GetByIdStudent", new{studentId = Model.StudentId, assignmentId = Model.AssignmentId})
 </div>
 
 @section Scripts {

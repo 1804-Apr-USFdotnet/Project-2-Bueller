@@ -31,7 +31,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Assignment", "Index", "Assignment", new{ id = Model.Assignment.ClassId}, null)
 </div>
 
 @section Scripts {
