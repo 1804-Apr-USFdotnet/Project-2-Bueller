@@ -64,7 +64,7 @@ namespace Bueller.MVC.Controllers
 
         public async Task<ActionResult> IndexHome()
         {
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"GetHome");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Home/GetHome");
             HttpResponseMessage apiResponse;
 
             try
