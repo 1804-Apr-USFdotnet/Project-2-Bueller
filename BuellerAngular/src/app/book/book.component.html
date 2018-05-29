@@ -1,11 +1,9 @@
-<p>
-  book works!
-</p>
+<header  class="masthead" style="background-image: url('./img/KCC-Bruin-Bookstore1.jpg')"></header>
+<h3>Books:</h3>
 
-
-
-  <input class="form-control-sm" type="text" name="search" [(ngModel)]="userFilter.BookTitle"> 
-  <h3>Books:</h3>
+<label class="label label-default" for="search"> <b>Search by Title:</b></label> <br>
+  <input  id="search" class="form-control-sm" type="text" name="search" [(ngModel)]="userFilter.BookTitle"> 
+ 
 
 
   <table   class="table">
@@ -18,13 +16,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let book of books | filterBy : userFilter; let i = index">
+        <tr *ngFor="let book of books |   paginate: { itemsPerPage: 8, currentPage: p }| filterBy : userFilter; let i = index">
           <th scope="row"> {{i + 1}}</th>
           <td>{{book.BookTitle}}</td>
           <td>{{book.Price}}</td>
-          <!-- <td>{{book.BookDescription}}</td> -->
-        <td>  <a routerLink="/bookByClass/{{book.ClassId}}">{{book.ClassId}}</a> </td>
+         <td>{{book.BookDescription}}</td> 
+        <!-- <td>  <a routerLink="/bookByClass/{{book.ClassId}}">{{book.ClassId}}</a> </td> -->
         </tr>
     
       </tbody>
     </table>
+    
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>

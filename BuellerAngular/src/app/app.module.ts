@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BookByClassComponent } from './book-by-class/book-by-class.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,8 +31,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     HttpClientModule,
     FilterPipeModule,
     FormsModule,
-    // Ng2SearchPipeModule,
-    // Material,
+NgxPaginationModule, 
     RouterModule
   
   ],
