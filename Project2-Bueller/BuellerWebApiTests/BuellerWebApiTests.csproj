@@ -116,6 +116,10 @@
       <Project>{EB4C8791-01FC-435A-8496-A8AC7AE941D4}</Project>
       <Name>Bueller.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bueller.DA\Bueller.DA.csproj">
+      <Project>{B90FB958-2AC6-40F4-84F4-2E7D3E9C404C}</Project>
+      <Name>Bueller.DA</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BuellerWebApi\BuellerWebApi.csproj">
       <Project>{02FB5E9B-F6CD-4251-9914-2C573AA081F7}</Project>
       <Name>BuellerWebApi</Name>

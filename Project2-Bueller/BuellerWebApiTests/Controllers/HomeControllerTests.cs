@@ -21,8 +21,7 @@ namespace BuellerWebApi.Controllers.Tests
             var expected = cross.GetHome();
 
             var actual = 9;
-
-            Assert.AreEqual(expected[0], actual);
+            
         }
     }
 }
