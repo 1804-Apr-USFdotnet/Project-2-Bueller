@@ -55,10 +55,30 @@ namespace Bueller.MVC.Controllers
 
             if (role != "teacher" && role != "student")
             {
-                return View();
+                return RedirectToAction("IndexHome");
             }
             return RedirectToAction("IndexCalendar");
 
+        }
+
+        public async Task<ActionResult> IndexHome()
+        {
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Home/GetHome");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+
+            var result = await apiResponse.Content.ReadAsAsync<Tuple<int, int, int>>();
+
+            return View("Index", result);
         }
 
         public async Task<ActionResult> IndexCalendar()
