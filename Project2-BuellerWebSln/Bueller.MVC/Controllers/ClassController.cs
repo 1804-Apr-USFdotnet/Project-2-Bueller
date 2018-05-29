@@ -57,7 +57,7 @@ namespace Bueller.MVC.Controllers
 
             if (role == "student")
                 apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByStudentId/{id}");
-            else if(role == "teacher")
+            else if (role == "teacher")
                 apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetByTeacherId/{id}/");
             else
                 apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Class/GetAll");
@@ -73,13 +73,12 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            if (!apiResponse.IsSuccessStatusCode)
+            List<Class> classes = new List<Class>();
+            if (apiResponse.IsSuccessStatusCode)
             {
-                return View("Error");
+                classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
             }
 
-
-            var classes = await apiResponse.Content.ReadAsAsync<List<Class>>();
 
             ViewBag.Role = Request.Cookies["Role"].Value;
             return View(classes);
@@ -230,7 +229,7 @@ namespace Bueller.MVC.Controllers
 
             var subjects = await apiResponse.Content.ReadAsAsync<List<string>>();
             var subjects2 = subjects.OrderBy(q => q);
-            var subjectselectlist = subjects2.Select(c => new SelectListItem {Text = c, Value = c}).ToList();
+            var subjectselectlist = subjects2.Select(c => new SelectListItem { Text = c, Value = c }).ToList();
 
             ViewBag.Subjects = subjectselectlist;
             return View();
@@ -351,7 +350,7 @@ namespace Bueller.MVC.Controllers
 
             var subjects = await apiResponse2.Content.ReadAsAsync<List<string>>();
             var subjects2 = subjects.OrderBy(q => q);
-            var subjectselectlist = subjects2.Select(c => new SelectListItem {Text = c, Value = c}).ToList();
+            var subjectselectlist = subjects2.Select(c => new SelectListItem { Text = c, Value = c }).ToList();
 
             ViewBag.Subjects = subjectselectlist;
 
