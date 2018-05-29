@@ -65,6 +65,11 @@ namespace Bueller.MVC.Controllers
 
         public ViewResult Create()
         {
+            if (Request.Cookies["Role"].Value != "teacher")
+            {
+                return View("Error");
+            }
+
             Assignment assignment = new Assignment();
 
             TempData.Keep("ClassId");
@@ -79,6 +84,10 @@ namespace Bueller.MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(Assignment assignment)
         {
+            if (Request.Cookies["Role"].Value != "teacher")
+            {
+                return View("Error");
+            }
 
             if (!ModelState.IsValid)
             {
@@ -114,6 +123,11 @@ namespace Bueller.MVC.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(int id)
         {
+            if (Request.Cookies["Role"].Value != "teacher")
+            {
+                return View("Error");
+            }
+
             if (id == 0)
             {
                 return View("Error");
@@ -137,6 +151,11 @@ namespace Bueller.MVC.Controllers
             }
 
             var file = await apiResponse.Content.ReadAsAsync<Assignment>();
+
+            if (file.Class.TeacherId != Convert.ToInt32(Request.Cookies["Id"].Value))
+            {
+                return View("Error");
+            }
 
             return View(file);
         }

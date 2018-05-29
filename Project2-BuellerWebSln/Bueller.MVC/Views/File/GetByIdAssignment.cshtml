@@ -14,6 +14,9 @@
         <th>
             Submitted On
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student)
+        </th>
         <th></th>
     </tr>
 
@@ -25,11 +28,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Modified)
         </td>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.FirstName) @Html.DisplayNameFor(model => model.Student.LastName)
+        </th>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FileId }) |
-            @Html.ActionLink("Grade File", "Create", "Grade", new { fileId = item.FileId }, null) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.FileId }) |*@
+            @Html.ActionLink("Grade File", "Create", "Grade", new { fileId = item.FileId }, null) @*|
             @Html.ActionLink("Details", "Details", new { id=item.FileId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FileId })
+            @Html.ActionLink("Delete", "Delete", new { id=item.FileId })*@
         </td>
     </tr>
 }
