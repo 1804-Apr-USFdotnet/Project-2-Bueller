@@ -1,0 +1,35 @@
+﻿@model Bueller.MVC.Models.Subject
+
+@{
+    ViewBag.Title = "Home Page";
+    var result = Model.Name.Split(',').ToList();
+}
+
+<header class="masthead" style="background-image: url(https://s3.us-east-2.amazonaws.com/kbaynardbucket/home-bg.jpg)">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Bueller</h1>
+                    <span class="subheading">Classroom and Employee Management</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="card-deck" style="text-align: center">
+    <div class="card">
+        <div class="card-header">Total Enrollment</div>
+        <div class="card-body"><b>@result[0] Students</b></div>
+    </div>
+    <div class="card">
+        <div class="card-header">Total Faculty</div>
+        <div class="card-body"><b>@result[1] Teachers</b></div>
+    </div>
+    <div class="card">
+        <div class="card-header">Classes Offered</div>
+        <div class="card-body"><b>@result[2] Classes</b></div>
+    </div>
+</div>
