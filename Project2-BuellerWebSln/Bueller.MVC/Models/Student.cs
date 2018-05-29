@@ -85,7 +85,7 @@ namespace Bueller.MVC.Models
                 if (this.Classes.Any())
                     foreach (var classitem in Classes)
                     {
-                        a += Credits;
+                        a += classitem.Credits;
                     }
 
                 return a;
