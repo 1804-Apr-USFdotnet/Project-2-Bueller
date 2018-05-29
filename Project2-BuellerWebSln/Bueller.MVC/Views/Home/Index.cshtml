@@ -1,4 +1,4 @@
-﻿@model Tuple<int, int, int>
+﻿@model List<int>
 
 @{
     ViewBag.Title = "Home Page";
@@ -21,14 +21,14 @@
 <div class="card-deck" style="text-align: center">
     <div class="card">
         <div class="card-header">Total Enrollment</div>
-        <div class="card-body"><b>@Model.Item3 Students</b></div>
+        <div class="card-body"><b>@Model[0] Students</b></div>
     </div>
     <div class="card">
         <div class="card-header">Total Faculty</div>
-        <div class="card-body"><b>@Model.Item2 Teachers</b></div>
+        <div class="card-body"><b>@Model[1] Teachers</b></div>
     </div>
     <div class="card">
         <div class="card-header">Classes Offered</div>
-        <div class="card-body"><b>@Model.Item1 Classes</b></div>
+        <div class="card-body"><b>@Model[2] Classes</b></div>
     </div>
 </div>

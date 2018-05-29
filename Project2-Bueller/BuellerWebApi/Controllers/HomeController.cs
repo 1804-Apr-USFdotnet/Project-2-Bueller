@@ -9,11 +9,10 @@ using Bueller.DAL.Repos;
 
 namespace BuellerWebApi.Controllers
 {
-    [System.Web.Mvc.RoutePrefix("Home")]
+    [System.Web.Mvc.RoutePrefix("api/Home")]
     public class HomeController : ApiController
     {
         private readonly CrossTable cross = new CrossTable();
-
 
         [HttpGet]
         [Route("GetHome")]

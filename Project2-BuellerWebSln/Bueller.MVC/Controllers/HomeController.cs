@@ -76,7 +76,7 @@ namespace Bueller.MVC.Controllers
             }
 
 
-            var result = await apiResponse.Content.ReadAsAsync<Tuple<int, int, int>>();
+            var result = await apiResponse.Content.ReadAsAsync<List<int>>();
 
             return View("Index", result);
         }
