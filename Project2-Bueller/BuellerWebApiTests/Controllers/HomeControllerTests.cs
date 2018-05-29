@@ -22,7 +22,7 @@ namespace BuellerWebApi.Controllers.Tests
 
             var actual = 9;
 
-            Assert.AreEqual(expected.Item1, actual);
+            Assert.AreEqual(expected[0], actual);
         }
     }
 }
