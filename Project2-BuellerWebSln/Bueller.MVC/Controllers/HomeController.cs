@@ -64,7 +64,7 @@ namespace Bueller.MVC.Controllers
 
         public async Task<ActionResult> IndexHome()
         {
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Home/GetHome");
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"GetHome");
             HttpResponseMessage apiResponse;
 
             try
@@ -77,8 +77,8 @@ namespace Bueller.MVC.Controllers
             }
 
 
-            var temp = await apiResponse.Content.ReadAsAsync<Subject>();
-            var result = temp.Name.Split(',').ToList();
+            var result = await apiResponse.Content.ReadAsAsync<Subject>();
+           
 
             return View("Index", result);
         }
