@@ -6,6 +6,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Bueller-App (Needs To be more Creative)';
+  title = 'Bueller-App';
   
 }
