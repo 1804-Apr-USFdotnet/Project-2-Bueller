@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Bueller.MVC.Models;
+using Newtonsoft.Json;
 
 namespace Bueller.MVC.Controllers
 {
@@ -76,7 +77,8 @@ namespace Bueller.MVC.Controllers
             }
 
 
-            var result = await apiResponse.Content.ReadAsAsync<List<int>>();
+            var temp = await apiResponse.Content.ReadAsAsync<Subject>();
+            var result = temp.Name.Split(',').ToList();
 
             return View("Index", result);
         }
