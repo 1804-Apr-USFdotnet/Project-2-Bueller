@@ -15,6 +15,11 @@ namespace Bueller.MVC.Controllers
         // GET: Grade
         public ActionResult Create(int fileId)
         {
+            if (Request.Cookies.Get("Role").Value != "teacher")
+            {
+                return View("Error");
+            }
+
             Grade grade = new Grade();
             grade.FileId = fileId;
 
@@ -68,7 +73,7 @@ namespace Bueller.MVC.Controllers
 
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("MyClasses","Class");
         }
     }
 }

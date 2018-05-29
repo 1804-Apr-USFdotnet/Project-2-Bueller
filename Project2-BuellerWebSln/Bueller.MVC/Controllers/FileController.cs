@@ -13,59 +13,59 @@ namespace Bueller.MVC.Controllers
     public class FileController : AServiceController
     {
 
-        public async Task<ActionResult> Index()
-        {
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, "api/File/GetAll");
-            HttpResponseMessage apiResponse;
+        //public async Task<ActionResult> Index()
+        //{
+        //    HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, "api/File/GetAll");
+        //    HttpResponseMessage apiResponse;
 
-            try
-            {
-                apiResponse = await HttpClient.SendAsync(apiRequest);
-            }
-            catch
-            {
-                return View("Error");
-            }
+        //    try
+        //    {
+        //        apiResponse = await HttpClient.SendAsync(apiRequest);
+        //    }
+        //    catch
+        //    {
+        //        return View("Error");
+        //    }
 
-            List<File> files = new List<File>();
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                files = await apiResponse.Content.ReadAsAsync<List<File>>();
-            }
-
-
-
-            return View(files);
-        }
-
-        public async Task<ActionResult> GetByIdClass(int classId)
-        {
-            if (classId == 0)
-            {
-                return View("Error");
-            }
-
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetByClassId/{classId}");
-            HttpResponseMessage apiResponse;
-
-            try
-            {
-                apiResponse = await HttpClient.SendAsync(apiRequest);
-            }
-            catch
-            {
-                return View("Error");
-            }
-
-            List<File> files = new List<File>();
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                files = await apiResponse.Content.ReadAsAsync<List<File>>();
-            }
+        //    List<File> files = new List<File>();
+        //    if (apiResponse.IsSuccessStatusCode)
+        //    {
+        //        files = await apiResponse.Content.ReadAsAsync<List<File>>();
+        //    }
 
 
-            return View(files);
-        }
+
+        //    return View(files);
+        //}
+
+        //public async Task<ActionResult> GetByIdClass(int classId)
+        //{
+        //    if (classId == 0)
+        //    {
+        //        return View("Error");
+        //    }
+
+        //    HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetByClassId/{classId}");
+        //    HttpResponseMessage apiResponse;
+
+        //    try
+        //    {
+        //        apiResponse = await HttpClient.SendAsync(apiRequest);
+        //    }
+        //    catch
+        //    {
+        //        return View("Error");
+        //    }
+
+        //    List<File> files = new List<File>();
+        //    if (apiResponse.IsSuccessStatusCode)
+        //    {
+        //        files = await apiResponse.Content.ReadAsAsync<List<File>>();
+        //    }
+
+
+        //    return View(files);
+        //}
 
         public async Task<ActionResult> GetByIdAssignment(int id)
         {
@@ -128,6 +128,16 @@ namespace Bueller.MVC.Controllers
 
         public ActionResult AddFile(int AssignmentId, int StudentId)
         {
+            if (Request.Cookies["Role"].Value != "student")
+            {
+                return View("Error");
+            }
+
+            if (StudentId != Convert.ToInt32(Request.Cookies["Id"].Value))
+            {
+                return View("Error");
+            }
+
             File file = new File();
             file.AssignmentId = AssignmentId;
             file.StudentId = StudentId;
@@ -137,6 +147,16 @@ namespace Bueller.MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> AddFile(File file)
         {
+            if (Request.Cookies["Role"].Value != "student")
+            {
+                return View("Error");
+            }
+
+            if (file.StudentId != Convert.ToInt32(Request.Cookies["Id"].Value))
+            {
+                return View("Error");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View("Error");
@@ -161,12 +181,17 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
-            return RedirectToAction("MyClasses", "Class", null);
+            return RedirectToAction("MyClasses", "Class");
         }
 
         public async Task<ActionResult> Edit(int id)
         {
             if (id == 0)
+            {
+                return View("Error");
+            }
+
+            if (Request.Cookies["Role"].Value != "student")
             {
                 return View("Error");
             }
@@ -189,6 +214,11 @@ namespace Bueller.MVC.Controllers
                 file = await apiResponse.Content.ReadAsAsync<File>();
             }
 
+            if (file.StudentId != Convert.ToInt32(Request.Cookies["Id"].Value))
+            {
+                return View("Error");
+            }
+
             return View(file);
         }
 
@@ -197,6 +227,16 @@ namespace Bueller.MVC.Controllers
         public async Task<ActionResult> Edit(int id, File file)
         {
             if (!ModelState.IsValid)
+            {
+                return View("Error");
+            }
+
+            if (Request.Cookies["Role"].Value != "student")
+            {
+                return View("Error");
+            }
+
+            if (file.StudentId != Convert.ToInt32(Request.Cookies["Id"].Value))
             {
                 return View("Error");
             }
@@ -232,6 +272,11 @@ namespace Bueller.MVC.Controllers
                 return View("Error");
             }
 
+            if (Request.Cookies["Role"].Value != "student")
+            {
+                return View("Error");
+            }
+
             HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetById/{id}");
             HttpResponseMessage apiResponse;
 
@@ -250,6 +295,11 @@ namespace Bueller.MVC.Controllers
             }
 
             var file = await apiResponse.Content.ReadAsAsync<File>();
+
+            if (file.StudentId != Convert.ToInt32(Request.Cookies["Id"].Value))
+            {
+                return View("Error");
+            }
 
             return View(file);
         }
@@ -277,28 +327,28 @@ namespace Bueller.MVC.Controllers
             return RedirectToAction("MyClasses", "Class");
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Details(int id)
-        {
-            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetById/{id}");
-            HttpResponseMessage apiResponse;
+        //[HttpGet]
+        //public async Task<ActionResult> Details(int id)
+        //{
+        //    HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/File/GetById/{id}");
+        //    HttpResponseMessage apiResponse;
 
-            try
-            {
-                apiResponse = await HttpClient.SendAsync(apiRequest);
-            }
-            catch
-            {
-                return View("Error");
-            }
+        //    try
+        //    {
+        //        apiResponse = await HttpClient.SendAsync(apiRequest);
+        //    }
+        //    catch
+        //    {
+        //        return View("Error");
+        //    }
 
-            File file = new File();
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                file = await apiResponse.Content.ReadAsAsync<File>();
-            }
+        //    File file = new File();
+        //    if (apiResponse.IsSuccessStatusCode)
+        //    {
+        //        file = await apiResponse.Content.ReadAsAsync<File>();
+        //    }
 
-            return View(file);
-        }
+        //    return View(file);
+        //}
     }
 }

@@ -132,8 +132,8 @@ namespace BuellerWebApi.Controllers
 
         [HttpPut]
         [Authorize(Roles = "teacher")]
-        [Route("Edit")]
-        public IHttpActionResult Put(int id, ClassDto classDto)
+        [Route("Edit/{id}")]
+        public IHttpActionResult Edit(int id, ClassDto classDto)
         {
             if (!ModelState.IsValid)
             {

@@ -4,7 +4,7 @@
     ViewBag.Title = "AddFile";
 }
 
-<h2>AddFile</h2>
+<h2>Add File</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>File</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -32,7 +31,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to My Classes", "MyClasses", "Class")
 </div>
 
 @section Scripts {

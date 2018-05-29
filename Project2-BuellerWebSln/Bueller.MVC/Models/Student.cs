@@ -77,10 +77,38 @@ namespace Bueller.MVC.Models
         public DateTime Modified { get; set; }
 
         //[NotMapped]
-        public int Credits { get; set; }
+        public int Credits
+        {
+            get
+            {
+                int a = 0;
+                if (this.Classes != null)
+                {
+                    if (this.Classes.Any())
+                    {
+                        foreach (var classitem in Classes)
+                        {
+                            a += classitem.Credits;
+                        }
+                    }
+                }
+
+                return a;
+            }
+        }
         //[NotMapped]
         [Display(Name = "Enrollment Status")]
-        public string StudentType { get; set; }
+        public string StudentType {
+            get
+            {
+                if (this.Credits <= 0)
+                    return "Not Enrolled";
+                if (this.Credits <= 16)
+                    return "Part Time";
+                return "Full Time";
+
+            }
+        }
         //[NotMapped]
         [Display(Name = "Grade")]
         public double AverageGrade { get; set; }

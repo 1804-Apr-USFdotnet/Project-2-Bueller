@@ -15,9 +15,10 @@ namespace Bueller.MVC.Models
         [ScaffoldColumn(false)]
         public int FileId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "File name is required")]
         [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "File name cannot be more than 100 characters")]
+        [Display(Name = "File Name")]
         public string FileName { get; set; }
 
         //[DataType(DataType.Upload)]     //not sure about this annotation

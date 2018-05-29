@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -31,7 +32,7 @@ namespace Bueller.MVC.Models
         [Required]
         [ScaffoldColumn(false)]
         public int ClassId { get; set; }
-
+        [ForeignKey("ClassId")]
         public virtual Class Class { get; set; }
 
         public virtual ICollection<File> Files { get; set; }

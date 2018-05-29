@@ -16,6 +16,7 @@ namespace Bueller.MVC.Models
         [Required(ErrorMessage = "Evaluation type is required")]
         [DataType(DataType.Text)]
         [StringLength(50, ErrorMessage = "Evaluation type cannot be more than 50 characters")]
+        [Display(Name = "Evaluation Type")]
         public string EvaluationType { get; set; }
 
         [Required(ErrorMessage = "Score is required")]
@@ -25,6 +26,7 @@ namespace Bueller.MVC.Models
         [Required(ErrorMessage = "Grade letter is required")]
         [DataType(DataType.Text)]
         [StringLength(2, ErrorMessage = "Grade letter cannot be more than 2 characters")]
+        [Display(Name = "Letter Grade")]
         public string GradeLetter { get; set; }
 
         [DataType(DataType.MultilineText)]
