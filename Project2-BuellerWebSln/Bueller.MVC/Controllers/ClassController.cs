@@ -229,7 +229,8 @@ namespace Bueller.MVC.Controllers
             }
 
             var subjects = await apiResponse.Content.ReadAsAsync<List<string>>();
-            var subjectselectlist = subjects.Select(c => new SelectListItem {Text = c, Value = c}).ToList();
+            var subjects2 = subjects.OrderBy(q => q);
+            var subjectselectlist = subjects2.Select(c => new SelectListItem {Text = c, Value = c}).ToList();
 
             ViewBag.Subjects = subjectselectlist;
             return View();
