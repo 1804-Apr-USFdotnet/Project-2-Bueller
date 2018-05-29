@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Bueller.MVC.Models;
+using Newtonsoft.Json;
 
 namespace Bueller.MVC.Controllers
 {
@@ -55,10 +56,31 @@ namespace Bueller.MVC.Controllers
 
             if (role != "teacher" && role != "student")
             {
-                return View();
+                return RedirectToAction("IndexHome");
             }
             return RedirectToAction("IndexCalendar");
 
+        }
+
+        public async Task<ActionResult> IndexHome()
+        {
+            HttpRequestMessage apiRequest = CreateRequestToService(HttpMethod.Get, $"api/Home/GetHome");
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await HttpClient.SendAsync(apiRequest);
+            }
+            catch
+            {
+                return View("Error");
+            }
+
+
+            var temp = await apiResponse.Content.ReadAsAsync<Subject>();
+            var result = temp.Name.Split(',').ToList();
+
+            return View("Index", result);
         }
 
         public async Task<ActionResult> IndexCalendar()

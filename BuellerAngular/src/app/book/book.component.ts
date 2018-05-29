@@ -14,6 +14,7 @@ export class BookComponent implements OnInit {
   displayedColums = [
     'bookTitle', 'price'
   ]
+  p: number = 1;
  books:  [
   {BookTitle: ''}  
   ];
