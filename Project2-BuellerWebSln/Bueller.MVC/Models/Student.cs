@@ -82,11 +82,16 @@ namespace Bueller.MVC.Models
             get
             {
                 int a = 0;
-                if (this.Classes.Any())
-                    foreach (var classitem in Classes)
+                if (this.Classes != null)
+                {
+                    if (this.Classes.Any())
                     {
-                        a += classitem.Credits;
+                        foreach (var classitem in Classes)
+                        {
+                            a += classitem.Credits;
+                        }
                     }
+                }
 
                 return a;
             }

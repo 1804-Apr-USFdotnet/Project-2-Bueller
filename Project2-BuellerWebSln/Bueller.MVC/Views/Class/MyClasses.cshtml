@@ -41,62 +41,65 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Section)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Credits)
-            </td>
-            @if (Request.Cookies["Role"].Value != "teacher")
-            {
-                <td>
-                    @Html.DisplayFor(modelItem => item.Teacher.FirstName) @Html.DisplayFor(modelItem => item.Teacher.LastName)
-                </td>
-            }
-            <td>
-                @Html.DisplayFor(modelItem => item.ClassDays)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTimeFormatted) -
-                @Html.DisplayFor(modelItem => item.EndTimeFormatted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomNumber)
-            </td>
-            <td>
-                @if (ViewBag.Role == "teacher")
-                {
-                    <p>
-                        @Html.ActionLink("Details", "Details", new { id = item.ClassId }) |
-                        @Html.ActionLink("Assignments", "Index", "Assignment", new { id = item.ClassId }, null) |
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ClassId }) @*|
+@if (Model.Any())
+ {
+     foreach (var item in Model)
+     {
+         <tr>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Name)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Subject.Name)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Section)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Credits)
+             </td>
+             @if (Request.Cookies["Role"].Value != "teacher")
+             {
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Teacher.FirstName) @Html.DisplayFor(modelItem => item.Teacher.LastName)
+                 </td>
+             }
+             <td>
+                 @Html.DisplayFor(modelItem => item.ClassDays)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.StartTimeFormatted) -
+                 @Html.DisplayFor(modelItem => item.EndTimeFormatted)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.RoomNumber)
+             </td>
+             <td>
+                 @if (ViewBag.Role == "teacher")
+                 {
+                     <p>
+                         @Html.ActionLink("Details", "Details", new {id = item.ClassId}) |
+                         @Html.ActionLink("Assignments", "Index", "Assignment", new {id = item.ClassId}, null) @*|
+                         @Html.ActionLink("Edit", "Edit", new {id = item.ClassId})*@ @*|
                         @Html.ActionLink("Delete", "Delete", new { id = item.ClassId }) |*@
-                        @*@Html.ActionLink("Submitted Files", "GetByIdClass", "File", new { classId = item.ClassId }, null)*@
-                    </p>
-                }
-                else
-                {
-                    <p>
-               
-                        @Html.ActionLink("Details", "Details", new { id = item.ClassId }) |
-                        @Html.ActionLink("Assignments", "Index", "Assignment", new { id = item.ClassId }, null)
-                    </p>
-                }
-                @*@Html.ActionLink("Details", "Details", new {id = item.ClassId}) |
+                         @*@Html.ActionLink("Submitted Files", "GetByIdClass", "File", new { classId = item.ClassId }, null)*@
+                     </p>
+                 }
+                 else
+                 {
+                     <p>
+
+                         @Html.ActionLink("Details", "Details", new {id = item.ClassId}) |
+                         @Html.ActionLink("Assignments", "Index", "Assignment", new {id = item.ClassId}, null)
+                     </p>
+                 }
+                 @*@Html.ActionLink("Details", "Details", new {id = item.ClassId}) |
                     @Html.ActionLink("Assignments", "Index", "Assignment", new {id = item.ClassId}, null) |
                     @Html.ActionLink("Edit", "Edit", new {id = item.ClassId}) |
                     @Html.ActionLink("Delete", "Delete", new {id = item.ClassId})*@
-            </td>
-        </tr>
-    }
+             </td>
+         </tr>
+     }
+ }
 
 </table>
