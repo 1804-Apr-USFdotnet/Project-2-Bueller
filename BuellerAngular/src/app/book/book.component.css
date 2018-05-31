@@ -1,1 +1,49 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~font-awesome/css/font-awesome.css';
+
+#container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    padding: 0px;
+    background-image: url("https://hdwallsource.com/img/2014/3/nice-backgrounds-18602-19072-hd-wallpapers.jpg");
+    overflow: hidden;
+
+}
+/* #searchWrapper > input{
+    text-align:left;
+    margin-right: 50%;
+    position: relative;
+    margin-bottom: 2%;
+    margin-top: 7%;
+  } */
+#searchWrapper{
+    position: relative;
+    margin-bottom: 2% !important;
+    margin-top: 3%;
+    margin-left: 3% !important;
+  
+}
+#icnSearch{
+position: relative;
+    margin-right: 1%;
+}
+#lblSearch{
+position: relative;
+margin: 2px;
+
+padding: 2%;
+    
+}
+#bookTable{
+    position: relative;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 6%;
+}
+.fa-search {
+
+}

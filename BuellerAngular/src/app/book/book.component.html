@@ -1,14 +1,19 @@
-<header  class="masthead" style="background-image: url('./img/KCC-Bruin-Bookstore1.jpg')"></header>
-<h3>Books:</h3>
 
-<label class="label label-default" for="search"> <b>Search by Title:</b></label> <br>
-  <input  id="search" class="form-control-sm" type="text" name="search" [(ngModel)]="userFilter.BookTitle"> 
+<div id= "container">
+  
+    <h3>Books:</h3>
+<div id="searchWrapper">
  
+<label  id="lblSearch"class="label label-default" for="search"> <b>Search by Title:</b></label>
+<i  id="icnSearch"class="fa fa-search"></i>
 
+  <input  id="search" class="" placeholder="search" type="text" name="search" [(ngModel)]="userFilter.BookTitle"> 
+  </div>
 
-  <table   class="table">
+  <table  id="bookTable" class="table table-bordered">
       <thead>
         <tr >
+
           <th scope="col">#</th>
           <th scope="col">Book Title</th>
           <th scope="col">Price</th>
@@ -16,9 +21,10 @@
         </tr>
       </thead>
       <tbody>
+     
         <tr *ngFor="let book of books |   paginate: { itemsPerPage: 8, currentPage: p }| filterBy : userFilter; let i = index">
           <th scope="row"> {{i + 1}}</th>
-          <td>{{book.BookTitle}}</td>
+          <td><b>{{book.BookTitle}} </b></td>
           <td>{{book.Price}}</td>
          <td>{{book.BookDescription}}</td> 
         <!-- <td>  <a routerLink="/bookByClass/{{book.ClassId}}">{{book.ClassId}}</a> </td> -->
@@ -26,5 +32,6 @@
     
       </tbody>
     </table>
-    
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  
+</div>
